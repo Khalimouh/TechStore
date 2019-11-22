@@ -1,11 +1,13 @@
 /* Create database */
-DROP DATABASE IF EXISTS 'techstore';
+DROP DATABASE IF EXISTS techstore;
 
 create database techstore;
 
+USE techstore;
+
 /* Create table user*/
 
-DROP TABLE IF EXISTS 'user';
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE techstore.user (
 	id_user INT NOT NULL AUTO_INCREMENT ,
@@ -17,7 +19,7 @@ CREATE TABLE techstore.user (
 
 
 /* Create table visiteur*/
-DROP TABLE IF EXISTS 'visiteur';
+DROP TABLE IF EXISTS visiteur;
 
 CREATE TABLE techstore.visiteur (
 	id_visiteur INT NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE techstore.visiteur (
 	);
 
 /* Create table annonceur*/
-DROP TABLE IF EXISTS 'annonceur';
+DROP TABLE IF EXISTS annonceur;
 
 CREATE TABLE techstore.annonceur (
 	id_annonceur INT NOT NULL,
@@ -41,7 +43,7 @@ CREATE TABLE techstore.annonceur (
 );
 
 /* Create table produit */
-DROP TABLE IF EXISTS 'produit';
+DROP TABLE IF EXISTS produit;
 
 CREATE TABLE techstore.produit (
 	id_produit INT NOT NULL  AUTO_INCREMENT,
@@ -54,7 +56,7 @@ CREATE TABLE techstore.produit (
 );
 
 /* Create table annonce */
-DROP TABLE IF EXISTS 'annonce';
+DROP TABLE IF EXISTS annonce;
 
 CREATE TABLE techstore.annonce (
 	id_annonce INT NOT NULL AUTO_INCREMENT,
@@ -69,7 +71,7 @@ CREATE TABLE techstore.annonce (
 );
 
 /* Create table consulter */
-DROP TABLE IF EXISTS 'consulter';
+DROP TABLE IF EXISTS consulter;
 
 CREATE TABLE techstore.consulter(
 	id_user INT NOT NULL,
@@ -79,7 +81,7 @@ CREATE TABLE techstore.consulter(
 );
 
 /* Create table publier */
-DROP TABLE IF EXISTS 'publier';
+DROP TABLE IF EXISTS publier;
 
 CREATE TABLE techstore.publier(
 	id_annonceur INT NOT NULL,
@@ -89,7 +91,7 @@ CREATE TABLE techstore.publier(
 );
 
 /* Create table photo*/
-DROP TABLE IF EXISTS 'photo';
+DROP TABLE IF EXISTS photo;
 
 CREATE TABLE techstore.photo(
 	id_photo INT NOT NULL AUTO_INCREMENT,
@@ -99,7 +101,7 @@ CREATE TABLE techstore.photo(
 );
 
 /* Create table PC */
-DROP TABLE IF EXISTS 'pc';
+DROP TABLE IF EXISTS pc;
 
 CREATE TABLE techstore.pc(
 	id_produit INT NOT NULL,
@@ -114,7 +116,7 @@ CREATE TABLE techstore.pc(
 );
 
 /* Create table TV */
-DROP TABLE IF EXISTS 'tv';
+DROP TABLE IF EXISTS tv;
 
 CREATE TABLE techstore.tv(
 	id_produit INT NOT NULL,
@@ -127,7 +129,7 @@ CREATE TABLE techstore.tv(
 );
 
 /* Create table telephonie*/
-DROP TABLE IF EXISTS 'telephonie';
+DROP TABLE IF EXISTS telephonie;
 
 CREATE TABLE techstore.telephonie(
 	id_produit INT NOT NULL,
@@ -147,7 +149,7 @@ CREATE TABLE techstore.telephonie(
 
 
 /* Create table app photo*/
-DROP TABLE IF EXISTS 'app_photo';
+DROP TABLE IF EXISTS app_photo;
 
 CREATE TABLE techstore.app_photo(
 	id_produit INT NOT NULL,
@@ -161,14 +163,13 @@ CREATE TABLE techstore.app_photo(
 );
 
 /* Create table accesoires */
-DROP TABLE IF EXISTS 'accesoires';
+DROP TABLE IF EXISTS accesoires;
 
 CREATE TABLE techstore.accesoires(
 	id_produit INT NOT NULL,
 	PRIMARY KEY (id_produit)
 	);
 
-USE techstore;
 
 /*  
  * Contraintes des clés étrangères	 
