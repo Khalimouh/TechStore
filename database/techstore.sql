@@ -16,7 +16,6 @@ CREATE TABLE techstore.user (
 CREATE TABLE techstore.visiteur (
 	id_visiteur INT NOT NULL,
 	PRIMARY KEY (id_visiteur),
-	FOREIGN KEY (id_visiteur) REFERENCES techstore.user(id_user)
 	);
 
 /* Create table annonceur*/
@@ -31,7 +30,6 @@ CREATE TABLE techstore.annonceur (
 	telephone VARCHAR(10) NOT NULL,
 	annonceur_photo BLOB ,
 	PRIMARY KEY (id_annonceur),
-	FOREIGN KEY (id_annonceur) REFERENCES techstore.user(id_user)
 );
 
 /* Create table produit */
@@ -56,8 +54,6 @@ CREATE TABLE techstore.annonce (
 	id_annonceur INT NOT NULL,
 	id_produit INT NOT NULL,
 	PRIMARY KEY(id_annonce),
-	FOREIGN KEY (id_annonceur) REFERENCES annonceur(id_annonceur),
-	FOREIGN KEY (id_produit) REFERENCES produit(id_produit)
 );
 
 /* Create table consulter */
@@ -66,8 +62,6 @@ CREATE TABLE techstore.consulter(
 	id_annonce INT NOT NULL,
 	date_consultation DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id_user,id_annonce),
-	FOREIGN KEY (id_user) REFERENCES techstore.user(id_user),
-	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
 );
 
 /* Create table publier */
@@ -77,8 +71,6 @@ CREATE TABLE techstore.publier(
 	id_annonce INT NOT NULL,
 	date_publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id_annonceur,id_annonce),
-	FOREIGN KEY (id_annonceur) REFERENCES techstore.annonceur(id_annonceur),
-	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
 );
 
 /* Create table photo*/
@@ -87,7 +79,6 @@ CREATE TABLE techstore.photo(
 	id_annonce INT NOT NULL,
 	photo BLOB NOT NULL,
 	PRIMARY KEY (id_photo),
-	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
 );
 
 /* Create table PC */
@@ -101,7 +92,6 @@ CREATE TABLE techstore.pc(
 	taille_disque INT NOT NULL,
 	batterie VARCHAR(80),
 	PRIMARY KEY (id_produit),
-	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
 );
 
 /* Create table TV */
@@ -113,7 +103,6 @@ CREATE TABLE techstore.tv(
 	os VARCHAR(20),
 	connectique VARCHAR(20),
 	PRIMARY KEY (id_produit),
-	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
 );
 
 /* Create table telephonie*/
@@ -132,7 +121,6 @@ CREATE TABLE techstore.telephonie(
 	res_app_av DECIMAL(2,1),
 	nfc INT NOT NULL,
 	PRIMARY KEY (id_produit),
-	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
 );
 
 
@@ -146,7 +134,6 @@ CREATE TABLE techstore.app_photo(
 	type_ecran VARCHAR(20) NOT NULL,
 	tech VARCHAR(10),
 	PRIMARY KEY (id_produit),
-	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
 );
 
 /* Create table accesoires */
@@ -154,8 +141,77 @@ CREATE TABLE techstore.app_photo(
 CREATE TABLE techstore.accesoires(
 	id_produit INT NOT NULL,
 	PRIMARY KEY (id_produit),
-	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
-);
+	);
+
+
+/*  
+ * Contraintes des clés étrangères	 
+ */
+ALTER TABLE  accesoires 
+  ADD CONSTRAINT  accesoires_fk_produit FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  annonce 
+--
+ALTER TABLE  annonce 
+  ADD CONSTRAINT  annonce_fk_annonceur  FOREIGN KEY ( id_annonceur ) REFERENCES  annonceur  ( id_annonceur ),
+  ADD CONSTRAINT  annonce_fk_produit  FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  annonceur 
+--
+ALTER TABLE  annonceur 
+  ADD CONSTRAINT  annonceur_fk_user  FOREIGN KEY ( id_annonceur ) REFERENCES  user  ( id_user );
+
+--
+-- Contraintes pour la table  app_photo 
+--
+ALTER TABLE  app_photo 
+  ADD CONSTRAINT  app_photo_fk_produit  FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  consulter 
+--
+ALTER TABLE  consulter 
+  ADD CONSTRAINT  consulter_fk_user  FOREIGN KEY ( id_user ) REFERENCES  user  ( id_user ),
+  ADD CONSTRAINT  consulter_fk_annonce  FOREIGN KEY ( id_annonce ) REFERENCES  annonce  ( id_annonce );
+
+--
+-- Contraintes pour la table  pc 
+--
+ALTER TABLE  pc 
+  ADD CONSTRAINT  pc_fk_produit  FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  photo 
+--
+ALTER TABLE  photo 
+  ADD CONSTRAINT  photo_fk_annonce  FOREIGN KEY ( id_annonce ) REFERENCES  annonce  ( id_annonce );
+
+--
+-- Contraintes pour la table  publier 
+--
+ALTER TABLE  publier 
+  ADD CONSTRAINT  publier_fk_annonceur  FOREIGN KEY ( id_annonceur ) REFERENCES  annonceur  ( id_annonceur ),
+  ADD CONSTRAINT  publier_fk_annonce  FOREIGN KEY ( id_annonce ) REFERENCES  annonce  ( id_annonce );
+
+--
+-- Contraintes pour la table  telephonie 
+--
+ALTER TABLE  telephonie 
+  ADD CONSTRAINT  telephonie_fk_produit  FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  tv 
+--
+ALTER TABLE  tv 
+  ADD CONSTRAINT  tv_fk_produit  FOREIGN KEY ( id_produit ) REFERENCES  produit  ( id_produit );
+
+--
+-- Contraintes pour la table  visiteur 
+--
+ALTER TABLE  visiteur 
+  ADD CONSTRAINT  visiteur_fk_user  FOREIGN KEY ( id_visiteur ) REFERENCES  user  ( id_user );
 
 
 
