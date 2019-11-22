@@ -243,6 +243,125 @@ ALTER TABLE  visiteur
 
 
 
+/* Création des views */
+
+/* Create view visiteur*/
+DROP VIEW IF EXISTS v_visiteur;
+
+CREATE VIEW v_visiteur AS (
+	SELECT id_visiteur, time_access, adress_ip 
+    FROM user u , visiteur v
+    WHERE u.id_user = v.id_visiteur
+
+);
+
+
+/* Create view annonceur*/
+DROP VIEW IF EXISTS v_annonceur;
+
+CREATE VIEW v_annonceur AS (
+	SELECT  id_annonceur,time_access,adress_ip,
+			mail,nom,prenom,ville,
+			telephone,annonceur_photo
+	FROM user u , annonceur a
+    WHERE u.id_user = a.id_annonceur
+   );
+
+/* Create view  PC*/
+DROP VIEW IF EXISTS v_pc;
+
+CREATE VIEW v_pc AS (
+	SELECT p.id_produit, marque, modele, poids, etat
+    		diagonale,processeur,c_g,ram,type_disque,taille_disque,batterie
+    FROM produit p, pc
+	WHERE p.id_produit = pc.id_produit
+);
+
+/* Create view telephonie */
+DROP VIEW IF EXISTS v_telephonie;
+
+CREATE VIEW v_telephonie AS (
+	SELECT p.id_produit, marque, modele, poids, etat
+    		diagonale,processeur,ram,taille_disque,os,batterie,
+    		nb_sim,type_sim,res_app_arr,res_app_av, nfc
+    FROM produit p, telephonie t
+	WHERE p.id_produit = t.id_produit
+);
+
+/* Create view TV*/
+DROP VIEW IF EXISTS v_tv;
+
+CREATE VIEW v_tv AS (
+	SELECT p.id_produit, marque, modele, poids, etat
+    		diagonale,definition,tech,os,connectique
+    FROM produit p, tv
+	WHERE p.id_produit = tv.id_produit
+);
+
+/* Create view  APP PHOTO*/
+DROP VIEW IF EXISTS v_app_photo;
+
+CREATE VIEW v_app_photo AS (
+	SELECT p.id_produit, marque, modele, poids, etat
+    		resolution,format_cap,definition,type_memoire,type_ecran,tech
+    FROM produit p, app_photo ap
+	WHERE p.id_produit = ap.id_produit
+);
+
+/* Create view accesoires */
+
+DROP VIEW IF EXISTS v_acc;
+
+CREATE VIEW v_acc AS (
+	SELECT p.id_produit, marque, modele, poids, etat
+    FROM produit p, app_photo ap
+	WHERE p.id_produit = ap.id_produit
+);
+
+/* Gestion des droits */
+
+/* Visiteur */
+DROP USER IF EXISTS 'visiteur'@'localhost';
+
+CREATE USER 'visiteur'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT ON  techstore.v_acc TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.v_annonceur TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.v_app_photo TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.v_pc TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.v_telephonie TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.v_tv TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.annonce TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.photo TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.publier TO 'visiteur'@'localhost';
+GRANT SELECT ON  techstore.consulter TO 'visiteur'@'localhost';
+FLUSH PRIVILEGES;
+
+/* Administrateur */
+DROP USER IF EXISTS 'admin'@'localhost';
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL ON  techstore.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
+
+/* Annonceur */
+DROP USER IF EXISTS 'annonceur'@'localhost';
+
+CREATE USER 'annonceur'@'localhost' IDENTIFIED BY 'password';
+
+GRANT SELECT ON  techstore.v_acc TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.v_annonceur TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.v_app_photo TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.v_pc TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.v_telephonie TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.v_tv TO 'annonceur'@'localhost';
+GRANT SELECT, INSERT,UPDATE ON  techstore.annonce TO 'annonceur'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON  techstore.photo TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.publier TO 'annonceur'@'localhost';
+GRANT SELECT ON  techstore.consulter TO 'annonceur'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
 
 
 
