@@ -361,12 +361,82 @@ GRANT SELECT ON  techstore.consulter TO 'annonceur'@'localhost';
 
 FLUSH PRIVILEGES;
 
+/* Insertion */
+
+/* User */
+INSERT INTO `user` (`id_user`, `time_access`, `adress_ip`, `type_user`) 
+			VALUES (NULL, CURRENT_TIME(), '192.168.1.11', 'Visiteur'),
+					(NULL, CURRENT_TIME(), '192.168.1.22', 'Annonceur'),
+					(NULL, CURRENT_TIME(), '192.168.1.33', 'Annonceur'),
+					(NULL, CURRENT_TIME(), '192.168.1.44', 'Annonceur'),
+					(NULL, CURRENT_TIME(), '192.168.1.5', 'Annonceur'),
+					(NULL, CURRENT_TIME(), '192.168.1.6', 'Visiteur'),
+					(NULL, CURRENT_TIME(), '192.168.1.7', 'Visiteur'),
+					(NULL, CURRENT_TIME(), '192.168.1.8', 'Annonceur'),
+					(NULL, CURRENT_TIME(), '192.168.1.9', 'Visiteur'),
+					(NULL, CURRENT_TIME(), '192.168.1.10', 'Annonceur');
+
+/* Annonceur */
+INSERT INTO `annonceur` (`id_annonceur`, `login`, `password`, `mail`,
+			`nom`, `prenom`, `ville`, `telephone`, `annonceur_photo`) 
+VALUES ('2', 'user2', 'pass2', 'user2@gmail.com', 'Sachin', 'Villegas', 'Paris', '012324565', NULL),
+		('4', 'user4', 'pass4', 'user4@gmail.com', 'Raveena', 'Lutz', 'Paris', '076421244', NULL),
+		('5', 'user5', 'pass5', 'user5@gmail.com', 'Nabeel', 'Newman', 'Paris', '0667898542', NULL),
+		('6', 'user6', 'pass6', 'user6@gmail.com', 'Marley', 'Beil', 'Lyon', '0724576512', NULL),
+		('7', 'user7', 'pass7', 'user7@gmail.com', 'Lowery', 'Keira', 'Lyon', '0123456578', NULL),
+		('10', 'user10', 'pass10', 'user10@gmail.com', 'Keanan', 'Mccormick', 'Strasbourg', '0213213456', NULL),
+		('12', 'user12', 'pass12', 'user12@gmail.com', 'Aisha', 'Khaldi', 'Nantes', '0612547831', NULL);
+/* Visiteur */
+INSERT INTO `visiteur` (`id_visiteur`) VALUES (1),(3), (8),(9),(11);
 
 
+/* SELECT */
+/* Nombre d'annonces pour chaque ville */
+SELECT ville, COUNT(*) FROM annonce
+GROUP BY ville
 
+/* Nombre d'annonces par catégorie */
+SELECT categorie, COUNT(*)
+FROM produit p, annonce a
+where p.id_produit = a.id_annonce
+GROUP BY categorie
 
+/* Nombre de consultation de chaque annonce*/
+SELECT id_annonce, COUNT(*) nbr_consultation
+from consulter
+GROUP by id_annonce;
 
+/* Nombre de consulation d'un utilisateur donné pour chaque catégorie */
+SELECT u.id_user, categorie , COUNT(*) nbr_consultation
+FROM  consulter c , user u, annonce a , produit p 
+WHERE c.id_user = u.id_user
+and c.id_annonce = a.id_annonce
+and a.id_produit = p.id_produit
+and u.id_user = 12
+GROUP by categorie;
 
+/* Nombre de consultation de chaque utilisateur donné pour chaque catégorie */
+SELECT u.id_user, categorie , COUNT(*) nbr_consultation
+FROM  consulter c , user u, annonce a , produit p 
+WHERE c.id_user = u.id_user
+and c.id_annonce = a.id_annonce
+and a.id_produit = p.id_produit
+GROUP by u.id_user,categorie;
+
+/* Toutes les annonces d'une catégorie donné */
+SELECT id_annonce 
+FROM annonce a , produit p 
+WHERE a.id_produit = p.id_produit
+and categorie = 'categorie_donnée';
+
+/* Les annonceurs qui n'ont aucune annonce */
+SELECT a2.id_annonceur 
+FROM annonce a, annonceur a2
+WHERE a2.id_annonceur NOT IN (SELECT a3.id_annonceur 
+                           FROM publier p , annonceur a3
+                          WHERE p.id_annonceur = a3.id_annonceur)
+
+/* */
 
 
 
