@@ -5,9 +5,9 @@ create database techstore;
 
 CREATE TABLE techstore.user (
 	id_user INT NOT NULL AUTO_INCREMENT ,
-	type_user VARCHAR(11) NOT NULL ,
 	time_access DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	adress_ip VARCHAR(15) NOT NULL ,
+	type_user VARCHAR(11) NOT NULL,
 	PRIMARY KEY (id_user)
 	);
 
@@ -33,22 +33,139 @@ CREATE TABLE techstore.annonceur (
 	PRIMARY KEY (id_annonceur),
 	FOREIGN KEY (id_annonceur) REFERENCES techstore.user(id_user)
 );
+
+/* Create table produit */
+CREATE TABLE techstore.produit (
+	id_produit INT NOT NULL  AUTO_INCREMENT,
+	marque VARCHAR(50) NOT NULL,
+	modele VARCHAR(20) NOT NULL,
+	poids DECIMAL(4,2),
+	etat VARCHAR(10) NOT NULL,
+	categorie VARCHAR(30) NOT NULL,
+	PRIMARY KEY(id_produit)
+);
+
 /* Create table annonce */
 CREATE TABLE techstore.annonce (
 	id_annonce INT NOT NULL AUTO_INCREMENT,
 	titre_annonce VARCHAR(80) NOT NULL,
-	prix DOUBLE NOT NULL,
+	prix DECIMAL(6,2) NOT NULL,
 	ville VARCHAR(80) NOT NULL,
 	type_annonce VARCHAR(10) NOT NULL,
 	time_pub DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	id_annonceur INT NOT NULL,
 	id_produit INT NOT NULL,
 	PRIMARY KEY(id_annonce),
-	FOREIGN KEY (id_annonceur) REFERENCES annonceur(id_annonceur)
-	FOREIGN KEY (id_produit) REFERENCES annonceur(id_produit)
+	FOREIGN KEY (id_annonceur) REFERENCES annonceur(id_annonceur),
+	FOREIGN KEY (id_produit) REFERENCES produit(id_produit)
 );
 
-/* Create table produit */
+/* Create table consulter */
+CREATE TABLE techstore.consulter(
+	id_user INT NOT NULL,
+	id_annonce INT NOT NULL,
+	date_consultation DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (id_user,id_annonce),
+	FOREIGN KEY (id_user) REFERENCES techstore.user(id_user),
+	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
+);
+
+/* Create table publier */
+
+CREATE TABLE techstore.publier(
+	id_annonceur INT NOT NULL,
+	id_annonce INT NOT NULL,
+	date_publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (id_annonceur,id_annonce),
+	FOREIGN KEY (id_annonceur) REFERENCES techstore.annonceur(id_annonceur),
+	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
+);
+
+/* Create table photo*/
+CREATE TABLE techstore.photo(
+	id_photo INT NOT NULL AUTO_INCREMENT,
+	id_annonce INT NOT NULL,
+	photo BLOB NOT NULL,
+	PRIMARY KEY (id_photo),
+	FOREIGN KEY (id_annonce) REFERENCES techstore.annonce(id_annonce)
+);
+
+/* Create table PC */
+CREATE TABLE techstore.pc(
+	id_produit INT NOT NULL,
+	diagonale DECIMAL(2,1) NOT NULL,
+	processeur VARCHAR(80) NOT NULL,
+	c_g VARCHAR(80) NOT NULL,
+	ram INT NOT NULL,
+	type_disque VARCHAR(10) NOT NULL,
+	taille_disque INT NOT NULL,
+	batterie VARCHAR(80),
+	PRIMARY KEY (id_produit),
+	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
+);
+
+/* Create table TV */
+CREATE TABLE techstore.tv(
+	id_produit INT NOT NULL,
+	diagonale DECIMAL(2,1) NOT NULL,
+	definition VARCHAR(20),
+	tech VARCHAR(20),
+	os VARCHAR(20),
+	connectique VARCHAR(20),
+	PRIMARY KEY (id_produit),
+	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
+);
+
+/* Create table telephonie*/
+
+CREATE TABLE techstore.telephonie(
+	id_produit INT NOT NULL,
+	diagonale DECIMAL(2,1) NOT NULL,
+	processeur VARCHAR(80) NOT NULL,
+	ram INT NOT NULL,
+	taille_disque INT NOT NULL,
+	os VARCHAR(20),
+	batterie VARCHAR(80),
+	nb_sim INT ,
+	type_sim VARCHAR(15),
+	res_app_arr DECIMAL(2,1) NOT NULL,
+	res_app_av DECIMAL(2,1),
+	nfc INT NOT NULL,
+	PRIMARY KEY (id_produit),
+	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
+);
+
+
+/* Create table app photo*/
+CREATE TABLE techstore.app_photo(
+	id_produit INT NOT NULL,
+	resolution DECIMAL(3,1) NOT NULL,
+	format_cap VARCHAR(10), 
+	definition VARCHAR(20),
+	type_memoire VARCHAR(20) NOT NULL,
+	type_ecran VARCHAR(20) NOT NULL,
+	tech VARCHAR(10),
+	PRIMARY KEY (id_produit),
+	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
+);
+
+/* Create table accesoires */
+
+CREATE TABLE techstore.accesoires(
+	id_produit INT NOT NULL,
+	PRIMARY KEY (id_produit),
+	FOREIGN KEY (id_produit) REFERENCES techstore.produit(id_produit)
+);
+
+
+
+
+
+
+
+
+
+
 
 
 
