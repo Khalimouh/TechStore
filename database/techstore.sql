@@ -1,7 +1,11 @@
 /* Create database */
+DROP DATABASE IF EXISTS 'techstore';
+
 create database techstore;
 
 /* Create table user*/
+
+DROP TABLE IF EXISTS 'user';
 
 CREATE TABLE techstore.user (
 	id_user INT NOT NULL AUTO_INCREMENT ,
@@ -13,12 +17,16 @@ CREATE TABLE techstore.user (
 
 
 /* Create table visiteur*/
+DROP TABLE IF EXISTS 'visiteur';
+
 CREATE TABLE techstore.visiteur (
 	id_visiteur INT NOT NULL,
-	PRIMARY KEY (id_visiteur),
+	PRIMARY KEY (id_visiteur)
 	);
 
 /* Create table annonceur*/
+DROP TABLE IF EXISTS 'annonceur';
+
 CREATE TABLE techstore.annonceur (
 	id_annonceur INT NOT NULL,
 	login VARCHAR(20) NOT NULL,
@@ -29,10 +37,12 @@ CREATE TABLE techstore.annonceur (
 	ville VARCHAR(80) NOT NULL,
 	telephone VARCHAR(10) NOT NULL,
 	annonceur_photo BLOB ,
-	PRIMARY KEY (id_annonceur),
+	PRIMARY KEY (id_annonceur)
 );
 
 /* Create table produit */
+DROP TABLE IF EXISTS 'produit';
+
 CREATE TABLE techstore.produit (
 	id_produit INT NOT NULL  AUTO_INCREMENT,
 	marque VARCHAR(50) NOT NULL,
@@ -44,6 +54,8 @@ CREATE TABLE techstore.produit (
 );
 
 /* Create table annonce */
+DROP TABLE IF EXISTS 'annonce';
+
 CREATE TABLE techstore.annonce (
 	id_annonce INT NOT NULL AUTO_INCREMENT,
 	titre_annonce VARCHAR(80) NOT NULL,
@@ -53,35 +65,42 @@ CREATE TABLE techstore.annonce (
 	time_pub DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	id_annonceur INT NOT NULL,
 	id_produit INT NOT NULL,
-	PRIMARY KEY(id_annonce),
+	PRIMARY KEY(id_annonce)
 );
 
 /* Create table consulter */
+DROP TABLE IF EXISTS 'consulter';
+
 CREATE TABLE techstore.consulter(
 	id_user INT NOT NULL,
 	id_annonce INT NOT NULL,
 	date_consultation DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (id_user,id_annonce),
+	PRIMARY KEY (id_user,id_annonce)
 );
 
 /* Create table publier */
+DROP TABLE IF EXISTS 'publier';
 
 CREATE TABLE techstore.publier(
 	id_annonceur INT NOT NULL,
 	id_annonce INT NOT NULL,
 	date_publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (id_annonceur,id_annonce),
+	PRIMARY KEY (id_annonceur,id_annonce)
 );
 
 /* Create table photo*/
+DROP TABLE IF EXISTS 'photo';
+
 CREATE TABLE techstore.photo(
 	id_photo INT NOT NULL AUTO_INCREMENT,
 	id_annonce INT NOT NULL,
 	photo BLOB NOT NULL,
-	PRIMARY KEY (id_photo),
+	PRIMARY KEY (id_photo)
 );
 
 /* Create table PC */
+DROP TABLE IF EXISTS 'pc';
+
 CREATE TABLE techstore.pc(
 	id_produit INT NOT NULL,
 	diagonale DECIMAL(2,1) NOT NULL,
@@ -91,10 +110,12 @@ CREATE TABLE techstore.pc(
 	type_disque VARCHAR(10) NOT NULL,
 	taille_disque INT NOT NULL,
 	batterie VARCHAR(80),
-	PRIMARY KEY (id_produit),
+	PRIMARY KEY (id_produit)
 );
 
 /* Create table TV */
+DROP TABLE IF EXISTS 'tv';
+
 CREATE TABLE techstore.tv(
 	id_produit INT NOT NULL,
 	diagonale DECIMAL(2,1) NOT NULL,
@@ -102,10 +123,11 @@ CREATE TABLE techstore.tv(
 	tech VARCHAR(20),
 	os VARCHAR(20),
 	connectique VARCHAR(20),
-	PRIMARY KEY (id_produit),
+	PRIMARY KEY (id_produit)
 );
 
 /* Create table telephonie*/
+DROP TABLE IF EXISTS 'telephonie';
 
 CREATE TABLE techstore.telephonie(
 	id_produit INT NOT NULL,
@@ -120,11 +142,13 @@ CREATE TABLE techstore.telephonie(
 	res_app_arr DECIMAL(2,1) NOT NULL,
 	res_app_av DECIMAL(2,1),
 	nfc INT NOT NULL,
-	PRIMARY KEY (id_produit),
+	PRIMARY KEY (id_produit)
 );
 
 
 /* Create table app photo*/
+DROP TABLE IF EXISTS 'app_photo';
+
 CREATE TABLE techstore.app_photo(
 	id_produit INT NOT NULL,
 	resolution DECIMAL(3,1) NOT NULL,
@@ -133,16 +157,18 @@ CREATE TABLE techstore.app_photo(
 	type_memoire VARCHAR(20) NOT NULL,
 	type_ecran VARCHAR(20) NOT NULL,
 	tech VARCHAR(10),
-	PRIMARY KEY (id_produit),
+	PRIMARY KEY (id_produit)
 );
 
 /* Create table accesoires */
+DROP TABLE IF EXISTS 'accesoires';
 
 CREATE TABLE techstore.accesoires(
 	id_produit INT NOT NULL,
-	PRIMARY KEY (id_produit),
+	PRIMARY KEY (id_produit)
 	);
 
+USE techstore;
 
 /*  
  * Contraintes des clés étrangères	 
