@@ -380,14 +380,14 @@ INSERT INTO `user` (`id_user`, `time_access`, `adress_ip`, `type_user`)
 INSERT INTO `annonceur` (`id_annonceur`, `login`, `password`, `mail`,
 			`nom`, `prenom`, `ville`, `telephone`, `annonceur_photo`) 
 VALUES ('2', 'user2', 'pass2', 'user2@gmail.com', 'Sachin', 'Villegas', 'Paris', '012324565', NULL),
-		('4', 'user4', 'pass4', 'user4@gmail.com', 'Raveena', 'Lutz', 'Paris', '076421244', NULL),
-		('5', 'user5', 'pass5', 'user5@gmail.com', 'Nabeel', 'Newman', 'Paris', '0667898542', NULL),
-		('6', 'user6', 'pass6', 'user6@gmail.com', 'Marley', 'Beil', 'Lyon', '0724576512', NULL),
-		('7', 'user7', 'pass7', 'user7@gmail.com', 'Lowery', 'Keira', 'Lyon', '0123456578', NULL),
-		('10', 'user10', 'pass10', 'user10@gmail.com', 'Keanan', 'Mccormick', 'Strasbourg', '0213213456', NULL),
-		('12', 'user12', 'pass12', 'user12@gmail.com', 'Aisha', 'Khaldi', 'Nantes', '0612547831', NULL);
+		('3', 'user2', 'pass3', 'user3@gmail.com', 'Raveena', 'Lutz', 'Paris', '076421244', NULL),
+		('4', 'user4', 'pass4', 'user4@gmail.com', 'Nabeel', 'Newman', 'Paris', '0667898542', NULL),
+		('5', 'user5', 'pass5', 'user5@gmail.com', 'Marley', 'Beil', 'Lyon', '0724576512', NULL),
+		('8', 'user8', 'pass8', 'user8@gmail.com', 'Lowery', 'Keira', 'Lyon', '0123456578', NULL),
+		('10', 'user10', 'pass10', 'user10@gmail.com', 'Keanan', 'Mccormick', 'Strasbourg', '0213213456', NULL);
+		
 /* Visiteur */
-INSERT INTO `visiteur` (`id_visiteur`) VALUES (1),(3), (8),(9),(11);
+INSERT INTO `visiteur` (`id_visiteur`) VALUES (1),(6), (7),(9);
 
 /* Produit */
 INSERT INTO `produit` (`id_produit`, `marque`, `modele`, `poids`, `etat`, `categorie`) VALUES 
@@ -432,21 +432,36 @@ INSERT INTO `pc` (`id_produit`, `diagonale`, `processeur`, `c_g`, `ram`, `type_d
 INSERT INTO `annonce` (`id_annonce`, `titre_annonce`, `prix`, `ville`, `type_annonce`, `time_pub`, `id_annonceur`, `id_produit`) VALUES 
 	(NULL, 'Téléphone a vendre', '120', 'Paris', 'Urgent', CURRENT_TIME(), '2', '1'),
 	(NULL, 'PC a vendre', '75', 'Lyon', 'Non urgent', CURRENT_TIME(), '4', '15'),
-	(NULL, 'Téléphone a vendre', '80', 'Nantes', 'Urgent', CURRENT_TIME(), '7', '8'),
-	(NULL, 'Téléphone a vendre', '210', 'Strasbourg', 'Non urgent', CURRENT_TIME(), '12', '9');
+	(NULL, 'Téléphone a vendre', '80', 'Nantes', 'Urgent', CURRENT_TIME(), '8', '7'),
+	(NULL, 'Téléphone a vendre', '210', 'Strasbourg', 'Non urgent', CURRENT_TIME(), '10', '9');
 
+/* Publier  */
+INSERT INTO `publier` (`id_annonceur`, `id_annonce`, `date_publication`) VALUES 
+			('2', '1', CURRENT_TIME()),
+			('4', '2', CURRENT_TIME()),
+			('8', '3', CURRENT_TIME()),
+			('10', '4', CURRENT_TIME());
 
-
+/* Consulter */
+INSERT INTO `consulter` (`id_user`, `id_annonce`, `date_consultation`) VALUES 
+('1', '1', CURRENT_TIME()),('1', '2', CURRENT_TIME()),('1', '3', CURRENT_TIME()),
+('1', '4', CURRENT_TIME()),('2', '1', CURRENT_TIME()),('2', '2', CURRENT_TIME()),
+('2', '3', CURRENT_TIME()),('2', '4', CURRENT_TIME()),('3', '1', CURRENT_TIME()),
+('3', '2', CURRENT_TIME()),('3', '3', CURRENT_TIME()),('3', '4', CURRENT_TIME()),
+('4', '1', CURRENT_TIME()),('4', '2', CURRENT_TIME()),('5', '1', CURRENT_TIME()),
+('5', '3', CURRENT_TIME()),('6', '4', CURRENT_TIME()),('7', '1', CURRENT_TIME()),
+('7', '3', CURRENT_TIME()),('9', '2', CURRENT_TIME()),('8', '1', CURRENT_TIME());
 /* SELECT */
 /* Nombre d'annonces pour chaque ville */
 SELECT ville, COUNT(*) FROM annonce
 GROUP BY ville
 
 /* Nombre d'annonces par catégorie */
-SELECT categorie, COUNT(*)
+SELECT categorie, COUNT(*) nbr
 FROM produit p, annonce a
-where p.id_produit = a.id_annonce
+where p.id_produit = a.id_produit
 GROUP BY categorie
+
 
 /* Nombre de consultation de chaque annonce*/
 SELECT id_annonce, COUNT(*) nbr_consultation
@@ -459,10 +474,10 @@ FROM  consulter c , user u, annonce a , produit p
 WHERE c.id_user = u.id_user
 and c.id_annonce = a.id_annonce
 and a.id_produit = p.id_produit
-and u.id_user = 12
+and u.id_user = 1
 GROUP by categorie;
 
-/* Nombre de consultation de chaque utilisateur donné pour chaque catégorie */
+/* Nombre de consultation de chaque utilisateur pour chaque catégorie */
 SELECT u.id_user, categorie , COUNT(*) nbr_consultation
 FROM  consulter c , user u, annonce a , produit p 
 WHERE c.id_user = u.id_user
@@ -477,12 +492,11 @@ WHERE a.id_produit = p.id_produit
 and categorie = 'categorie_donnée';
 
 /* Les annonceurs qui n'ont aucune annonce */
-SELECT a2.id_annonceur 
-FROM annonce a, annonceur a2
-WHERE a2.id_annonceur NOT IN (SELECT a3.id_annonceur 
-                           FROM publier p , annonceur a3
-                          WHERE p.id_annonceur = a3.id_annonceur)
-
+SELECT DISTINCT a.id_annonceur 
+FROM annonceur a
+WHERE a.id_annonceur NOT IN (SELECT a2.id_annonceur 
+                           FROM publier p , annonceur a2
+                          WHERE p.id_annonceur = a2.id_annonceur)
 /* Classement des annonceurs par nbr d'annonces et catégorie */
 
 
