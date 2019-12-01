@@ -49,7 +49,7 @@ CREATE TABLE techstore.produit (
 	id_produit INT NOT NULL  AUTO_INCREMENT,
 	marque VARCHAR(50) NOT NULL,
 	modele VARCHAR(20) NOT NULL,
-	poids DECIMAL(4,2),
+	poids DECIMAL(6,2),
 	etat VARCHAR(10) NOT NULL,
 	categorie VARCHAR(30) NOT NULL,
 	PRIMARY KEY(id_produit)
@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS annonce;
 CREATE TABLE techstore.annonce (
 	id_annonce INT NOT NULL AUTO_INCREMENT,
 	titre_annonce VARCHAR(80) NOT NULL,
-	prix DECIMAL(6,2) NOT NULL,
+	prix DECIMAL(8,2) NOT NULL,
 	ville VARCHAR(80) NOT NULL,
 	type_annonce VARCHAR(10) NOT NULL,
 	time_pub DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -105,7 +105,7 @@ DROP TABLE IF EXISTS pc;
 
 CREATE TABLE techstore.pc(
 	id_produit INT NOT NULL,
-	diagonale DECIMAL(2,1) NOT NULL,
+	diagonale DECIMAL(3,1) NOT NULL,
 	processeur VARCHAR(80) NOT NULL,
 	c_g VARCHAR(80) NOT NULL,
 	ram INT NOT NULL,
@@ -120,7 +120,7 @@ DROP TABLE IF EXISTS tv;
 
 CREATE TABLE techstore.tv(
 	id_produit INT NOT NULL,
-	diagonale DECIMAL(2,1) NOT NULL,
+	diagonale DECIMAL(3,1) NOT NULL,
 	definition VARCHAR(20),
 	tech VARCHAR(20),
 	os VARCHAR(20),
@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS telephonie;
 
 CREATE TABLE techstore.telephonie(
 	id_produit INT NOT NULL,
-	diagonale DECIMAL(2,1) NOT NULL,
+	diagonale DECIMAL(3,1) NOT NULL,
 	processeur VARCHAR(80) NOT NULL,
 	ram INT NOT NULL,
 	taille_disque INT NOT NULL,
@@ -141,8 +141,8 @@ CREATE TABLE techstore.telephonie(
 	batterie VARCHAR(80),
 	nb_sim INT ,
 	type_sim VARCHAR(15),
-	res_app_arr DECIMAL(2,1) NOT NULL,
-	res_app_av DECIMAL(2,1),
+	res_app_arr DECIMAL(3,1) NOT NULL,
+	res_app_av DECIMAL(3,1),
 	nfc INT NOT NULL,
 	PRIMARY KEY (id_produit)
 );
@@ -153,7 +153,7 @@ DROP TABLE IF EXISTS app_photo;
 
 CREATE TABLE techstore.app_photo(
 	id_produit INT NOT NULL,
-	resolution DECIMAL(3,1) NOT NULL,
+	resolution DECIMAL(4,1) NOT NULL,
 	format_cap VARCHAR(10), 
 	definition VARCHAR(20),
 	type_memoire VARCHAR(20) NOT NULL,
@@ -389,6 +389,53 @@ VALUES ('2', 'user2', 'pass2', 'user2@gmail.com', 'Sachin', 'Villegas', 'Paris',
 /* Visiteur */
 INSERT INTO `visiteur` (`id_visiteur`) VALUES (1),(3), (8),(9),(11);
 
+/* Produit */
+INSERT INTO `produit` (`id_produit`, `marque`, `modele`, `poids`, `etat`, `categorie`) VALUES 
+	(NULL, 'Apple', 'Iphone 11', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy S10', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy A30', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy A20', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy M10', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy S7', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Samsung', 'Galaxy S8', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Apple', 'Iphone 10', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Apple', 'Iphone 9', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Apple', 'Iphone 6s', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Huawei', 'P30', NULL, 'Neuf', 'Téléphonie'),
+	(NULL, 'Asus', 'C423NA-BV0044', NULL, 'Neuf', 'PC'),
+	(NULL, 'Acer', 'Chromebook CB3-431-C64E', NULL, 'Neuf', 'PC'),
+	(NULL, 'Apple', 'iMac', NULL, 'Neuf', 'PC'),
+	(NULL, 'HP', 'Pavilion x360 ', NULL, 'Neuf', 'PC');
+
+/* Téléphonie */
+INSERT INTO `telephonie` (`id_produit`, `diagonale`, `processeur`, `ram`, `taille_disque`, `os`, `batterie`, `nb_sim`, `type_sim`, `res_app_arr`, `res_app_av`, `nfc`) VALUES 
+	('1', '6.1', 'Apple A13', '4', '128', 'IOS', '3110', '1', 'Nano SIM', '12', NULL, '1'), 
+	('2', '6.1', 'Samsung Exynos 9820', '8', '64', 'Android', '3500', '2', 'Nano SIM', '16', NULL, '1'),
+	('8', '5.1', 'Apple A13', '4', '64', 'IOS', '2550', '1', 'Nano SIM', '12.2', NULL, '1'),
+	('9', '5.8', 'Apple A11', '4', '16', 'IOS', '1650', '1', 'Nano SIM', '12.1', NULL, '1'),
+	('10', '5.4', 'Apple A10', '4', '256', 'IOS', '1500', '1', 'Nano SIM', '12.1', NULL, '1'),
+	('3', '7.0', 'Samsung Exynos 9820', '8', '64', 'Android', '3500', '2', 'Nano SIM', '16.1', NULL, '1'),
+	('4', '5.8', 'Samsung Exynos 8260', '6', '128', 'Android', '3000', '2', 'Nano SIM', '16.1', NULL, '1'),
+	('5', '4.9', 'Samsung Exynos 7861', '4', '16', 'Android', '2550', '1', 'Nano SIM', '16.1', NULL, '1'),
+	('6', '6.2', 'Samsung Exynos 6248', '4', '16', 'Android', '2000', '2', 'Nano SIM', '15.8', NULL, '1'),
+	('7', '6.4', 'Samsung Exynos 5512', '6', '32', 'Android', '3500', '1', 'Nano SIM', '16.1', NULL, '1'),
+	('11', '6.1', 'HiSilicon Kirin 980', '6', '128', 'Android', '4500', '2', 'Nano SIM', '40.2', NULL, '1');
+
+/* PC */
+INSERT INTO `pc` (`id_produit`, `diagonale`, `processeur`, `c_g`, `ram`, `type_disque`, `taille_disque`, `batterie`) VALUES 
+	('15', '15.1', 'Intel Core i5-8265U', 'Intel UHD 620', '16', 'SSD', '256', NULL),
+	('12', '17.2', 'Intel Core i3-87020U', 'GeForce GT840m', '16', 'SSD', '512', NULL),
+	('13', '13.1', 'Intel Pentium N4200', 'Intel HD Graphics', '8', 'eMMC', '32', NULL),
+	('14', '27', 'Intel Core i5-8265U', 'Radeon Pro 555X', '16', 'SSD', '128', NULL);
+
+/* Annonce */
+INSERT INTO `annonce` (`id_annonce`, `titre_annonce`, `prix`, `ville`, `type_annonce`, `time_pub`, `id_annonceur`, `id_produit`) VALUES 
+	(NULL, 'Téléphone a vendre', '120', 'Paris', 'Urgent', CURRENT_TIME(), '2', '1'),
+	(NULL, 'PC a vendre', '75', 'Lyon', 'Non urgent', CURRENT_TIME(), '4', '15'),
+	(NULL, 'Téléphone a vendre', '80', 'Nantes', 'Urgent', CURRENT_TIME(), '7', '8'),
+	(NULL, 'Téléphone a vendre', '210', 'Strasbourg', 'Non urgent', CURRENT_TIME(), '12', '9');
+
+
 
 /* SELECT */
 /* Nombre d'annonces pour chaque ville */
@@ -436,7 +483,10 @@ WHERE a2.id_annonceur NOT IN (SELECT a3.id_annonceur
                            FROM publier p , annonceur a3
                           WHERE p.id_annonceur = a3.id_annonceur)
 
-/* */
+/* Classement des annonceurs par nbr d'annonces et catégorie */
+
+
+/* L'annonceur qui possede au moins une annonce dans chaque catégorie */
 
 
 
