@@ -318,6 +318,16 @@ CREATE VIEW v_acc AS (
 	WHERE p.id_produit = ap.id_produit
 );
 
+/* Create view , chaque utilisateur - annonce et sa categorie */
+DROP VIEW IF EXISTS v_ann_cat;
+
+CREATE VIEW v_ann_cat AS (
+SELECT a.id_annonceur , ace.id_annonce , prd.categorie
+FROM annonceur a, publier p , annonce ace , produit prd
+where a.id_annonceur = p.id_annonceur
+and p.id_annonce = ace.id_annonce
+and ace.id_produit = prd.id_produit
+);
 /* Gestion des droits */
 
 /* Visiteur */
@@ -433,14 +443,16 @@ INSERT INTO `annonce` (`id_annonce`, `titre_annonce`, `prix`, `ville`, `type_ann
 	(NULL, 'Téléphone a vendre', '120', 'Paris', 'Urgent', CURRENT_TIME(), '2', '1'),
 	(NULL, 'PC a vendre', '75', 'Lyon', 'Non urgent', CURRENT_TIME(), '4', '15'),
 	(NULL, 'Téléphone a vendre', '80', 'Nantes', 'Urgent', CURRENT_TIME(), '8', '7'),
-	(NULL, 'Téléphone a vendre', '210', 'Strasbourg', 'Non urgent', CURRENT_TIME(), '10', '9');
+	(NULL, 'Téléphone a vendre', '210', 'Strasbourg', 'Non urgent', CURRENT_TIME(), '10', '9'),
+	(NULL, 'PC a vendre', '100', 'Paris', 'Non urgent', CURRENT_TIME(), '2', '14');
 
 /* Publier  */
 INSERT INTO `publier` (`id_annonceur`, `id_annonce`, `date_publication`) VALUES 
 			('2', '1', CURRENT_TIME()),
 			('4', '2', CURRENT_TIME()),
 			('8', '3', CURRENT_TIME()),
-			('10', '4', CURRENT_TIME());
+			('10', '4', CURRENT_TIME()),
+			('2', '5', CURRENT_TIME());
 
 /* Consulter */
 INSERT INTO `consulter` (`id_user`, `id_annonce`, `date_consultation`) VALUES 
@@ -497,10 +509,25 @@ FROM annonceur a
 WHERE a.id_annonceur NOT IN (SELECT a2.id_annonceur 
                            FROM publier p , annonceur a2
                           WHERE p.id_annonceur = a2.id_annonceur)
-/* Classement des annonceurs par nbr d'annonces et catégorie */
 
+/* Classement des annonceurs par nbr d'annonces pour chaque catégorie */
+SELECT a.id_annonceur, pr.categorie ,COUNT(*) nbr_annonce 
+FROM annonceur a , annonce an , publier p , produit pr
+WHERE a.id_annonceur = p.id_annonceur
+AND p.id_annonce = an.id_annonce
+AND pr.id_produit = an.id_produit
+GROUP BY a.id_annonceur, pr.categorie
 
 /* L'annonceur qui possede au moins une annonce dans chaque catégorie */
+
+SELECT DISTINCT v.id_annonceur
+FROM v_ann_cat v
+WHERE NOT EXISTS (SELECT DISTINCT categorie
+				  FROM produit p
+				  WHERE NOT EXISTS (SELECT * FROM v_ann_cat v2
+                                     WHERE (v.id_annonceur = v2.id_annonceur)
+                                     AND (v2.categorie = p.categorie)))
+
 
 
 
