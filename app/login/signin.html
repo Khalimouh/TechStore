@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="signin.css">
+	<meta charset="utf-8">
+	<title>Insciption</title>
+</head>
+<body>
+	
+	<form method="post" action="signin.php" id="#">
+		<div>
+        	<label for="Login">Login :</label>
+        	<input type="text" id="Login" name="annonceur_login">
+    	</div>
+    	<div>
+        	<label for="Password">Password :</label>
+        	<input type="password" id="Password" name="annonceur_password">
+    	</div>
+    	<div>
+        	<label for="Password">Confirmer Password :</label>
+        	<input type="password" id="conf_password" name="annonceur_conf_password">
+    	</div>
+    	<div>
+        	<label for="e-mail">E-mail :</label>
+        	<input type="e-mail" id="E-mail" name="annonceur_e-mail"></input>
+    	</div>
+    	<div>
+        	<label for="Nom">Nom :</label>
+        	<input type="text" id="Nom" name="annonceur_nom"></input>
+    	</div>
+    	<div>
+        	<label for="Prenom">Prénom :</label>
+        	<input type="text" id="Prenom" name="annonceur_prenom"></input>
+    	</div>
+    	<div>
+        	<label for="Ville">Ville :</label>
+        	<input type="text" id="Ville" name="annonceur_ville"></input>
+    	</div>
+    	<div>
+        	<label for="Telephone">Téléphone :</label>
+        	<input type="text" id="Téléphone" name="annonceur_tel"></input>
+    	</div>
+    	<div>
+        	<label for="fichier_a_uploader" title="Recherchez le fichier à uploader !">Photo de profil :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_SIZE; ?>" />
+            <input name="fichier" type="file" id="fichier_a_uploader" />
+    	</div>
+    	<div class="button" align="center">
+        <button type="submit">S'inscrire</button>
+   		 </div>
+    </form>
+</body>
+</html>
