@@ -33,108 +33,15 @@
 	<section id="section_center">
 		<h3>Annonces populaires</h3>
 		<section id="section_popular_ads">
-			<div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
+			<?php
+        		require_once("./app/main/ads.php");
+        		get_ads();
+        	?>
         	
 		</section>
 			<h3>Annonces recommandées!</h3>
 		<section id="section_recommanded_ads">
-			<div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        	
-		</section>
+			</section>
 		
 	</section>
 	

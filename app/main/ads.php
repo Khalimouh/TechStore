@@ -1,25 +1,33 @@
 <?php
-	require_once("../dbconnection.php");
-	$conn = null;
+    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
+    define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
+
+require_once(PROJECT_LIBS.'/app/dbconnection.php');
+$conn = null;
+
+function get_ads(){
 	connectDb($conn);
+	$query = "SELECT a.titre_annonce, a.prix, a.time_pub, p.photo 
+				FROM annonce a
+				LEFT JOIN photo p ON a.id_annonce = p.id_annonce";
 
-	$result = $link->query( "SELECT * FROM birthdays" )
-	or die("SELECT Error: ".$link->error);
-	$num_rows = $result->num_rows;
-	print "There are $num_rows records.<P>";
-	print "<table width=200 border=1>\n";
-	while ($get_info = $result->fetch_row()){ 
-	print "<tr>\n";
-	foreach ($get_info as $field) 
-	print "\t<td><font face=arial size=1/>$field</font></td>\n";
-	print "</tr>\n";
-	}
-	print "</table>\n";
+	$result = $conn->query($query)
+			or die("SELECT Error: ".$conn->error);
+
+	while ($tuple = mysqli_fetch_object($result)){
+ 		print_ads($tuple->prix,$tuple->titre_annonce,$tuple->time_pub);
+ 	}
 	$result->free();
-
-
 	closeDb($conn);
+}
 
+function print_ads($price,$title,$date){
+	print "<div class= ads>";
+	print "<img class=img_ads src=./app/img/logo.png>";
+	print "<div class=price_ads>$price €</div>";
+	print "<div class=title_ads>$title</div>";
+	print "<div class=date_ads>$date</div>";
+	print "</div>";  	
 
-
+}
 ?>

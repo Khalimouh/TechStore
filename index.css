@@ -87,15 +87,7 @@ nav li a:hover {
 	flex: 3;
 	display: block;
 }
-#section_center div{
-	background: pink;
-	width: auto;
-	height: 40vh;
-}
-#section_center div:hover{
-	background: red;
-	
-}
+
 #section_popular_ads {
 	display: grid;
 	grid-gap: 5px;
@@ -110,6 +102,57 @@ nav li a:hover {
 	grid-template-columns: auto auto auto auto;
 }
 
+.ads {
+	background: pink;
+	width: 15vw;
+	height: 40vh;
+	display: flex;
+    flex-direction: column;
+    justify-content: all;
+}
+.ads:hover {
+	background: red;
+}
+.ads .title_ads{
+	text-align: center;
+	width: 100%;
+	height: auto;
+	color: white;
+	align-self: center;
+	background: red;
+
+}
+.ads .img_ads{
+	border: 1px solid black;
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: auto;
+	height: 90vh;
+	
+}
+.ads .date_ads{
+	text-align: center;
+	background: yellow;
+	align-self: center;
+	width: 100%;
+	height: 3vh;
+}
+
+.ads .price_ads{
+	display: block;
+	padding: 3px;
+	margin: 10px;
+	align-self: flex-end;
+	width: auto;
+	height: auto;
+	position: absolute;
+	z-index: 2;
+	color: white;
+	background: #f33105;
+	border-radius: 8px;
+	opacity: 0.9;
+}
 
 #aside_right{
 	border: 1px solid black;
@@ -119,12 +162,6 @@ nav li a:hover {
 	flex-direction: column;
   	align-items: center; 
 }
-
-div{
-	border: 1px solid black;
-	background: purple;
-
-	}
 
 footer{
 	margin: 5px;
