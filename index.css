@@ -1,0 +1,135 @@
+header{ 
+	border: 1px solid black;
+	background: red;
+	margin: 5px;
+	padding: 5px;
+	height: 10vh;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+
+}
+#logo_header{
+	width: 12vw;
+}
+#search_bar_header{
+	width: 40vw;
+	display: block;
+
+}
+
+#search_bar_header input{
+	
+}
+#search_bar_header button{
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+#buttons_header{
+	width: 10vw;
+}
+
+#section_main{
+	margin: 5px;
+	display: flex;
+	align-items: stretch;
+
+	
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: auto;
+}
+nav{
+	border: 1px solid black;
+	background: yellow;
+	flex: 0.8;
+	
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background-color: #f1f1f1;
+}
+
+nav li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#section_center{
+	margin: 0 5px 0 5px;
+	padding: 5px;
+	border: 1px solid black;
+	height: auto;
+	width: auto;
+	flex: 3;
+	display: block;
+}
+#section_center div{
+	background: pink;
+	width: auto;
+	height: 40vh;
+}
+#section_center div:hover{
+	background: red;
+	
+}
+#section_popular_ads {
+	display: grid;
+	grid-gap: 5px;
+	grid-column-gap: 5px;
+	grid-template-columns: auto auto auto auto;
+}
+
+#section_recommanded_ads{
+	display: grid;
+	grid-gap: 5px;
+	grid-column-gap: 5px;
+	grid-template-columns: auto auto auto auto;
+}
+
+
+#aside_right{
+	border: 1px solid black;
+	height: auto;
+	flex: 0.8;
+	display: flex;
+	flex-direction: column;
+  	align-items: center; 
+}
+
+div{
+	border: 1px solid black;
+	background: purple;
+
+	}
+
+footer{
+	margin: 5px;
+	border: 1px solid black;
+	background: blue;
+	display: block;
+	width: auto;
+}
