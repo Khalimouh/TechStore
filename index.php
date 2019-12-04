@@ -20,17 +20,19 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Navigator -+-+-+-+-+-+-+-+-+- -->
 	<section id="section_main">
 	<nav id="navigation_bar">
+		<div id="section_title">Catégories</div>
 		<ul>
 		<li><a href="#" class="active">Home</a></li>
-  		<li><a href="#">Link 1</a></li>
-  		<li><a href="#">Link 2</a></li>
-  		<li><a href="#">Link 3</a></li>
-  		<li><a href="#">Link 4</a></li>
+  		<?php
+  			require_once("./app/main/category.php");
+  			getCategories();
+  		?>
 		</ul>
 	</nav>
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Section Center-+-+-+-+-+-+-+-+-+- -->
 	<section id="section_center">
+		<div id="section_title">Annonces</div>
 		<h3>Annonces populaires</h3>
 		<section id="section_popular_ads">
 			<?php
@@ -41,13 +43,18 @@
 		</section>
 			<h3>Annonces recommandées!</h3>
 		<section id="section_recommanded_ads">
-			</section>
+			<?php
+        		require_once("./app/main/ads.php");
+        		get_ads();
+        	?>	
+		</section>
 		
 	</section>
 	
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Section Right-+-+-+-+-+-+-+-+-+- -->
 	<aside id="aside_right">
+		<div id="section_title">Statistiques</div>
 		<div>
 			<h1>À propos de l'auteur</h1>
             <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>

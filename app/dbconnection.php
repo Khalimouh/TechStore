@@ -1,6 +1,6 @@
 <?php 
 	error_reporting(-1);
-
+	
 	// Connection BDD
 	function connectDb(&$conn){
 		$conn = new mysqli('localhost', 'user' , 'user','techstore');

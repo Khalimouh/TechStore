@@ -39,8 +39,15 @@ header{
 	display: flex;
 	align-items: stretch;
 
-	
 }
+#section_title {
+	vertical-align: middle;
+	text-align: center;
+	background: gray;
+	width: 100%;
+	height: 5vh;
+}
+	
 nav ul {
   list-style-type: none;
   padding: 0;
@@ -79,16 +86,15 @@ nav li a:hover {
 }
 
 #section_center{
-	margin: 0 5px 0 5px;
-	padding: 5px;
+	
 	border: 1px solid black;
 	height: auto;
 	width: auto;
 	flex: 3;
 	display: block;
 }
-
 #section_popular_ads {
+	margin: 5px;
 	display: grid;
 	grid-gap: 5px;
 	grid-column-gap: 5px;
@@ -96,10 +102,17 @@ nav li a:hover {
 }
 
 #section_recommanded_ads{
+	margin: 5px;
 	display: grid;
 	grid-gap: 5px;
 	grid-column-gap: 5px;
 	grid-template-columns: auto auto auto auto;
+}
+
+#section_center a {
+	display: block;
+  	color: #000;
+  	text-decoration: none;
 }
 
 .ads {
