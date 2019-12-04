@@ -32,13 +32,13 @@ DROP TABLE IF EXISTS annonceur;
 CREATE TABLE techstore.annonceur (
 	id_annonceur INT NOT NULL,
 	login VARCHAR(20) NOT NULL,
-	password VARCHAR(30) NOT NULL,
+	password VARCHAR(158) NOT NULL,
 	mail VARCHAR(50) NOT NULL,
 	nom VARCHAR(30) NOT NULL,
 	prenom VARCHAR(40) NOT NULL,
 	ville VARCHAR(80) NOT NULL,
 	telephone VARCHAR(10) NOT NULL,
-	annonceur_photo BLOB ,
+	annonceur_photo  MEDIUMBLOB ,
 	PRIMARY KEY (id_annonceur)
 );
 
