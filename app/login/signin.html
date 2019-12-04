@@ -5,9 +5,9 @@
 	<meta charset="utf-8">
 	<title>Insciption</title>
 </head>
-<body>
+<body id="1">
 	
-	<form method="post" action="signin.php" id="#">
+	<form method="post" action="signin.php" id="2" enctype="multipart/form-data" >
 		<div>
         	<label for="Login">Login :</label>
         	<input type="text" id="Login" name="annonceur_login">
@@ -18,7 +18,7 @@
     	</div>
     	<div>
         	<label for="Password">Confirmer Password :</label>
-        	<input type="password" id="conf_password" name="annonceur_conf_password">
+        	<input type="Password" id="conf_password" name="annonceur_conf_password">
     	</div>
     	<div>
         	<label for="e-mail">E-mail :</label>
@@ -41,10 +41,10 @@
         	<input type="text" id="Téléphone" name="annonceur_tel"></input>
     	</div>
     	<div>
-        	<label for="fichier_a_uploader" title="Recherchez le fichier à uploader !">Photo de profil :</label>
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_SIZE; ?>" />
-            <input name="fichier" type="file" id="fichier_a_uploader" />
-    	</div>
+        	<label for="file">Photo :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+            <input type="file" name="file" size=3500000 />
+        </div>
     	<div class="button" align="center">
         <button type="submit">S'inscrire</button>
    		 </div>
