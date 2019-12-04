@@ -1,9 +1,10 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: lightgray;
 }
 header{ 
-	border: 1px solid black;
+
 	background: gray;
 	margin: 5px;
 	padding: 5px 15px 5px 15px;
@@ -13,12 +14,17 @@ header{
 	justify-content: space-between;
 
 }
-#logo_header{
+#logo_header a{
 
 	width: 12vw;
 	height: 10vh;
 	display: flex;
 	align-self: center;
+}
+
+#logo_header a img {
+	width: 100%;
+	height: auto;
 }
 #search_bar_header{
 	width: 40vw;
@@ -51,7 +57,12 @@ header{
   	cursor: pointer;
   	display: flex;
   	justify-content: center;
-  	padding: 5px;
+  	padding: 2px;
+}
+
+#search_bar_header button img{
+	width: 100%;
+	max-height: 100%;
 }
 #buttons_header{
 	align-self: center;
@@ -175,12 +186,11 @@ nav .nbr_ads{
 }
 
 .ads {
-	background: pink;
 	width: 15vw;
 	height: 40vh;
 	display: flex;
-    flex-direction: column;
-    justify-content: all;
+	flex-direction: column;
+    border: 1px solid black;
 }
 .ads:hover {
 	opacity: 0.8;
@@ -196,12 +206,15 @@ nav .nbr_ads{
 }
 .ads .img_ads{
 	border: 1px solid black;
-	position: relative;
 	z-index: 1;
 	display: block;
 	width: auto;
-	height: 90vh;
+	max-height: 100%;
+}
+.ads .img_ads img{
 	
+	width: 100%;
+	max-height: 100%;
 }
 .ads .date_ads{
 	text-align: center;

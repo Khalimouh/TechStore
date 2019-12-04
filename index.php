@@ -7,7 +7,9 @@
 <body>
 	<!-- -+-+-+-+-+-+-+-+-+- Header -+-+-+-+-+-+-+-+-+- -->
 	<header> 
-		<div id = "logo_header"><img src="./app/img/logo.png"></div>
+		<div id = "logo_header">
+			<a href="#"><img src="./app/img/logo.png"></a>
+		</div>
 		<div id = "search_bar_header" >		
     		<form action="/action_page.php">
       		<input type="text" placeholder="Chercher un produit, une marque..." name="search">
@@ -25,7 +27,6 @@
 	<nav id="navigation_bar">
 		<div id="section_title">Catégories</div>
 		<ul>
-		<li><a href="#" class="active">Home</a></li>
   		<?php
   			require_once("./app/main/category.php");
   			getCategories();
