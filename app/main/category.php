@@ -10,21 +10,29 @@
 	$conn = null;
 	function getCategories(){
 		connectDb($conn);
-		$query = "SELECT DISTINCT categorie FROM produit";
+		$query = "SELECT categorie, COUNT(*) nbr
+					FROM produit p, annonce a
+					WHERE p.id_produit = a.id_produit
+					GROUP BY categorie
+					ORDER BY categorie";
 
 		$result = $conn->query($query)
 				or die("SELECT Error: ".$conn->error);
 
 		while ($tuple = mysqli_fetch_object($result)) {
-			print_categorie($tuple->categorie);
+			print_categorie($tuple->categorie, $tuple->nbr);
 		}
 		$result->free();
 		closeDb($conn);
 
 	}
 	
-	function print_categorie($cat){
-		print "<li><a href=#>$cat</a></li>";
+	function print_categorie($cat,$nbr){
+		print "<li>";
+		print "<a href= # >";
+		print "<span>$cat</span>";
+		print "<span class=nbr_ads>$nbr</span>";
+		print "</a></li>";
 	}
 
 

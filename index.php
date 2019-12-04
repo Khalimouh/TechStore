@@ -7,14 +7,17 @@
 <body>
 	<!-- -+-+-+-+-+-+-+-+-+- Header -+-+-+-+-+-+-+-+-+- -->
 	<header> 
-		<div id = "logo_header"> <h2> Image </h2></div>
+		<div id = "logo_header"><img src="./app/img/logo.png"></div>
 		<div id = "search_bar_header" >		
     		<form action="/action_page.php">
       		<input type="text" placeholder="Chercher un produit, une marque..." name="search">
-      		<button type="submit"><i class="button_search"></i></button>
+      		<button type="submit"><img src="./app/img/icon_search.png"></button>
     		</form>
 		</div>
-		<div id="buttons_header"><h2>B2</h2></div>
+		<div id="buttons_header">
+			<button id="button_head_annonce" onclick="addAnnonce()">Deposer annonce</button>
+			<button id="button_head_compte" onclick="compte()"><img src="./app/img/icon_user.png"></button>
+		</div>
 	</header>
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Navigator -+-+-+-+-+-+-+-+-+- -->
@@ -55,18 +58,11 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Section Right-+-+-+-+-+-+-+-+-+- -->
 	<aside id="aside_right">
 		<div id="section_title">Statistiques</div>
-		<div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
-        <div>
-			<h1>À propos de l'auteur</h1>
-            <p>C'est moi, Zozor ! Je suis né un 23 novembre 2005.</p>
-        </div>
+		<?php  
+			require_once("./app/main/stats.php");
+			getStatsCatg();
+
+		?>
 	</aside>
 	</section>
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
