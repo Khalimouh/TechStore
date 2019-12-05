@@ -1,0 +1,272 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: lightgray;
+}
+header{ 
+
+	background: gray;
+	margin: 5px;
+	padding: 5px 15px 5px 15px;
+	height: 10vh;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+#logo_header a{
+
+	width: 12vw;
+	height: 10vh;
+	display: flex;
+	align-self: center;
+}
+
+#logo_header a img {
+	width: 100%;
+	height: auto;
+}
+#search_bar_header{
+	width: 40vw;
+	height: 7vh;
+	align-self: center;
+
+}
+
+#search_bar_header form{
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+#search_bar_header input[type=text] {
+	
+  	width: 100%;
+  	font-size: 17px;
+  	font-style: italic;
+  	padding: 10px;
+  	border-radius: 10px 0 0 10px;
+  	outline: none;
+  	border: none;
+}
+#search_bar_header button {
+	width: 7%;
+  	background: #ddd;
+  	font-size: 17px;
+  	border: none;
+  	border-radius: 0 10px 10px 0;
+  	cursor: pointer;
+  	display: flex;
+  	justify-content: center;
+  	padding: 2px;
+}
+
+#search_bar_header button img{
+	width: 100%;
+	max-height: 100%;
+}
+#buttons_header{
+	align-self: center;
+	width: auto;
+	height: auto;
+	display: flex;
+	justify-content: center;
+}
+
+#buttons_header button {
+	margin: 5px;
+	width: auto;
+  	border: 2px solid black;
+  	border-radius: 5px;
+  	text-align: center;
+  	text-decoration: none;
+  	cursor: pointer; 
+	padding: 5px;
+}
+
+#buttons_header #button_head_compte {
+	display: flex;
+	justify-content: center;
+
+}
+
+#section_main{
+	margin: 5px;
+	display: flex;
+	align-items: stretch;
+
+}
+#section_title {
+	vertical-align: middle;
+	text-align: center;
+	background: gray;
+	width: 100%;
+	height: 5vh;
+}
+
+
+#section_center{
+	
+	border: 1px solid black;
+	height: auto;
+	width: auto;
+	flex: 3;
+	display: block;
+}
+
+#section_popular_ads {
+	margin: 5px;
+	display: flex;
+	background-color: white;
+}
+
+
+.ads {
+	width: 13vw;
+	height: 30vh;
+	display: flex;
+	flex-direction: column;
+    border: 1px solid black;
+}
+.ads:hover {
+	opacity: 0.8;
+}
+.ads .title_ads{
+	text-align: center;
+	width: 100%;
+	height: auto;
+	color: white;
+	align-self: center;
+	background: red;
+
+}
+.ads .img_ads{
+	border: 1px solid black;
+	z-index: 1;
+	display: block;
+	width: auto;
+	max-height: 100%;
+}
+.ads .img_ads img{
+	
+	width: 100%;
+	max-height: 100%;
+}
+.ads .date_ads{
+	text-align: center;
+	background: yellow;
+	align-self: center;
+	width: 100%;
+	height: 3vh;
+
+}
+.ads .date_ads :first-child{
+	float: left;
+	margin-left: 5px;
+}
+
+.ads .date_ads :nth-child(2n){
+	float: right;
+	margin-right: 5px;
+}
+
+.ads .price_ads{
+	display: block;
+	padding: 3px;
+	margin: 10px;
+	align-self: flex-end;
+	width: auto;
+	height: auto;
+	position: absolute;
+	z-index: 2;
+	color: white;
+	background: #f33105;
+	border-radius: 8px;
+	opacity: 0.9;
+}
+
+#section_ads {
+	border: 1px solid yellow;
+	display: block;
+
+}
+#section_search_filter{
+	padding: 5px;
+	border: 1px solid red;
+	display: flex;
+	flex-wrap: wrap;
+
+}
+
+.aside_ad {
+	border: 1px solid pink;
+	background-color: pink;
+	display: flex;
+	height: 30vh;
+	width: auto;
+	padding: 10px;
+
+}
+
+.aside_ad .annonceur_div {
+	float: right;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	align-content: space-between;
+	border: 1px solid black;
+	height: 100%;
+	width: 30%;
+}
+.aside_ad .annonceur_div a img{
+	width: 100%;
+	height: 100%;
+
+}
+.aside_ad .ad_desc {
+	display: flex;
+}
+.aside_ad .ad_desc .ad_caracts{
+	padding: 10px;
+	border: 1px solid black;
+	display: block;
+	height: auto;
+	position: relative;
+}
+.aside_ad .ad_desc .ad_caracts .ad_price{
+	position: absolute;
+	bottom:0;
+  	right:0;
+  	color: red;
+  	margin: 5px;
+}
+
+
+.aside_ad .ad_desc .ad_title{
+	color: red;
+	align-self: flex-start;
+}
+.aside_ad .ad_desc img{
+	border: 1px solid white;
+	width: 25%;
+	
+}
+#aside_right{
+	border: 1px solid black;
+	height: auto;
+	flex: 0.8;
+	display: flex;
+	flex-direction: column;
+  	align-items: center; 
+
+}
+
+
+
+footer{
+	margin: 5px;
+	border: 1px solid black;
+	background: blue;
+	display: block;
+	width: auto;
+}
