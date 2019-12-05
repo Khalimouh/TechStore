@@ -36,7 +36,7 @@
 			?>
 		</section>
 			<section id="section_search_filter">
-			<form id="filter_form">
+			<form method="get" action="filter.php" id="filter_form">
 				<input type="text" name="keyword" placeholder="Mots clés">
 				<input type="text" name="marque" placeholder="Marque">
 				<input type="text" name="modele" placeholder="Modèle">
@@ -62,41 +62,11 @@
 			</form>	
 			</section>
 		<section id="section_ads">
-			<aside class="aside_ad">
-				<div class="ad_desc">
-					<img src="../img/logo.png">
-					
-					<div class="ad_caracts">
-					<div class="ad_title"><a href="#">Titre de l'annonce</a></div>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque beatae, ducimus inventore adipisci, repudiandae optio tempore. Hic aut similique blanditiis ab harum vero ullam nobis accusamus libero omnis! Ducimus, asperiores?
-					<div class="ad_price">Price : 10000 €</div>
-					</div>
-				</div>
-				<div class="annonceur_div">
-					<div class="annonceur_ville">Paris 75000</div>
-					<div class="diff_date_pub">5min</div>
-					<a href="#"><img src="../img/logo.png"></a>
-					<div class="annonceur_nom"><a href="#">Nom annonceur</a></div>
-				</div>
-			</aside>
-			
-			<aside class="aside_ad">
-				<div class="ad_desc">
-					<img src="../img/logo.png">
-					
-					<div class="ad_caracts">
-					<div class="ad_title"><a href="#">Titre de l'annonce</a></div>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque beatae, ducimus inventore adipisci, repudiandae optio tempore. Hic aut similique blanditiis ab harum vero ullam nobis accusamus libero omnis! Ducimus, asperiores?
-					<div class="ad_price">Price : 10000 €</div>
-					</div>
-				</div>
-				<div class="annonceur_div">
-					<div class="annonceur_ville">Paris 75000</div>
-					<div class="diff_date_pub">5min</div>
-					<a href="#"><img src="../img/logo.png"></a>
-					<div class="annonceur_nom"><a href="#">Nom annonceur</a></div>
-				</div>
-			</aside>
+			<?php
+				require_once("./ads_control.php");
+				get_ads_cat();
+
+			?>
 		</section>
 		
 	</section>

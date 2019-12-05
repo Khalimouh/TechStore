@@ -209,28 +209,58 @@ header{
 }
 
 .aside_ad .annonceur_div {
-	float: right;
-	display: flex;
+	display: block;
 	align-items: center;
 	flex-direction: column;
-	align-content: space-between;
 	border: 1px solid black;
 	height: 100%;
-	width: 30%;
+	width: 20%;
 }
-.aside_ad .annonceur_div a img{
-	width: 100%;
-	height: 100%;
 
+
+.aside_ad .annonceur_div .annonceur_ville{
+	text-align: center;
+	height: 10%;
+	width: 100%;
+	background-color: yellow;
+}
+.aside_ad .annonceur_div .diff_date_pub{
+	text-align: center;
+	height: 10%;
+	width: 100%;
+	background-color: gray;
+	
+}
+.aside_ad .annonceur_div a{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 80%;
+	background-color: white;
+}
+.aside_ad .annonceur_div .annonceur_nom {
+	text-align: center;
+	background-color: red;
+	width : 100%;
+	height: auto;
+	
+}
+
+.aside_ad .annonceur_div a img{
+	max-height: 100%;
+	width: auto;
 }
 .aside_ad .ad_desc {
 	display: flex;
+	width: 80%;
 }
 .aside_ad .ad_desc .ad_caracts{
 	padding: 10px;
 	border: 1px solid black;
 	display: block;
 	height: auto;
+	flex: 3;
 	position: relative;
 }
 .aside_ad .ad_desc .ad_caracts .ad_price{
