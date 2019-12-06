@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -16,7 +17,7 @@
     		</form>
 		</div>
 		<div id="buttons_header">
-			<button id="button_head_annonce" onclick="addAnnonce()">Deposer annonce</button>
+			<button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = 'profil.php';"><img src="../img/icon_user.png"></button>
 		</div>
 	</header>

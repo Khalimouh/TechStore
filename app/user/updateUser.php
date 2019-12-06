@@ -1,8 +1,9 @@
+<?php session_start(); ?>
 <html>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="../../index.css">
-	<link rel="stylesheet" type="text/css" href="../login/signin.css">
+	<link rel="stylesheet" type="text/css" href="form.css">
 	<title>TechStore</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
     		</form>
 		</div>
 		<div id="buttons_header">
-			<button id="button_head_annonce" onclick="addAnnonce()">Deposer annonce</button>
+			<button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = 'profil.php';"><img src="../img/icon_user.png"></button>
 		</div>
 	</header>
@@ -35,7 +36,7 @@
 	</nav>
 	<section id="section_center">
 	<div id="section_title"> Modifier informations</div>
-		<form action="UpdateUser.php" method="POST" id ="updatefrom" enctype="multipart/form-data" >
+		<form action="UpdateUser.php" method="POST" id ="updateform" enctype="multipart/form-data" >
 		<div>
         	<label for="Login">Login :</label>
         	<input type="text" id="Login" name="annonceur_login">
