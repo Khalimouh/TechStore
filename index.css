@@ -89,6 +89,12 @@ header{
 
 }
 
+#annonce_table{
+	border: 1px solid black;
+	border-collapse: collapse;
+	 width: 100%;
+}
+
 #section_main{
 	margin: 5px;
 	display: flex;
@@ -104,6 +110,9 @@ header{
 }
 
 
+.user{
+	border: 2px solid black;
+}
 
 
 	

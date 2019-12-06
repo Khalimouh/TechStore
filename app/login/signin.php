@@ -3,6 +3,17 @@
 error_reporting(-1);
 ini_set('display_errors', 'On');
 
+if (!defined('PROJECT_ROOT'))
+	define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
+
+if (!defined('PROJECT_LIBS'))
+   	define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
+
+require_once(PROJECT_LIBS.'/app/dbconnection.php');
+$conn = null;
+
+
+
 function getUserIpAddr(){
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
         $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -72,23 +83,20 @@ if(strcmp($password, $confpassword) == 0 && filter_var($mail, FILTER_VALIDATE_EM
 $passhache = password_hash($password, PASSWORD_DEFAULT);
 /*print($passhache);*/
 //On se connecte à la BD
-$link = new mysqli('localhost', 'user', 'user', 'techstore');
-	if ($link->connect_errno) {
-		die ("Erreur de connexion : errno: " . $link->errno . " error:" .$link->error);
-	}
+connectDb($conn);
 //récuperation de l'id_user
-$res = $link->query("SELECT * FROM user");
+$res = $conn->query("SELECT * FROM user");
 $new_id_availible = $res->num_rows+1;
 
 //récuperation de la date
 $date = date('Y-m-d H:i:s');
 
 
-$link->query("INSERT INTO user (id_user, time_access, adress_ip, type_user) VALUES ($new_id_availible, '$date', '$user_ip', 'Annonceur');") or die("Erreur insertion user : " . $link->error);
+$conn->query("INSERT INTO user (id_user, time_access, adress_ip, type_user) VALUES ($new_id_availible, '$date', '$user_ip', 'Annonceur');") or die("Erreur insertion user : " . $conn->error);
 
-$link->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
+$conn->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
 	nom, prenom, ville, telephone, annonceur_photo) VALUES ($new_id_availible, '$Login','$passhache', '$mail', '$nom', '$prenom', '$ville', '$tel', " .
-"'" . addslashes ($img_blob) . "');")or die("Erreur insertion annonceur: " . $link->error);
+"'" . addslashes ($img_blob) . "');")or die("Erreur insertion annonceur: " . $conn->error);
 //rediriger vers la page d'acceuil du site 	
 
 //header("Location: ");
@@ -98,5 +106,10 @@ $link->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
 	print("Les mots de passe ne sont pas identiques");
 	exit;
 }
+
+
+
+$resultat->free();
+$conn->close();
 
 ?>
