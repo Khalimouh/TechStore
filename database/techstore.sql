@@ -61,6 +61,7 @@ DROP TABLE IF EXISTS annonce;
 CREATE TABLE techstore.annonce (
 	id_annonce INT NOT NULL AUTO_INCREMENT,
 	titre_annonce VARCHAR(80) NOT NULL,
+	description VARCHAR(512),
 	prix DECIMAL(8,2) NOT NULL,
 	ville VARCHAR(80) NOT NULL,
 	type_annonce VARCHAR(10) NOT NULL,

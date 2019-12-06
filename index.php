@@ -18,7 +18,7 @@
     		</form>
 		</div>
 		<div id="buttons_header">
-			<button id="button_head_annonce" onclick="addAnnonce()">Deposer annonce</button>
+			<button id="button_head_annonce" onclick="window.location.href =' ./app/login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = './app/login/checkLogin.php';"><img src="./app/img/icon_user.png"></button>
 		</div>
 	</header>

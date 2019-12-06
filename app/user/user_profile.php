@@ -1,8 +1,8 @@
 <?php
-	
+	/*
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
-	
+	*/
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 
@@ -55,7 +55,7 @@
 		$query = "SELECT DISTINCT a.titre_annonce, a.prix, a.time_pub
 					FROM annonce a , annonceur an , publier p
 					WHERE a.id_annonceur = an.id_annonceur AND p.id_annonceur = a.id_annonceur
-						AND an.id_annonceur = 2 ";
+						AND an.id_annonceur = '$id' ";
 		$result = $conn->query($query) or die("SELECT Error: ". $conn->error);
 		print("<table id='Annonce_table' >");
 		//Passe dans le if quand l'utilisateur n'a pas d'annonce (bug)
@@ -91,7 +91,7 @@
 		$id = $_SESSION['id'];
 		connectDb($conn);
 		//Ces publications dans chaque catégorie
-		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = 2";
+		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id";
 		//Ses publications totales
 		$query2 = "SELECT COUNT(*) as nb
 					FROM publier p , annonceur an
@@ -103,19 +103,22 @@
 		$result2 = $conn->query($query2);
 
 		$tupleNBAnnonce = mysqli_fetch_object($result2);
-		
+		if($result && $result2){
 		print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
 		print("Dans les catégorie suivantes: ");
 		print("<table id=' Annonceur_stats' border=1 >");
 		while ($tuplesAnnonces = mysqli_fetch_object($result)){
 			displayUserStats($tuplesAnnonces->categorie, $tuplesAnnonces->nbr_annonce);
- 			
  		}
 		print("</table>");
 		$result->free();
-		$result2->free();
-		
+		$result2->free();	
 		closeDb($conn);
+ 		}else{
+ 			print "<div><tr>";
+			print "Qu'attendez vous pour publier des annonces !";
+			print "</div></tr>";  	
+ 		}
 	}
 
 ?>
