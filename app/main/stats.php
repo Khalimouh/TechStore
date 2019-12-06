@@ -9,7 +9,6 @@
     //Get script dbconnection
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$GLOBALS['conn'] = null;
-
 	function catsToArray(){
 		
 		$array = null;
@@ -39,16 +38,17 @@
 		print "<div class=table_stats>";
 		print "<table>";
 		print "<tr><th colspan=2>$cat</th></tr>";
-		while ($tuple = mysqli_fetch_object($result))
-			printStat($tuple->nom, $tuple->prenom, $tuple->nbr_ann);
-		
+		while ($tuple = mysqli_fetch_object($result)){
+			$nom = $tuple->nom." ".$tuple->prenom;
+			printStat($nom, $tuple->nbr_ann);
+		}
 		print	"</table></div>";
 
 		$result->free();
 	}
 
-	function printStat($nom, $prenom, $nbr){
-		print "<tr><td><a href= #>$nom $prenom</a></td><td>$nbr</td></tr>";
+	function printStat($nom, $nbr){
+		print "<tr><td><a href= #>$nom</a></td><td>$nbr</td></tr>";
 	}
 
 	function getStatsCatg(){
@@ -59,6 +59,27 @@
 			prepareStat($cat);
 		}
 	
+		closeDb($GLOBALS['conn']);
+	}
+
+	function getStatsVille(){
+		connectDb($GLOBALS['conn']);
+		$query = "SELECT ville, COUNT(*) nbr_ann 
+					FROM annonce
+					GROUP BY ville
+					ORDER BY nbr_ann DESC";
+
+		$result = $GLOBALS['conn']->query($query)
+				or die("SELECT Error: ".$GLOBALS['conn']->error);
+		print "<div class=table_stats>";
+		print "<table>";
+		print "<tr><th colspan=2>Villes</th></tr>";
+		while ($tuple = mysqli_fetch_object($result))
+			printStat($tuple->ville, $tuple->nbr_ann);
+		
+		print	"</table></div>";
+
+		$result->free();
 		closeDb($GLOBALS['conn']);
 	}
 ?>

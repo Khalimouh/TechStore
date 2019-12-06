@@ -43,7 +43,7 @@
 		<section id="section_popular_ads">
 			<?php
         		require_once("./app/main/ads.php");
-        		get_ads();
+        		get_popular_ads();
         	?>
         	
 		</section>
@@ -51,7 +51,8 @@
 		<section id="section_recommanded_ads">
 			<?php
         		require_once("./app/main/ads.php");
-        		get_ads();
+        		$limit = 1000;
+        		get_popular_ads();
         	?>	
 		</section>
 		
@@ -61,10 +62,15 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Section Right-+-+-+-+-+-+-+-+-+- -->
 	<aside id="aside_right">
 		<div id="section_title">Statistiques</div>
+		<div>Classement par catégorie</div>
 		<?php  
 			require_once("./app/main/stats.php");
 			getStatsCatg();
 
+		?>
+		<div>Classement par ville</div>
+		<?php  
+			getStatsVille();
 		?>
 	</aside>
 	</section>

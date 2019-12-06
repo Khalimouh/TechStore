@@ -9,15 +9,10 @@
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
 
-function get_ads(){
-	connectDb($conn);
-	$query = "SELECT a.titre_annonce, a.prix, a.time_pub, p.photo, COUNT(c.id_annonce) nbr_cons
-				FROM annonce a
-				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
-				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
-				GROUP by a.id_annonce
-				ORDER BY nbr_cons DESC";
 
+function get_ads($query){
+	connectDb($conn);
+	
 	$result = $conn->query($query)
 			or die("SELECT Error: ".$conn->error);
 
@@ -43,4 +38,21 @@ function print_ads($price, $title, $date, $nbr){
 	print "</div></a>";  	
 	
 }
+function get_popular_ads($limit = 1000,$cat = ''){
+	$query = "SELECT a.titre_annonce, a.prix, a.time_pub, p.photo , COUNT(c.id_annonce) nbr_cons
+				FROM annonce a
+				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
+				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
+                INNER JOIN produit pr ON a.id_produit = pr.id_produit and pr.categorie LIKE '$cat%'
+				GROUP by a.id_annonce
+				ORDER BY nbr_cons DESC
+				LIMIT $limit";
+	get_ads($query);
+}
+
+function get_recommanded_ads(){
+
+}
+
+
 ?>
