@@ -2,27 +2,23 @@
 
 error_reporting(-1);
 ini_set('display_errors', 'On');
+if (!defined('PROJECT_ROOT'))
+    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
+
+if (!defined('PROJECT_LIBS'))
+    define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
+
+
+require_once(PROJECT_LIBS.'/app/dbconnection.php');
+$conn = null;
+
 
 $login = $_POST['annonceur_login'];
 $password = $_POST['annonceur_password'];
-$link = new mysqli('localhost', 'user', 'user', 'techstore');
-	if ($link->connect_errno) {
-		die ("Erreur de connexion : errno: " . $link->errno . " error:" .$link->error);
-	}
-$resultat = $link->query("SELECT id_annonceur, password FROM annonceur WHERE login = '$login'")or die("SELECT Error: " . $link->error);
 
-/*
-print "Il y a $num_rows lignes.<br/>";
-$num_rows = $resultat->num_rows;
-print "<table width=200 border=1>\n";
-while ($get_info = $resultat->fetch_row()){
-	print "<tr>\n";
-	foreach ($get_info as $field)
-	print "\t<td>$field</td>\n";
-	print "</tr>\n";
-}
-print "</table>\n";
-*/
+connectDb($conn);
+$resultat = $conn->query("SELECT id_annonceur, password FROM annonceur WHERE login = '$login'")or die("SELECT Error: " . $conn->error);
+
 
 $get_info = $resultat->fetch_row();
 
@@ -38,12 +34,16 @@ else
         session_start();
         $_SESSION['id'] = $get_info[0];
         $_SESSION['login'] = $login ;
-        echo 'Vous êtes connecté !';
-        //header("Location: logout.php");
+           echo 'Vous êtes connecté !';
+        header("Location: ../user/profil.php");
+        exit;
     }
     else {
         echo 'Mauvais identifiant ou mot de passe !';
     }
 }
+
+$resultat->free();
+$conn->close();
 
 ?>

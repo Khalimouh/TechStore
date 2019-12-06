@@ -9,6 +9,5 @@ session_destroy();
 setcookie('login', '');
 setcookie('pass_hache', '');
 
-
-header("Location: login.html");
+header("Location: ../../index.php");
 ?>

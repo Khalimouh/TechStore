@@ -1,3 +1,4 @@
+<?php session_start(); ?> 
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -18,9 +19,10 @@
 		</div>
 		<div id="buttons_header">
 			<button id="button_head_annonce" onclick="addAnnonce()">Deposer annonce</button>
-			<button id="button_head_compte" onclick="compte()"><img src="./app/img/icon_user.png"></button>
+			<button id="button_head_compte" onclick="window.location.href = './app/login/checkLogin.php';"><img src="./app/img/icon_user.png"></button>
 		</div>
 	</header>
+
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Navigator -+-+-+-+-+-+-+-+-+- -->
 	<section id="section_main">
