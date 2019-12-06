@@ -1,5 +1,10 @@
 <html>
 <head>
+	<?php 
+		require_once("../main/ads.php");
+		require_once("./ads_control.php");
+
+	?>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="ads_category.css">
 	<title> Categorie </title>
@@ -31,40 +36,40 @@
 		<div id="section_title">Annonces</div>
 		<section id="section_popular_ads">
 			<?php
-				require_once("../main/ads.php");
+				
 				get_popular_ads(6, 'PC');
 			?>
 		</section>
 			<section id="section_search_filter">
-			<form method="get" action="filter.php" id="filter_form">
-				<input type="text" name="keyword" placeholder="Mots clés">
-				<input type="text" name="marque" placeholder="Marque">
-				<input type="text" name="modele" placeholder="Modèle">
-				<input type="text" name="poids" placeholder="Poids">
-				<input type="date" name="date_pub">
-				<select name ="etat" form="filter_form">
-  					<option value="neuf">Neuf</option>
-  					<option value="occas">Occasion</option>
+			<form method="get" action="<?=$_SERVER['PHP_SELF'];?>"  id="filter_form">
+				<input type="text" name="keyword" placeholder="Mots clés" value="<?php echo $keyword; ?>">
+				<input type="text" name="marque" placeholder="Marque" value="<?php echo $marque; ?>">
+				<input type="text" name="modele" placeholder="Modèle" value="<?php echo $modele; ?>">
+				<input type="text" name="poids" placeholder="Poids" value="<?php echo $poids; ?>">
+				<input type="date" name="date_pub" >
+				<select name ="etat" form="filter_form" value="<?php echo $etat; ?>">
+  					<option ></option>
+  					<option ></option>
 				</select> 
 				<select name ="ville" form="filter_form">
-  					<option value="ville">Ville</option>
+  					<option ></option>
 				</select>
 				<select name ="urgent" form="filter_form">
-  					<option value="urgent_t">Urgent</option>
-  					<option value="urgent_f">Non urgent</option>
+  					<option >Urgent</option>
+  					<option >Non urgent</option>
 				</select>
 				<select name ="photo" form="filter_form">
-  					<option value="photo_t">Avec photos</option>
-  					<option value="photo_f">Toutes les annonces</option>
+  					<option >Avec photos</option>
+  					<option >Toutes les annonces</option>
 				</select>
 				 
-				<button type="submit">Filtrer</button>
+				<input type="submit" name="filterButton" value="Filtrer"></input>
 			</form>	
 			</section>
 		<section id="section_ads">
 			<?php
-				require_once("./ads_control.php");
-				get_ads_cat();
+				
+				get_ads_cat($keyword,'',$marque, $modele, $etat, $ville);
 
 			?>
 		</section>

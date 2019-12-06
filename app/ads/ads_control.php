@@ -1,7 +1,33 @@
 <?php
 	
-	
+	if (!defined('PROJECT_ROOT'))
+	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 
+	if (!defined('PROJECT_LIBS'))
+    	define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
+
+    //Get script dbconnection
+	require_once(PROJECT_LIBS.'/app/dbconnection.php');
+	$conn = null;
+
+	/* Getters from the URL */
+	 if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['filterButton'])){
+
+		$keyword = $_GET["keyword"];
+		//$cat = $_GET["cat"];
+		$marque = $_GET["marque"];
+		$modele = $_GET["modele"];
+		$poids = $_GET["poids"];
+		$etat = $_GET["etat"];
+		$ville = $_GET["ville"];
+
+	/*	echo '<script type="text/javascript">alert("Data has been submitted to");</script>';*/
+	}
+	else {
+		$keyword =''; /*$cat ='';*/ $marque =''; $modele =''; $etat = ''; $poids = ''; $ville ='';
+	}
+
+    /* -+ - +- +- +- +- - + - -+ -+ -+ - +- +- +- +- +- + -+ -+ -+ - +- +- */
 
 	function print_ad_cat($title, $cat='', $marque, $model, $ad_ville, $etat, $urg, $price,
 						$an_ville, $diffdate, $an_nom, $nbr_cons){
