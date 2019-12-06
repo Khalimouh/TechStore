@@ -194,8 +194,20 @@ header{
 	padding: 5px;
 	border: 1px solid red;
 	display: flex;
+	flex-direction: column;
+
+}
+#section_search_filter form{
+	padding: 5px;
+	border: 1px solid red;
+	display: flex;
 	flex-wrap: wrap;
 
+}
+
+#section_search_filter form > * {
+        width: 14%;
+        height: auto;
 }
 
 .aside_ad {

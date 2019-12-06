@@ -17,14 +17,21 @@
 		//$cat = $_GET["cat"];
 		$marque = $_GET["marque"];
 		$modele = $_GET["modele"];
-		$poids = $_GET["poids"];
+		$poids_min = $_GET["poids_min"];
+		$poids_max = $_GET["poids_max"];
+		$prix_min = $_GET["prix_min"];
+		$prix_max = $_GET["prix_max"];
+		$date_min = $_GET["date_min"];
+		$date_max = $_GET["date_max"];
 		$etat = $_GET["etat"];
 		$ville = $_GET["ville"];
+		$urgence = $_GET["urgence"];
+		$photos = $_GET["photos"];
 
 	/*	echo '<script type="text/javascript">alert("Data has been submitted to");</script>';*/
 	}
 	else {
-		$keyword =''; /*$cat ='';*/ $marque =''; $modele =''; $etat = ''; $poids = ''; $ville ='';
+		$keyword =''; /*$cat ='';*/ $marque =''; $modele =''; $etat = ''; $poids_min = ''; $poids_max = ''; $prix_min = ''; $prix_max =''; $ville =''; $urgence = ''; $date_min =''; $date_max = ''; $photos ='';
 	}
 
     /* -+ - +- +- +- +- - + - -+ -+ -+ - +- +- +- +- +- + -+ -+ -+ - +- +- */
@@ -51,7 +58,20 @@
 
 
 
-	function get_ads_cat($key ='',$cat ='', $marque ='', $modele ='', $etat = '', $ville =''){
+	function get_ads_cat($keyword ='', $cat ='', $marque ='', $modele ='', $etat = '', $poids_min = '', $poids_max = '', $prix_min = '', $prix_max ='', $ville ='', $urgence = '', $date_min ='', $date_max = '', $photos = ''){
+		$t_prix_max = $prix_max =='' ? 10000 : $prix_max;
+		$t_date_max = $date_max =='' ? 'CURRENT_DATE()' : $date_max;
+		$t_poids_max = $poids_max =='' ? 10000 : $poids_max;
+		$t_poids_cond = ($poids_min == '' AND $poids_max == '') ? '' :
+				"AND pr.poids BETWEEN ".$poids_min." AND ".$t_poids_max." ";
+
+		if($photos == '')
+			$t_photos = 'LEFT JOIN photo p ON a.id_annonce = p.id_annonce';
+		else if ($photos == 'Avec photos')
+			$t_photos = 'INNER JOIN photo p ON a.id_annonce = p.id_annonce';
+		else if ($photos == 'Sans photos')
+			$t_photos = 'INNER JOIN photo p ON a.id_annonce <> p.id_annonce';
+		
 		connectDb($conn);
 		$query = "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as a_ville, ann.annonceur_photo,
 					 a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville,
@@ -65,20 +85,28 @@
 							AND an.id_annonce = p.id_annonce) ann
 							ON a.id_annonceur = ann.id_annonceur and a.id_annonce = ann.id_annonce
  				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
-				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
+				$t_photos
                 INNER JOIN produit pr ON a.id_produit = pr.id_produit
-                		and pr.categorie LIKE '%$cat%' and pr.marque LIKE '%$marque%' and pr.modele LIKE '%$modele%' and pr.etat LIKE '%$etat%'
-                WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$key%'
+                WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
+                AND pr.categorie LIKE '%$cat%' AND pr.marque LIKE '%$marque%' 
+                AND pr.modele LIKE '%$modele%' and pr.etat LIKE '%$etat%' 
+                AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
+                AND a.time_pub BETWEEN '$date_min' AND $t_date_max
+                $t_poids_cond
+                AND a.type_annonce LIKE '$urgence%'
 				GROUP by a.id_annonce
 				ORDER BY nbr_cons DESC
 				LIMIT 100";
 
+		//echo $query;
+		//echo '<script type="text/javascript">console.log("'.$query.'");</script>';
 		$result = $conn->query($query)
 			or die("SELECT Error: ".$conn->error);
 
 		while ($tuple = mysqli_fetch_object($result)){
 			print_ad_cat($tuple->titre_annonce, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->ad_ville, $tuple->etat, $tuple->type_annonce, $tuple->prix, $tuple->a_ville, $tuple->time_pub, $tuple->nom." ".$tuple->prenom, $tuple->nbr_cons);			
  		}
+
 		$result->free();
 		closeDb($conn);
 }
