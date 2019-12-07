@@ -16,8 +16,8 @@
 			<a href="../../index.php"><img src="../img/logo.png"></a>
 		</div>
 		<div id = "search_bar_header" >		
-    		<form action="/action_page.php">
-      		<input type="text" placeholder="Chercher un produit, une marque..." name="search">
+    		<form action="<?=$_SERVER['PHP_SELF'];?>">
+      		<input type="text" placeholder="Chercher un produit, une marque..." name="keyword">
       		<button type="submit"><img src="../img/icon_search.png"></button>
     		</form>
 		</div>
