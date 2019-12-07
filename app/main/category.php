@@ -18,10 +18,17 @@
 
 		$result = $conn->query($query)
 				or die("SELECT Error: ".$conn->error);
-
+		$nbr_total = 0;
 		while ($tuple = mysqli_fetch_object($result)) {
 			print_categorie($tuple->categorie, $tuple->nbr);
+			$nbr_total += $tuple->nbr;
 		}
+		print "<li>";
+		print "<a class = active href=/TechStore/app/ads/ads_category.php>";
+		print "<span>Toutes les catégories</span>";
+		print "<span class=nbr_ads>$nbr_total</span>";
+		print "</a></li>";
+
 		$result->free();
 		closeDb($conn);
 
@@ -29,7 +36,7 @@
 	
 	function print_categorie($cat,$nbr){
 		print "<li>";
-		print "<a href= # >";
+		print "<a href=/TechStore/app/ads/ads_category.php?cat=$cat>";
 		print "<span>$cat</span>";
 		print "<span class=nbr_ads>$nbr</span>";
 		print "</a></li>";
