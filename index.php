@@ -9,7 +9,7 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Header -+-+-+-+-+-+-+-+-+- -->
 	<header> 
 		<div id = "logo_header">
-			<a href="#"><img src="./app/img/logo.png"></a>
+			<a href="<?=$_SERVER['PHP_SELF'];?>"><img src="./app/img/logo.png"></a>
 		</div>
 		<div id = "search_bar_header" >		
     		<form action="/action_page.php">

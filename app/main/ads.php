@@ -25,7 +25,7 @@ function get_ads($query){
 }
 
 function print_ads($price, $title, $date, $nbr){
-	print "<a href= #>";
+	print "<a href=#>";
 	print "<div class= ads>";
 	// photo ads
 	print "<img class=img_ads src=./app/img/logo.png>";
@@ -39,7 +39,7 @@ function print_ads($price, $title, $date, $nbr){
 	
 }
 function get_popular_ads($limit = 1000,$cat = ''){
-	$query = "SELECT a.titre_annonce, a.prix, a.time_pub, p.photo , COUNT(c.id_annonce) nbr_cons
+	$query = "SELECT a.titre_annonce, a.prix, a.time_pub, p.photo ,pr.categorie, COUNT(c.id_annonce) nbr_cons
 				FROM annonce a
 				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
