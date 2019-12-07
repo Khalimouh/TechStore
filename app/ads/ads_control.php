@@ -18,6 +18,11 @@ if(!isset($_GET["cat"]))
 
 $cat = $_GET["cat"];
 
+if(!isset($_GET["keyword"]))	
+	$_GET["keyword"] = '';
+
+$keyword = $_GET["keyword"];
+	
 
 function printFormCatg($cat =''){
 	global $cpu, $diag, $c_g, $ram, $taille_disk, $type_disk, $os, $app_photo;
@@ -67,7 +72,6 @@ function printFormCatg($cat =''){
 
 if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['filterButton'])){
 
-	$keyword = $_GET["keyword"];
 	$marque = $_GET["marque"];
 	$modele = $_GET["modele"];
 	$poids_min = $_GET["poids_min"];
@@ -92,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['filterButton'])){
 	/*	echo '<script type="text/javascript">alert("Data has been submitted to");</script>';*/
 }
 else {
-	$keyword =''; $marque =''; $modele =''; $etat = ''; $poids_min = ''; $poids_max = ''; $prix_min = ''; $prix_max =''; $ville =''; $urgence = ''; $date_min =''; $date_max = ''; $photos ='';$cpu = ''; $diag= ''; $ram= ''; $taille_disk = ''; $type_disk = ''; $os = ''; $c_g = '';$app_photo = '';
+	 $marque =''; $modele =''; $etat = ''; $poids_min = ''; $poids_max = ''; $prix_min = ''; $prix_max =''; $ville =''; $urgence = ''; $date_min =''; $date_max = ''; $photos ='';$cpu = ''; $diag= ''; $ram= ''; $taille_disk = ''; $type_disk = ''; $os = ''; $c_g = '';$app_photo = '';
 }
 
 
@@ -157,13 +161,19 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	$t_photos
 	INNER JOIN v_pc ON a.id_produit = v_pc.id_produit
 	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
-	AND v_pc.categorie LIKE '$cat%' AND v_pc.marque LIKE '%$marque%' 
-	AND v_pc.modele LIKE '%$modele%' and v_pc.etat LIKE '%$etat%' 
+	AND v_pc.categorie LIKE '$cat%' 
+	AND v_pc.marque LIKE '%$marque%' OR v_pc.marque LIKE '%$keyword%'
+	AND v_pc.modele LIKE '%$modele%' OR v_pc.modele LIKE '%$keyword%'
+	and v_pc.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
-	AND a.type_annonce LIKE '$urgence%'
-	AND v_pc.processeur LIKE '%$cpu%' AND v_pc.c_g LIKE '%$c_g%' AND v_pc.diagonale <= '$t_diag' AND v_pc.ram <= '$t_ram' AND v_pc.type_disque LIKE '$type_disk%' and v_pc.taille_disque <= '$t_taille_disk'
+	AND a.type_annonce LIKE '$urgence%' 
+	AND v_pc.processeur LIKE '%$cpu%' OR v_pc.processeur LIKE '%$keyword%'
+	AND v_pc.c_g LIKE '%$c_g%' OR v_pc.c_g LIKE '%$keyword%'
+	AND v_pc.diagonale <= '$t_diag' AND v_pc.ram <= '$t_ram' 
+	AND v_pc.type_disque LIKE '$type_disk%' OR v_pc.type_disque LIKE '%$keyword%'
+	AND v_pc.taille_disque <= '$t_taille_disk'
 
 	GROUP by a.id_annonce
 	ORDER BY nbr_cons DESC
@@ -185,13 +195,17 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	$t_photos
 	INNER JOIN v_telephonie t ON a.id_produit = t.id_produit
 	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
-	AND t.categorie LIKE '$cat%' AND t.marque LIKE '%$marque%' 
-	AND t.modele LIKE '%$modele%' and t.etat LIKE '%$etat%' 
+	AND t.categorie LIKE '$cat%' 
+	AND t.marque LIKE '%$marque%' OR t.marque LIKE '%$keyword%'
+	AND t.modele LIKE '%$modele%' OR t.modele LIKE '%$keyword%'
+	and t.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
 	AND a.type_annonce LIKE '$urgence%'
-	AND t.processeur LIKE '%$cpu%' AND t.res_app_arr <= '$t_app_photo' AND t.diagonale <= '$t_diag' AND t.ram <= '$t_ram' AND t.taille_disque <= '$t_taille_disk'
+	AND t.processeur LIKE '%$cpu%' OR t.processeur LIKE '%$keyword%'
+	AND t.res_app_arr <= '$t_app_photo' AND t.diagonale <= '$t_diag' 
+	AND t.ram <= '$t_ram' AND t.taille_disque <= '$t_taille_disk'
 	GROUP by a.id_annonce
 	ORDER BY nbr_cons DESC
 	LIMIT 100";
@@ -211,8 +225,10 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	$t_photos
 	INNER JOIN produit pr ON a.id_produit = pr.id_produit
 	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
-	AND pr.categorie LIKE '$cat%' AND pr.marque LIKE '%$marque%' 
-	AND pr.modele LIKE '%$modele%' and pr.etat LIKE '%$etat%' 
+	AND pr.categorie LIKE '$cat%' 
+	AND pr.marque LIKE '%$marque%' OR pr.marque LIKE '%$keyword%'
+	AND pr.modele LIKE '%$modele%' OR pr.modele LIKE '%$keyword%'
+	and pr.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
