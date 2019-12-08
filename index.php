@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./index.css">
+	<link rel="icon" href="/TechStore/app/img/logo.ico" />
 	<title>TechStore</title>
 </head>
 <body>

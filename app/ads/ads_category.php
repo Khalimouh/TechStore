@@ -46,7 +46,6 @@
 		<div id="section_title">Annonces</div>
 		<section id="section_popular_ads">
 			<?php
-				
 				get_popular_ads(6,$cat);
 			?>
 		</section>

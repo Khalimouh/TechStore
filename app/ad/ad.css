@@ -14,6 +14,7 @@ header{
 	justify-content: space-between;
 
 }
+
 #logo_header a{
 
 	width: 12vw;
@@ -89,12 +90,6 @@ header{
 
 }
 
-#annonce_table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	 width: 100%;
-}
-
 #section_main{
 	margin: 5px;
 	display: flex;
@@ -110,86 +105,83 @@ header{
 }
 
 
-.user{
-	border: 2px solid black;
-}
-
-nav{
-	border: 1px solid black;
-	background: yellow;
-	flex: 0.8;
-	
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  background-color: #f1f1f1;
-}
-
-nav li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-nav li a:hover {
-  background-color: #555;
-  color: white;
-}
-
-nav .nbr_ads{
-	color: red;
-	background-color: yellow;
-	border-radius: 50%;
-	padding: 2px;
-	width: auto;
-	height: auto;
-	text-align: center;
-	float:right;
-}
-
-.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
 #section_center{
 	
-	border: 1px solid black;
+	border: 1px solid red;
 	height: auto;
 	width: auto;
 	flex: 3;
 	display: block;
-}
-#section_popular_ads {
-	margin: 5px;
-	display: grid;
-	grid-gap: 5px;
-	grid-column-gap: 5px;
-	grid-template-columns: auto auto auto auto;
-}
-
-#section_recommanded_ads{
-	margin: 5px;
-	display: grid;
-	grid-gap: 5px;
-	grid-column-gap: 5px;
-	grid-template-columns: auto auto auto auto;
+	padding: 10px;
 }
 
 #section_center a {
-	display: block;
-  	color: #000;
+	color: #123482;
   	text-decoration: none;
 }
 
-.ads {
+#section_center div {
+	padding: 2px;
+}
+
+.redirect_cat {
+	font-size: 25px;
+
+}
+
+.ad_title {
+	font-size: 30px;
+	font-weight: bold;
+}
+.ad_caract_title{
+	font-weight: bold;
+
+}
+
+.caracts_cat{
+	border:  1px solid red;
+
+	grid-gap: 2px;
+	grid-column-gap: 2px;
+	grid-template-columns: auto auto auto; 
+}
+.ad_price {
+	font-size: 25px;
+	font-weight: bold;
+	color: red;
+}
+
+
+
+#section_photos {
+	width: auto;
+	height: auto;
+	border: 1px solid red;
+	margin: 10px;
+
+	display: grid;
+	grid-gap: 2px;
+	grid-column-gap: 2px;
+	grid-template-columns: auto auto auto auto auto;
+
+}
+#section_photos img {
+	border: 1px solid white;
 	width: 15vw;
 	height: 40vh;
+	display: flex;
+}
+
+#section_popular_ads {
+	margin: 5px;
+	display: flex;
+	background-color: white;
+}
+
+
+.ads {
+	width: 13vw;
+	height: 30vh;
 	display: flex;
 	flex-direction: column;
     border: 1px solid black;
@@ -251,6 +243,7 @@ nav .nbr_ads{
 	opacity: 0.9;
 }
 
+
 #aside_right{
 	border: 1px solid black;
 	height: auto;
@@ -287,6 +280,8 @@ nav .nbr_ads{
   	background-color: #4CAF50;
   	color: white;
 }
+
+
 
 footer{
 	margin: 5px;
