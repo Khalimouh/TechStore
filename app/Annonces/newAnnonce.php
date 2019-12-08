@@ -1,9 +1,9 @@
 <?php
 	session_start();
 	/*Debug
+	*/
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
-	*/
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 
@@ -72,7 +72,7 @@
 	$nb_id_produit = $conn->query("SELECT * FROM produit");
 	$new_id_availible = $nb_id_produit->num_rows+1;
 	/*Insertion du produit*/
-	$conn->query("INSERT INTO produit (id_produit, marque , modele, poids, etat, categorie) VALUES ($new_id_availible , '$marque', '$modele' , '$poids' , '$etat'); ") or die ("Erreur d'insertion produit" . $conn->error);
+	$conn->query("INSERT INTO produit (id_produit, marque , modele, poids, etat, categorie) VALUES ($new_id_availible , '$marque', '$modele' , '$poids' , '$etat', '$tmpcategorie'); ") or die ("Erreur d'insertion produit" . $conn->error);
 	
 	/*Insertion dans la catégorie correspondante*/
 	switch ($tmpcategorie) {
@@ -136,12 +136,13 @@
 	$nb_id_annonce= $conn->query("SELECT * FROM annonce");
 	$new_id_annonce = $nb_id_annonce->num_rows+1;
 	$date = date('Y-m-d H:i:s');
-	$conn->queryt("INSERT INTO annonce ( id_annonce , titre_annonce , description, prix, ville, type_annonce, time_pub, id_annonceur, id_produit) VALUES ($new_id_annonce , '$titre', '$description', $prix ,'$ville', '$etat', $date, $idann, $new_id_availible) ") or die ("Erreur d'insertion Annonce" . $conn->error);
+	$conn->query("INSERT INTO annonce ( id_annonce , titre_annonce , description, prix, ville, type_annonce, time_pub, id_annonceur, id_produit) VALUES ($new_id_annonce , '$titre', '$description', $prix ,'$ville', '$etat', '$date', $idann, $new_id_availible) ") or die ("Erreur d'insertion Annonce" . $conn->error);
 	/*	Inserer la photo */ 
 	/*Recuperer l'id photo*/
 	$nb_id_photo= $conn->query("SELECT * FROM photo");
 	$new_id_photo = $nb_id_photo->num_rows+1;
-	$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, ,new_id_availible, '" . addslashes ($img_blob) . "');") or die ("Erreur d'insertion photo" . $conn->error);
+	$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_availible," .
+"'" . addslashes ($img_blob) . "');") or die ("Erreur d'insertion photo" . $conn->error);
 	/*Inserer la publication corresspondant*/
 	$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, $date") or die ("Erreur d'insertion photo" . $conn->error);
 

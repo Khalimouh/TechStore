@@ -38,19 +38,19 @@
 	    
 		<div>
         	<label for="Titre">Titre :</label>
-        	<input type="text" id="Titre" name="titre_annonce" value="<?php echo $titre_annonce; ?>">
+        	<input type="text" id="Titre" name="titre_annonce">
 	    </div>
 	    <div>
         	<label for="Prix">Prix :</label>
-        	<input type="text" id="Prix" name="prix_annonce" value="<?php echo $prix_annonce; ?>">
+        	<input type="text" id="Prix" name="prix_annonce">
 	    </div>
 	    <div>
         	<label for="Ville">Ville :</label>
-        	<input type="text" id="Ville" name="ville_annonce"value="<?php echo $ville_annonce; ?>">
+        	<input type="text" id="Ville" name="ville_annonce">
 	    </div>
 	  	<div class="type_annonce">
 			<label for="monselectEtat">Etat:</label>
-		 	<select name = "etat" id="monselectEtat" value="<?php echo $etat; ?>" form="updateform">
+		 	<select name = "etat" id="monselectEtat"  form="updateform">
 		 	  <option value="noval" ></option> 
 			  <option value="Urgent">Urgent</option>
 			  <option value="Non Urgent">Non Urgent</option>
@@ -63,7 +63,7 @@
        </div>
 		<div class="Catégories">
 			<label for="Catégorie">Catégorie:</label>
-		 	<select name="cat" id="monselectcategorie" value="<?php echo $cat; ?>" form="updateform" onchange="this.form.submit();">
+		 	<select name="cat" id="monselectcategorie"  form="updateform" onchange="this.form.submit();">
 		 	  <option value="" selected hidden><?php echo $tmpcategorie == "" ? "" : $tmpcategorie ?></option> 
 			  <option value="Appareil Photo">Appareil Photo</option>
 			  <option value="Accesoires">Acessoires</option>
@@ -74,20 +74,20 @@
 		</div> 
 		<div>
         	<label for="Marque">Marque :</label>
-        	<input type="text" id="Marque" name="marque_annonce" value="<?php echo $marque_annonce; ?>">
+        	<input type="text" id="Marque" name="marque_annonce">
 	    </div>
 	    <div>
         	<label for="Modéle">Modéle :</label>
-        	<input type="text" id="Modéle" name="modele_annonce" value="<?php echo $modele_annonce; ?>">
+        	<input type="text" id="Modéle" name="modele_annonce">
 	    </div>
 	    <div>
         	<label for="Poids">Poids :</label>
-        	<input type="text" id="Poids" name="poids_annonce" value="<?php echo $poids_annonce; ?>">
+        	<input type="text" id="Poids" name="poids_annonce" >
 
 	    </div>
 	    <div>
         	<label for="Etat">Etat produit :</label>
-        	<select name="etat_produit" id="monselectetatproduit" value="<?php echo $etat_produit; ?>" form="updateform">
+        	<select name="etat_produit" id="monselectetatproduit" form="updateform">
 			  <option value="Neuf">Neuf</option>
 			  <option value="Use">Usé</option>
 			</select> 
