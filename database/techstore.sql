@@ -272,7 +272,7 @@ CREATE VIEW v_annonceur AS (
 DROP VIEW IF EXISTS v_pc;
 
 CREATE VIEW v_pc AS (
-	SELECT p.id_produit, marque, modele, poids, etat
+	SELECT p.id_produit,categorie, marque, modele, poids, etat,
     		diagonale,processeur,c_g,ram,type_disque,taille_disque,batterie
     FROM produit p, pc
 	WHERE p.id_produit = pc.id_produit
@@ -282,7 +282,7 @@ CREATE VIEW v_pc AS (
 DROP VIEW IF EXISTS v_telephonie;
 
 CREATE VIEW v_telephonie AS (
-	SELECT p.id_produit, marque, modele, poids, etat
+	SELECT p.id_produit, categorie, marque, modele, poids, etat,
     		diagonale,processeur,ram,taille_disque,os,batterie,
     		nb_sim,type_sim,res_app_arr,res_app_av, nfc
     FROM produit p, telephonie t
@@ -293,7 +293,7 @@ CREATE VIEW v_telephonie AS (
 DROP VIEW IF EXISTS v_tv;
 
 CREATE VIEW v_tv AS (
-	SELECT p.id_produit, marque, modele, poids, etat
+	SELECT p.id_produit, categorie, marque, modele, poids, etat,
     		diagonale,definition,tech,os,connectique
     FROM produit p, tv
 	WHERE p.id_produit = tv.id_produit
@@ -303,7 +303,7 @@ CREATE VIEW v_tv AS (
 DROP VIEW IF EXISTS v_app_photo;
 
 CREATE VIEW v_app_photo AS (
-	SELECT p.id_produit, marque, modele, poids, etat
+	SELECT p.id_produit, categorie, marque, modele, poids, etat,
     		resolution,format_cap,definition,type_memoire,type_ecran,tech
     FROM produit p, app_photo ap
 	WHERE p.id_produit = ap.id_produit
@@ -314,7 +314,7 @@ CREATE VIEW v_app_photo AS (
 DROP VIEW IF EXISTS v_acc;
 
 CREATE VIEW v_acc AS (
-	SELECT p.id_produit, marque, modele, poids, etat
+	SELECT p.id_produit, categorie, marque, modele, poids, etat
     FROM produit p, app_photo ap
 	WHERE p.id_produit = ap.id_produit
 );
