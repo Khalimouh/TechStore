@@ -103,13 +103,13 @@ else {
 
 /* -+ - +- +- +- +- - + - -+ -+ -+ - +- +- +- +- +- + -+ -+ -+ - +- +- */
 
-function print_ad_cat($title, $cat='', $marque, $model, $ad_ville, $etat, $urg, $price,
+function print_ad_cat($id,$title, $cat='', $marque, $model, $ad_ville, $etat, $urg, $price,
 	$an_ville, $diffdate, $an_nom, $nbr_cons){
 	print "<aside class=aside_ad><div class=ad_desc>";
 	/* Annonce */
 	print "<img src=../img/logo.png>";
 	print "<div class=ad_caracts>";
-	print "<div class=ad_title><a href=#>$title</a></div>";
+	print "<div class=ad_title><a href=/TechStore/app/ad/ad.php?id=$id target=_blank>$title</a></div>";
 	print "$cat<br>$marque $model<br>$ad_ville<br>$etat<br>$urg<br>$nbr_cons";
 	print "	<div class=ad_price>$price €</div>"; 
 	print "</div></div>";
@@ -117,7 +117,7 @@ function print_ad_cat($title, $cat='', $marque, $model, $ad_ville, $etat, $urg, 
 	print "<div class=annonceur_div>";
 	print "<div class=annonceur_ville>$an_ville</div>";
 	print "<div class=diff_date_pub>$diffdate</div>";
-	print "<a href=#><img src=../img/logo.png>";
+	print "<a href=#><img src=/TechStore/app/img/logo.png>";
 	print "<div class=annonceur_nom>$an_nom</div>";
 	print "</a></div></aside>";
 }
@@ -250,7 +250,7 @@ function printResults($query){
 	or die("SELECT Error: ".$conn->error);
 
 	while ($tuple = mysqli_fetch_object($result)){
-		print_ad_cat($tuple->titre_annonce, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->ad_ville, $tuple->etat, $tuple->type_annonce, $tuple->prix, $tuple->a_ville, $tuple->time_pub, $tuple->nom." ".$tuple->prenom, $tuple->nbr_cons);			
+		print_ad_cat($tuple->id_annonce,$tuple->titre_annonce, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->ad_ville, $tuple->etat, $tuple->type_annonce, $tuple->prix, $tuple->a_ville, $tuple->time_pub, $tuple->nom." ".$tuple->prenom, $tuple->nbr_cons);			
 	}
 
 	$result->free();

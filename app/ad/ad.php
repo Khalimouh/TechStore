@@ -1,14 +1,15 @@
-<html>
-<head>
 	<?php 
 		require_once("../main/ads.php");
 		require_once("../ads/ads_control.php");
 		require_once("./ad_control.php");
 	?>
+<html>
+<head>
 	<meta charset="utf-8">
 	<!--<meta http-equiv="Refresh" content="0; url=https://www.w3docs.com" /> -->
 	<link rel="stylesheet" type="text/css" href="ad.css">
-	<title>Annonce </title>
+	<link rel="icon" href="/TechStore/app/img/logo.ico" />
+	<title><?php echo $titre; ?></title>
 </head>
 <body>
 	<header> 
@@ -35,9 +36,19 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Section Center-+-+-+-+-+-+-+-+-+- -->
 	<form >
 		<input type="hidden" name="id" value="">
+		<input type="hidden" name="titre">
+		<input type="hidden" name="cat">
+		<input type="hidden" name="marque">
+		<input type="hidden" name="model">
 	</form>
 	<section id="section_center">
 		<?php getAd();  ?>
+		<h2>Annonces similaires</h2>
+		<section id="section_popular_ads">
+			<?php
+			    get_popular_ads(6,$_GET["cat"],$_GET["marque"],$_GET["modele"], $_GET["id"]);
+			?>
+		</section>
 	</section>
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Section Right-+-+-+-+-+-+-+-+-+- -->

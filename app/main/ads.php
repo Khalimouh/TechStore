@@ -25,7 +25,7 @@ function get_ads($query){
 }
 
 function print_ads($id, $price, $title, $date, $nbr){
-	print "<a href=/TechStore/app/ad/ad.php?id=$id>";
+	print "<a href=/TechStore/app/ad/ad.php?id=$id target=_blank>";
 	print "<div class= ads>";
 	// photo ads
 	print "<img class=img_ads src=./app/img/logo.png>";
@@ -38,12 +38,14 @@ function print_ads($id, $price, $title, $date, $nbr){
 	print "</div></a>";  	
 	
 }
-function get_popular_ads($limit = 1000,$cat = ''){
+function get_popular_ads($limit = 1000,$cat = '', $marque ='', $modele = '',$id = ''){
+	$id_cond = $id == '' ? '' : 'AND a.id_annonce <> '.$id;
 	$query = "SELECT a.id_annonce, a.titre_annonce, a.prix, a.time_pub, p.photo ,pr.categorie, COUNT(c.id_annonce) nbr_cons
 				FROM annonce a
 				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
                 INNER JOIN produit pr ON a.id_produit = pr.id_produit and pr.categorie LIKE '$cat%'
+                WHERE pr.marque LIKE '%$marque%' AND pr.modele LIKE '%$modele%' $id_cond
 				GROUP by a.id_annonce
 				ORDER BY nbr_cons DESC
 				LIMIT $limit";
