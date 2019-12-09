@@ -17,7 +17,7 @@
 			<a href="/TechStore"><img src="/TechStore/app/img/logo.png"></a>
 		</div>
 		<div id = "search_bar_header" >		
-    		<form action="<?=$_SERVER['PHP_SELF'];?>">
+    		<form action="/TechStore/app/ads/ads_category.php">
       		<input type="text" placeholder="Chercher un produit, une marque..." name="keyword">
       		<button type="submit"><img src="/TechStore/app/img/icon_search.png"></button>
     		</form>

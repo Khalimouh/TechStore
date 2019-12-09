@@ -12,7 +12,7 @@
 
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
-	
+
 	if (session_status() == PHP_SESSION_NONE) {
     session_start();
 	}
