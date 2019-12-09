@@ -72,11 +72,11 @@
 	$nb_id_produit = $conn->query("SELECT * FROM produit");
 	$new_id_availible = $nb_id_produit->num_rows+1;
 	/*Insertion du produit*/
-	$conn->query("INSERT INTO produit (id_produit, marque , modele, poids, etat, categorie) VALUES ($new_id_availible , '$marque', '$modele' , '$poids' , '$etat', '$tmpcategorie'); ") or die ("Erreur d'insertion produit" . $conn->error);
+	$conn->query("INSERT INTO produit (id_produit, marque , modele, poids, etat, categorie) VALUES ($new_id_availible , '$marque', '$modele' , '$poids' , '$etatp', '$tmpcategorie'); ") or die ("Erreur d'insertion produit" . $conn->error);
 	
 	/*Insertion dans la catégorie correspondante*/
 	switch ($tmpcategorie) {
-		case 'Appareil Photo':
+		case "Appareil Photo":
 			$resolution = $_POST['resolution_app'];
 			$format = $POST['format_cap'];
 			$def = $_POST['definition_app'];
@@ -86,10 +86,11 @@
 
 			$conn->query("INSERT INTO  app_photo ( id_produit, resolution, format_cap, definition, type_memoire, type_ecran, tech) VALUES($new_id_availible, $resolution , '$format', '$mem' , '$ecran' , '$tech') ;") or die ("Erreur d'insertion Appareil Photo" . $conn->error);
 			break;
-		case 'Accessoires':
-			$conn->query("INSERT INTO acessoires (id_produit) VALUES ($new_id_availible);") or die("Erreur d'insertion Accesoires" . $conn->error);
+		case "Accesoires":
+		print ("ajout accesoires");
+			$conn->query("INSERT INTO accesoires (id_produit) VALUES ($new_id_availible);") or die("Erreur d'insertion Accesoires" . $conn->error);
 			break;
-		case 'Téléphonie':
+		case "Téléphonie":
 			$diag = $_POST['diagonale_tel'];
 			$proc = $_POST['processeur_tel'];
 			$ram = $_POST['ram_tel'];
@@ -104,7 +105,7 @@
 			$conn->query("INSERT INTO telephonie (id_produit, diagonale, processeur, ram, taille_disque, os, batterie, nb_sim, type_sim, res_app_arr , res_app_avn,nfc) VALUES ($new_id_availible, '$diag', '$proc', '$ram', '$taille', '$os', '$batterie', '$nb_sim', '$type_sim', '$resav', '$resar', '$nfc');") or die("Erreur d'insertion Téléphonie" . $conn->error);
 
 			break;
-		case 'PC':
+		case "PC":
 			$diagonale = $_POST['diagonale_pc'];
 			$proc = $_POST['processeur_pc'];
 			$cg = $_POST['cg_pc'];
@@ -117,7 +118,7 @@
 			$conn->query("INSERT INTO pc (id_produit, diagonale, processeur ,c_g , ram , type_disque, taille_disque, batterie) VALUES ($new_id_availible, $diagonale, '$processeur', '$cg', $ram, '$type', $taille, '$bat');") or die ("Erreur d'insertion PC" . $conn->error);
 
 			break;
-		case 'TV':
+		case "TV":
 			$diag  = $_POST['diagonale_tv'];
 			$deftv = $_POST['definition_tv'];
 			$os = $_POST['os_produit'];
@@ -141,10 +142,10 @@
 	/*Recuperer l'id photo*/
 	$nb_id_photo= $conn->query("SELECT * FROM photo");
 	$new_id_photo = $nb_id_photo->num_rows+1;
-	$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_availible," .
+	$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_annonce," .
 "'" . addslashes ($img_blob) . "');") or die ("Erreur d'insertion photo" . $conn->error);
 	/*Inserer la publication corresspondant*/
-	$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, $date") or die ("Erreur d'insertion photo" . $conn->error);
+	$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, '$date');") or die ("Erreur d'insertion photo" . $conn->error);
 
 	$nb_id_photo->free();
 	$nb_id_annonce->free();

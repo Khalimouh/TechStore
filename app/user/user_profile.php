@@ -91,13 +91,13 @@
 		$id = $_SESSION['id'];
 		connectDb($conn);
 		//Ces publications dans chaque catégorie
-		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id";
+		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id'";
 		//Ses publications totales
 		$query2 = "SELECT COUNT(*) as nb
 					FROM publier p , annonceur an
 					WHERE p.id_annonceur = an.id_annonceur
 					GROUP BY an.id_annonceur
-					HAVING an.id_annonceur = 2";
+					HAVING an.id_annonceur = '$id'";
 		
 		$result = $conn->query($query);
 		$result2 = $conn->query($query2);
