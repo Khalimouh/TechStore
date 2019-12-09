@@ -38,9 +38,14 @@ function getAd(){
 
 	$tuple = mysqli_fetch_object($result);
 	
-	$result = $conn->query(getQueryCat($tuple->categorie,$tuple->id_produit))
-			or die("SELECT Error: ".$conn->error);
-	$caracts = mysqli_fetch_assoc($result);
+	$query = getQueryCat($tuple->categorie,$tuple->id_produit);
+	$caracts = [];
+
+	if($query != ''){
+		$result = $conn->query($query)
+				or die("SELECT Error: ".$conn->error);
+		$caracts = mysqli_fetch_assoc($result);
+	}
 
 	$result->free();
 	
@@ -108,7 +113,7 @@ function getQueryCat($cat, $id){
 	$query = '';
 	switch($cat)
 	{
-		case 'PC': { 
+		case 'PCC': { 
 			$query ="SELECT pc.diagonale Diagonale, pc.processeur Processeur, pc.c_g 'Carte graphique', pc.ram Ram, pc.type_disque 'Type disque', pc.taille_disque 'Taille Disque', pc.batterie Batterie FROM v_pc pc WHERE pc.id_produit = $id";
 		
 			return $query;
@@ -118,10 +123,22 @@ function getQueryCat($cat, $id){
 
 			return $query;
 		}
-		
-		default;
 
-		break;
+		case 'TV':{
+			$query = "SELECT tv.diagonale Diagonale, tv.definition Définition, tv.tech Téchnologie, tv.os OS, tv.connectique Connectique FROM v_tv tv WHERE tv.id_produit = $id";
+			return $query;
+		}
+
+		case 'Appareils photo':{
+			$query = "SELECT app.resolution Résolution, app.format_cap 'Format capteur', app.definition Définition, app.type_memoire 'Type mémoire', app.type_ecran 'Type écran', app.tech Téchnologie FROM v_app_photo app WHERE app.id_produit = $id";
+			return $query;
+		}
+		default: {
+
+			return $query;
+
+		}
+
 	}
 
 }
