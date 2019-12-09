@@ -1,15 +1,15 @@
-<?php
-	session_start();
+<?php 
+	if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+	}
 	/*Debug
 	*/
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
-
 	if (!defined('PROJECT_LIBS'))
     	define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
-
     //Get script dbconnection
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
@@ -21,7 +21,7 @@
 		$cat = $_POST['cat'];
 	}
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
 		echo "<script> alert('if categorie'); </script>";
 		$titre = $_POST['titre_annonce'];
 		$prix = $_POST['prix_annonce'];
@@ -79,7 +79,6 @@
 		echo $img_nom." est bien trasféré" . "\n";
 	}
 	*/
-
 
 	/*Afficher le fomulaire correspondant au produit*/
 	function return_correct_form($cat){

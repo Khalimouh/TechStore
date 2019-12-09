@@ -25,7 +25,7 @@
 
 	function prepareStat($cat){
 		
-		$query = "SELECT a.nom ,a.prenom ,a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_ann
+		$query = "SELECT a.id_annonceur,a.nom ,a.prenom ,a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_ann
 				FROM annonceur a , annonce an , publier p , produit pr
 				WHERE a.id_annonceur = p.id_annonceur
 				AND p.id_annonce = an.id_annonce
@@ -40,11 +40,15 @@
 		print "<tr><th colspan=2>$cat</th></tr>";
 		while ($tuple = mysqli_fetch_object($result)){
 			$nom = $tuple->nom." ".$tuple->prenom;
-			printStat($nom, $tuple->nbr_ann);
+			printStatAnn($tuple->id_annonceur,$nom, $tuple->nbr_ann);
 		}
 		print	"</table></div>";
 
 		$result->free();
+	}
+
+	function printStatAnn($id_ann, $nom, $nbr){
+		print "<tr><td><a href=/TechStore/app/annonceur/annonceur.php?id=$id_ann target=_blank>$nom</a></td><td>$nbr</td></tr>";
 	}
 
 	function printStat($nom, $nbr){

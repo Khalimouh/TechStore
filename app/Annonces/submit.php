@@ -96,7 +96,6 @@
 	    </div>      
 		<?php
 	    	return_correct_form($cat);
-
 	    ?>
        	<div>
         	<label for="file">Photo :</label>

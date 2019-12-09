@@ -10,10 +10,10 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Header -+-+-+-+-+-+-+-+-+- -->
 	<header> 
 		<div id = "logo_header">
-			<a href="<?=$_SERVER['PHP_SELF'];?>"><img src="./app/img/logo.png"></a>
+			<a href="/TechStore"><img src="./app/img/logo.png"></a>
 		</div>
 		<div id = "search_bar_header" >		
-    		<form action="./app/ads/ads_category.php">
+    		<form action="/TechStore/app/ads/ads_category.php">
       		<input type="text" placeholder="Chercher un produit, une marque..." name="keyword">
       		<button type="submit"><img src="./app/img/icon_search.png"></button>
     		</form>

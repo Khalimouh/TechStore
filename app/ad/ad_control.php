@@ -102,7 +102,7 @@ function print_ad($id_annonce, $titre_annonce, $prix, $time_pub, $ad_ville, $typ
 
 	print "<div class=annonceur_div>";
 	print "<h2>A propos de l'annonceur</h2>";
-	print "<a href=#><div class=annonceur_nom>$nom $prenom</div></a>"; 
+	print "<a href=/TechStore/app/annonceur/annonceur.php?id=$id_annonceur target=_blank><div class=annonceur_nom>$nom $prenom</div></a>"; 
 	print "<div><span class=ad_caract_title>Ville:</span> $an_ville</div>";
 	print "<div><span class=ad_caract_title>Téléphone:</span> $telephone</div>";
 	print "<div><span class=ad_caract_title>Email : </span> $mail</div></div><hr>";
@@ -113,7 +113,7 @@ function getQueryCat($cat, $id){
 	$query = '';
 	switch($cat)
 	{
-		case 'PCC': { 
+		case 'PC': { 
 			$query ="SELECT pc.diagonale Diagonale, pc.processeur Processeur, pc.c_g 'Carte graphique', pc.ram Ram, pc.type_disque 'Type disque', pc.taille_disque 'Taille Disque', pc.batterie Batterie FROM v_pc pc WHERE pc.id_produit = $id";
 		
 			return $query;
