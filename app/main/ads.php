@@ -45,7 +45,7 @@ function get_popular_ads($limit = 1000,$cat = '', $marque ='', $modele = '',$id 
 				LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 				LEFT JOIN photo p ON a.id_annonce = p.id_annonce
                 INNER JOIN produit pr ON a.id_produit = pr.id_produit and pr.categorie LIKE '$cat%'
-                WHERE pr.marque LIKE '%$marque%' AND pr.modele LIKE '%$modele%' $id_cond
+                WHERE (pr.marque LIKE '%$marque%' OR pr.modele LIKE '%$modele%') $id_cond
 				GROUP by a.id_annonce
 				ORDER BY nbr_cons DESC
 				LIMIT $limit";
