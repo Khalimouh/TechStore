@@ -12,6 +12,7 @@
 
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
+
 	if (session_status() == PHP_SESSION_NONE) {
     session_start();
 	}
@@ -93,34 +94,43 @@
 		$id = $_SESSION['id'];
 		connectDb($conn);
 		//Ces publications dans chaque catégorie
-		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id";
+		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id'";
 		//Ses publications totales
 		$query2 = "SELECT COUNT(*) as nb
 					FROM publier p , annonceur an
 					WHERE p.id_annonceur = an.id_annonceur
 					GROUP BY an.id_annonceur
-					HAVING an.id_annonceur = 2";
+					HAVING an.id_annonceur = '$id'";
 		
-		$result = $conn->query($query);
-		$result2 = $conn->query($query2);
 
-		$tupleNBAnnonce = mysqli_fetch_object($result2);
-		if($result && $result2){
-		print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
-		print("Dans les catégorie suivantes: ");
-		print("<table id=' Annonceur_stats' border=1 >");
-		while ($tuplesAnnonces = mysqli_fetch_object($result)){
-			displayUserStats($tuplesAnnonces->categorie, $tuplesAnnonces->nbr_annonce);
- 		}
-		print("</table>");
-		$result->free();
-		$result2->free();	
-		closeDb($conn);
- 		}else{
+		$result = $conn->query($query) or die("SELECT Error: ".$conn->error);
+		$result2 = $conn->query($query2) or die("SELECT Error: ".$conn->error);;
+
+		
+		
+
+		
+		if($tupleNBAnnonce = mysqli_fetch_object($result2)){
+			print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
+		
+			print("Dans les catégorie suivantes: ");
+			print("<table id=' Annonceur_stats' border=1 >");
+		
+			while ($tuplesAnnonces = mysqli_fetch_object($result)){
+				displayUserStats($tuplesAnnonces->categorie, $tuplesAnnonces->nbr_annonce);
+ 			}
+
+			print("</table>");
+		}
+ 		else{
  			print "<div><tr>";
 			print "Qu'attendez vous pour publier des annonces !";
 			print "</div></tr>";  	
  		}
+
+		$result->free();
+		$result2->free();	
+		closeDb($conn);
 	}
 
 ?>

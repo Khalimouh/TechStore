@@ -14,12 +14,14 @@
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
 	$idann = $_SESSION['id'];
+
 	if (!isset($_POST['cat'])) {
 		$cat  = '' ;
 	}else{
 		$cat = $_POST['cat'];
 	}
-	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
 		echo "<script> alert('if categorie'); </script>";
 		$titre = $_POST['titre_annonce'];
 		$prix = $_POST['prix_annonce'];
@@ -43,6 +45,7 @@
 		$poids = '';
 		$etatp = '';
 	}
+
 	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='publier'){
 		echo "<script> alert('boutton valider'); </script>";
 	}
@@ -55,6 +58,7 @@
 	$img_type = '';
 	$img_nom = '';
 	$taille_max = 9000000;
+
 	if ($_FILES['file'] > 0){
   		print("You have selected a file to upload");
   	}
@@ -75,6 +79,7 @@
 		echo $img_nom." est bien trasféré" . "\n";
 	}
 	*/
+
 	/*Afficher le fomulaire correspondant au produit*/
 	function return_correct_form($cat){
 		switch ($cat) {
