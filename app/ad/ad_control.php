@@ -113,7 +113,7 @@ function getQueryCat($cat, $id){
 	$query = '';
 	switch($cat)
 	{
-		case 'PCC': { 
+		case 'PC': { 
 			$query ="SELECT pc.diagonale Diagonale, pc.processeur Processeur, pc.c_g 'Carte graphique', pc.ram Ram, pc.type_disque 'Type disque', pc.taille_disque 'Taille Disque', pc.batterie Batterie FROM v_pc pc WHERE pc.id_produit = $id";
 		
 			return $query;
