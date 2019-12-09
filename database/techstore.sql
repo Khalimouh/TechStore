@@ -517,7 +517,7 @@ FROM annonceur a , annonce an , publier p , produit pr
 WHERE a.id_annonceur = p.id_annonceur
 AND p.id_annonce = an.id_annonce
 AND pr.id_produit = an.id_produit
-GROUP BY a.id_annonceur, pr.categorie
+GROUP BY a.id_annonceur, pr.categorie;
 
 /* L'annonceur qui possede au moins une annonce dans chaque catégorie */
 
@@ -527,7 +527,7 @@ WHERE NOT EXISTS (SELECT DISTINCT categorie
 				  FROM produit p
 				  WHERE NOT EXISTS (SELECT * FROM v_ann_cat v2
                                      WHERE (v.id_annonceur = v2.id_annonceur)
-                                     AND (v2.categorie = p.categorie)))
+                                     AND (v2.categorie = p.categorie)));
 
 
 
