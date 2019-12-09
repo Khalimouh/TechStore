@@ -1,155 +1,80 @@
-<?php
-	session_start();
+<?php 
+	if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+	}
 	/*Debug
 	*/
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
-
 	if (!defined('PROJECT_LIBS'))
     	define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
-
     //Get script dbconnection
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
-	
-		
-	if (!isset($_POST['cat'])) {
-		$_POST['cat'] = '';
-	}
-
-	if(!isset($_POST['description'])){
-		$_POST['description'] = '';
-	}
-	$description = $_POST['description'];
-	$tmpcategorie = $_POST['cat'];
 	$idann = $_SESSION['id'];
-	if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['Publish'])){
+	if (!isset($_POST['cat'])) {
+		$cat  = '' ;
+	}else{
+		$cat = $_POST['cat'];
+	}
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
+		echo "<script> alert('if categorie'); </script>";
 		$titre = $_POST['titre_annonce'];
 		$prix = $_POST['prix_annonce'];
 		$ville = $_POST['ville_annonce'];
 		$etat = $_POST['etat'];//type_annonce
-		//$cat = $_POST['cat'];
+		$cat = $_POST['cat'];
+		$description = $_POST['description'];
 		$marque = $_POST['marque_annonce'];
 		$modele = $_POST['modele_annonce'];
-		$poids = $_POST['poids_annonce'];
+		$poids = floatval($_POST['poids_annonce']);
 		$etatp = $_POST['etat_produit'];
+	}else {
+		echo "<script> alert('else categorie'); </script>";
+		$titre = '';
+		$prix = '';
+		$ville = '';
+		$etat = '';
+		$marque = '';
+		$description = '';
+		$modele = '';
+		$poids = '';
+		$etatp = '';
+	}
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='publier'){
+		echo "<script> alert('boutton valider'); </script>";
 	}
 	
 	/*Récuperer les données des photos*/
+	/*
 	$ret= false;
 	$img_blob = '';
 	$img_taille = 0;
 	$img_type = '';
 	$img_nom = '';
-	$taille_max = 3550000;
-
-
+	$taille_max = 9000000;
 	if ($_FILES['file'] > 0){
-  		  echo "You have selected a file to upload";
+  		print("You have selected a file to upload");
   	}
-
 	$ret = is_uploaded_file($_FILES['file']['tmp_name']);
 	if (!$ret) {
-		echo "Problème de transfert";
+		print("Problème de transfert");
 		return false;
 	} else {
 	// Le fichier a bien été reçu	
 	$img_taille = $_FILES['file']['size'];
-		if ($img_taille > $taille_max) {
-			echo "Trop gros !";
-			return false;
-		}
+	if ($img_taille > $taille_max) {
+		print("Trop gros !");
+		return false;
+	}
 	$img_type = $_FILES['file']['type'];
 	$img_nom = $_FILES['file']['name'];
 	$img_blob = file_get_contents ($_FILES['file']['tmp_name']);
-	echo $img_nom." est bien trasféré" . "\n";
+		echo $img_nom." est bien trasféré" . "\n";
 	}
-
-	connectDb($conn);
-	/*Recuperation du numéro produit*/
-	$nb_id_produit = $conn->query("SELECT * FROM produit");
-	$new_id_availible = $nb_id_produit->num_rows+1;
-	/*Insertion du produit*/
-	$conn->query("INSERT INTO produit (id_produit, marque , modele, poids, etat, categorie) VALUES ($new_id_availible , '$marque', '$modele' , '$poids' , '$etat', '$tmpcategorie'); ") or die ("Erreur d'insertion produit" . $conn->error);
-	
-	/*Insertion dans la catégorie correspondante*/
-	switch ($tmpcategorie) {
-		case 'Appareil Photo':
-			$resolution = $_POST['resolution_app'];
-			$format = $POST['format_cap'];
-			$def = $_POST['definition_app'];
-			$mem= $_POST['memoire_app'];
-			$ecran = $_POST['type_ecran_app'];
-			$tech = $_POST['tech_app'];
-
-			$conn->query("INSERT INTO  app_photo ( id_produit, resolution, format_cap, definition, type_memoire, type_ecran, tech) VALUES($new_id_availible, $resolution , '$format', '$mem' , '$ecran' , '$tech') ;") or die ("Erreur d'insertion Appareil Photo" . $conn->error);
-			break;
-		case 'Accessoires':
-			$conn->query("INSERT INTO acessoires (id_produit) VALUES ($new_id_availible);") or die("Erreur d'insertion Accesoires" . $conn->error);
-			break;
-		case 'Téléphonie':
-			$diag = $_POST['diagonale_tel'];
-			$proc = $_POST['processeur_tel'];
-			$ram = $_POST['ram_tel'];
-			$taille = $_POST['taille_disque_tel'];
-			$os = $_POST['os_produit'];
-			$batterie = $_POST['batterie_tel'];
-			$nb_sim = $_POST['nbsim'];
-			$type_sim = $_POST['type_sim'];
-			$resav = $_POST['ress_app_av'];
-			$resar = $_POST['ress_app_ar'];
-			$nfc = $_POST['nfc'];
-			$conn->query("INSERT INTO telephonie (id_produit, diagonale, processeur, ram, taille_disque, os, batterie, nb_sim, type_sim, res_app_arr , res_app_avn,nfc) VALUES ($new_id_availible, '$diag', '$proc', '$ram', '$taille', '$os', '$batterie', '$nb_sim', '$type_sim', '$resav', '$resar', '$nfc');") or die("Erreur d'insertion Téléphonie" . $conn->error);
-
-			break;
-		case 'PC':
-			$diagonale = $_POST['diagonale_pc'];
-			$proc = $_POST['processeur_pc'];
-			$cg = $_POST['cg_pc'];
-			$ram = $_POST['ram_pc'];
-			$type =  $_POST['disque_pc'];
-			$taille = $_POST['taille_disque_pc'];
-			$bat = $_POST['batterie_pc'];
-
-
-			$conn->query("INSERT INTO pc (id_produit, diagonale, processeur ,c_g , ram , type_disque, taille_disque, batterie) VALUES ($new_id_availible, $diagonale, '$processeur', '$cg', $ram, '$type', $taille, '$bat');") or die ("Erreur d'insertion PC" . $conn->error);
-
-			break;
-		case 'TV':
-			$diag  = $_POST['diagonale_tv'];
-			$deftv = $_POST['definition_tv'];
-			$os = $_POST['os_produit'];
-			$tech = $_POST['technologie_tv'];
-			$connectique = $_POST['connectique'];
-
-			$conn->query("INSERT INTO tv (id_produit, diagonale, definition, tech, os ,connectique) VALUES ($new_id_availible, $diag, '$deftv', '$tech', '$os' ,'$connectique')
-				;") or die ("Erreur d'insertion TV" . $conn->error);
-			break;
-		default:
-			break;
-	}
-
-	/*Inserer l'annonce */
-	/*Récup du numero annonce*/
-	$nb_id_annonce= $conn->query("SELECT * FROM annonce");
-	$new_id_annonce = $nb_id_annonce->num_rows+1;
-	$date = date('Y-m-d H:i:s');
-	$conn->query("INSERT INTO annonce ( id_annonce , titre_annonce , description, prix, ville, type_annonce, time_pub, id_annonceur, id_produit) VALUES ($new_id_annonce , '$titre', '$description', $prix ,'$ville', '$etat', '$date', $idann, $new_id_availible) ") or die ("Erreur d'insertion Annonce" . $conn->error);
-	/*	Inserer la photo */ 
-	/*Recuperer l'id photo*/
-	$nb_id_photo= $conn->query("SELECT * FROM photo");
-	$new_id_photo = $nb_id_photo->num_rows+1;
-	$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_availible," .
-"'" . addslashes ($img_blob) . "');") or die ("Erreur d'insertion photo" . $conn->error);
-	/*Inserer la publication corresspondant*/
-	$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, $date") or die ("Erreur d'insertion photo" . $conn->error);
-
-	$nb_id_photo->free();
-	$nb_id_annonce->free();
-	$nb_id_produit->free();
-	$conn->close();
+	*/
 	/*Afficher le fomulaire correspondant au produit*/
 	function return_correct_form($cat){
 		switch ($cat) {
