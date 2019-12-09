@@ -63,7 +63,7 @@
        </div>
 		<div class="Catégories">
 			<label for="Catégorie">Catégorie:</label>
-		 	<select name="cat" id="monselectcategorie"  form="updateform" onchange="document.getElementById('pub').submit();">
+		 	<select name="cat" id="monselectcategorie"  form="updateform" onchange="document.getElementById('cat_button').click()">
 		 	  <option value="" selected hidden><?php echo $cat == "" ? "" : $cat ?></option> 
 			  <option value="Appareil Photo">Appareil Photo</option>
 			  <option value="Accesoires">Acessoires</option>
@@ -104,9 +104,9 @@
             <input type="file" name="file" size=9000000 />
         </div>
     	<div class="button" align="center">
-        <button type="submit"  name="Publish" value="publier" id="pub">Publier</button>
+        <button type="submit"  name="button_valider" value="publier">Publier</button>
         <div class="button" align="center">
-        <button type="submit"  name="insert" hidden ="hidden" id="insert" ></button>
+        <button type="submit"  name="button_valider" hidden ="hidden" value="categorie" id="cat_button"></button>
     </div>
 	</form>
 	</section>

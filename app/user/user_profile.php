@@ -12,7 +12,10 @@
 
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
 	$conn = null;
-	session_start();
+	
+	if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+	}
 
 	function debug(){
 		print $_SESSION['id'];
@@ -99,26 +102,35 @@
 					GROUP BY an.id_annonceur
 					HAVING an.id_annonceur = '$id'";
 		
-		$result = $conn->query($query);
-		$result2 = $conn->query($query2);
 
-		$tupleNBAnnonce = mysqli_fetch_object($result2);
-		if($result && $result2){
-		print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
-		print("Dans les catégorie suivantes: ");
-		print("<table id=' Annonceur_stats' border=1 >");
-		while ($tuplesAnnonces = mysqli_fetch_object($result)){
-			displayUserStats($tuplesAnnonces->categorie, $tuplesAnnonces->nbr_annonce);
- 		}
-		print("</table>");
-		$result->free();
-		$result2->free();	
-		closeDb($conn);
- 		}else{
+		$result = $conn->query($query) or die("SELECT Error: ".$conn->error);
+		$result2 = $conn->query($query2) or die("SELECT Error: ".$conn->error);;
+
+		
+		
+
+		
+		if($tupleNBAnnonce = mysqli_fetch_object($result2)){
+			print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
+		
+			print("Dans les catégorie suivantes: ");
+			print("<table id=' Annonceur_stats' border=1 >");
+		
+			while ($tuplesAnnonces = mysqli_fetch_object($result)){
+				displayUserStats($tuplesAnnonces->categorie, $tuplesAnnonces->nbr_annonce);
+ 			}
+
+			print("</table>");
+		}
+ 		else{
  			print "<div><tr>";
 			print "Qu'attendez vous pour publier des annonces !";
 			print "</div></tr>";  	
  		}
+
+		$result->free();
+		$result2->free();	
+		closeDb($conn);
 	}
 
 ?>
