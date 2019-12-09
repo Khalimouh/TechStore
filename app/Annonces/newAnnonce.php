@@ -21,8 +21,8 @@
 		$cat = $_POST['cat'];
 	}
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert']) && !isset($_POST['Publish'])){
-		echo "<script> alert('if'); </script>";
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='categorie'){
+		echo "<script> alert('if categorie'); </script>";
 		$titre = $_POST['titre_annonce'];
 		$prix = $_POST['prix_annonce'];
 		$ville = $_POST['ville_annonce'];
@@ -33,8 +33,8 @@
 		$modele = $_POST['modele_annonce'];
 		$poids = floatval($_POST['poids_annonce']);
 		$etatp = $_POST['etat_produit'];
-	}else{
-		echo "<script> alert('else'); </script>";
+	}else {
+		echo "<script> alert('else categorie'); </script>";
 		$titre = '';
 		$prix = '';
 		$ville = '';
@@ -46,8 +46,8 @@
 		$etatp = '';
 	}
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['Publish'])){
-		echo "<script> alert('boutton2'); </script>";
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_POST['button_valider'] =='publier'){
+		echo "<script> alert('boutton valider'); </script>";
 	}
 	
 	/*Récuperer les données des photos*/
