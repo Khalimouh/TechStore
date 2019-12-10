@@ -51,7 +51,7 @@
 	  	<div class="type_annonce">
 			<label for="monselectEtat">Etat:</label>
 		 	<select name = "etat" id="monselectEtat"  form="updateform">
-		 	  <option value="" ><?php echo $etat == "" ? " " : $etat ?></option> 
+		 	  <option value="<?php echo $etat ?>" ><?php echo $etat == "" ? " " : $etat ?></option> 
 			  <option value="Urgent">Urgent</option>
 			  <option value="Non Urgent">Non Urgent</option>
 			</select> 
@@ -88,7 +88,7 @@
 	    <div>
         	<label for="Etat">Etat produit :</label>
         	<select name="etat_produit" id="monselectetatproduit" form="updateform">
-        	<option value="" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
+        	<option value="<?php echo $etatp ?>" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
 			  <option value="Neuf">Neuf</option>
 			  <option value="Use">Usé</option>
 			</select> 
