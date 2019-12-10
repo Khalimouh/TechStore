@@ -99,7 +99,7 @@ $conn->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
 "'" . addslashes ($img_blob) . "');")or die("Erreur insertion annonceur: " . $conn->error);
 //rediriger vers la page d'acceuil du site 	
 
-//header("Location: ");
+	header("Location: ../user/profil.php");
 	exit;
 }else{
 	header("Location: signin.html");

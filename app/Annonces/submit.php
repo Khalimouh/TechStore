@@ -64,7 +64,7 @@
 		<div class="Catégories">
 			<label for="Catégorie">Catégorie:</label>
 		 	<select name="cat" id="monselectcategorie"  form="updateform" onchange="document.getElementById('cat_button').click()">
-		 	  <option value="" selected hidden><?php echo $cat == "" ? "" : $cat ?></option> 
+		 	  <option value="<?php echo $cat ?>" selected hidden><?php echo $cat == "" ? "" : $cat ?></option> 
 			  <option value="Appareil Photo">Appareil Photo</option>
 			  <option value="Accesoires">Acessoires</option>
 			  <option value="PC" >PC</option>
