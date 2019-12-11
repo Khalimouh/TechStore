@@ -146,41 +146,41 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 
 	if($cat == 'PC')
 
-		$query = "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as a_ville, ann.annonceur_photo,
-	a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville,
-	a.type_annonce,p.photo,
-	v_pc.marque, v_pc.modele, v_pc.etat , v_pc.categorie, v_pc.poids, COUNT(c.id_annonce) nbr_cons
-	FROM annonce a
-	INNER JOIN (SELECT a2.id_annonceur, an.id_annonce, a2.nom, a2.prenom,
-	a2.ville, a2.annonceur_photo	
-	FROM v_annonceur a2, publier p , annonce an
-	WHERE a2.id_annonceur = p.id_annonceur
-	AND an.id_annonce = p.id_annonce) ann
-	ON a.id_annonceur = ann.id_annonceur and a.id_annonce = ann.id_annonce
-	LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
-	$t_photos
-	INNER JOIN v_pc ON a.id_produit = v_pc.id_produit
-	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
-	AND v_pc.categorie LIKE '$cat%' 
-	AND v_pc.marque LIKE '%$marque%' OR v_pc.marque LIKE '%$keyword%'
-	AND v_pc.modele LIKE '%$modele%' OR v_pc.modele LIKE '%$keyword%'
-	and v_pc.etat LIKE '%$etat%' 
-	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
-	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
-	$t_poids_cond
-	AND a.type_annonce LIKE '$urgence%' 
-	AND v_pc.processeur LIKE '%$cpu%' OR v_pc.processeur LIKE '%$keyword%'
-	AND v_pc.c_g LIKE '%$c_g%' OR v_pc.c_g LIKE '%$keyword%'
-	AND v_pc.diagonale <= '$t_diag' AND v_pc.ram <= '$t_ram' 
-	AND v_pc.type_disque LIKE '$type_disk%' OR v_pc.type_disque LIKE '%$keyword%'
-	AND v_pc.taille_disque <= '$t_taille_disk'
+		$query = "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as an_ville, ann.annonceur_photo,
+			a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville,
+			a.type_annonce,p.photo,
+			v_pc.marque, v_pc.modele, v_pc.etat , v_pc.categorie, v_pc.poids, COUNT(c.id_annonce) nbr_cons
+			FROM annonce a
+			INNER JOIN (SELECT a2.id_annonceur, an.id_annonce, a2.nom, a2.prenom,
+			a2.ville, a2.annonceur_photo	
+			FROM v_annonceur a2, publier p , annonce an
+			WHERE a2.id_annonceur = p.id_annonceur
+			AND an.id_annonce = p.id_annonce) ann
+			ON a.id_annonceur = ann.id_annonceur and a.id_annonce = ann.id_annonce
+			LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
+			$t_photos
+			INNER JOIN v_pc ON a.id_produit = v_pc.id_produit
+			WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
+			AND v_pc.categorie LIKE '$cat%' 
+			AND v_pc.marque LIKE '%$marque%' OR v_pc.marque LIKE '%$keyword%'
+			AND v_pc.modele LIKE '%$modele%' OR v_pc.modele LIKE '%$keyword%'
+			and v_pc.etat LIKE '%$etat%' 
+			AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
+			AND a.time_pub BETWEEN '$date_min' AND $t_date_max
+			$t_poids_cond
+			AND a.type_annonce LIKE '$urgence%' 
+			AND v_pc.processeur LIKE '%$cpu%' OR v_pc.processeur LIKE '%$keyword%'
+			AND v_pc.c_g LIKE '%$c_g%' OR v_pc.c_g LIKE '%$keyword%'
+			AND v_pc.diagonale <= '$t_diag' AND v_pc.ram <= '$t_ram' 
+			AND v_pc.type_disque LIKE '$type_disk%' OR v_pc.type_disque LIKE '%$keyword%'
+			AND v_pc.taille_disque <= '$t_taille_disk'
 
-	GROUP by a.id_annonce
-	ORDER BY nbr_cons DESC
-	LIMIT 100";
+			GROUP by a.id_annonce
+			ORDER BY nbr_cons DESC
+			LIMIT 100";
 
 	else if($cat == 'Téléphonie')
-		$query= "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as a_ville, ann.annonceur_photo,
+		$query= "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as an_ville, ann.annonceur_photo,
 	a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville,
 	a.type_annonce,p.photo,
 	t.marque, t.modele, t.etat , t.categorie, t.poids, COUNT(c.id_annonce) nbr_cons

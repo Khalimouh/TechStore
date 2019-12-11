@@ -1,4 +1,5 @@
 	<?php 
+	require_once("../user/newuser.php");
 	require_once("../main/ads.php");
 	require_once("../ads/ads_control.php");
 	require_once("./annonceur_control.php");
@@ -67,10 +68,8 @@
 
 
 		<footer>
-			<footer>
-				<p>Copyright Zozor - Tous droits réservés<br />
-					<a href="#">Me contacter !</a></p>
-				</footer>
-			</footer>
+            <p> <?php echo $_SESSION['id']," ",$_SESSION['user']; ?> <br />
+           
+        </footer>
 		</body>
 		</html>

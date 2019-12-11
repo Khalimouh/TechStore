@@ -12,11 +12,20 @@ require_once(PROJECT_LIBS.'/app/dbconnection.php');
 $conn = null;
 
 /* Getters from the URL */
-if(!isset($_GET["id"]))	
+if(!isset($_GET["id"]) or $_GET["id"] == ''){
 	header("Location: /TechStore/app/404");
+	exit;
+}
 
 $id = $_GET["id"];
+$id_user = $_SESSION['id'];
 $titre = 'Annonce';
+
+// Nombre consultation
+connectDb($conn);
+$conn->query("INSERT INTO consulter VALUES ($id_user, $id, CURRENT_TIME());") or die ("Erreur insertion consulter ".$conn->error);
+closeDb($conn);
+
 function getAd(){
 	global $id, $titre;
 	$query = "SELECT a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville, 				a.type_annonce, p.photo, COUNT(c.id_annonce) nbr_cons, 

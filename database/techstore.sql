@@ -78,7 +78,7 @@ CREATE TABLE techstore.consulter(
 	id_user INT NOT NULL,
 	id_annonce INT NOT NULL,
 	date_consultation DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (id_user,id_annonce)
+	PRIMARY KEY (id_user,id_annonce,date_consultation)
 );
 
 /* Create table publier */

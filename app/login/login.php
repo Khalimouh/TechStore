@@ -31,9 +31,13 @@ if (!$resultat)
 else
 {
     if ($isPasswordCorrect) {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
         $_SESSION['id'] = $get_info[0];
         $_SESSION['login'] = $login ;
+        $_SESSION['user'] = 'Annonceur';
+        
            echo 'Vous êtes connecté !';
         header("Location: ../user/profil.php");
         exit;
