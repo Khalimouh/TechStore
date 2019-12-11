@@ -94,7 +94,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_
 				$resav = $_POST['ress_app_av'];
 				$resar = $_POST['ress_app_ar'];
 				$nfc = $_POST['nfc'];
-				$conn->query("INSERT INTO telephonie (id_produit, diagonale, processeur, ram, taille_disque, os, batterie, nb_sim, type_sim, res_app_arr , res_app_avn,nfc) VALUES ($new_id_produit, '$diag', '$proc', '$ram', '$taille', '$os', '$batterie', '$nb_sim', '$type_sim', '$resav', '$resar', '$nfc');") or die("Erreur d'insertion Téléphonie" . $conn->error);
+				if ($nfc == "OUI" || $nfc == "Oui" ||$nfc == "oui") {
+						$nfc = 1;
+				}else{
+					$nfc = 0;
+				}
+
+				$conn->query("INSERT INTO telephonie (id_produit, diagonale, processeur, ram, taille_disque, os, batterie, nb_sim, type_sim, res_app_arr , res_app_av ,nfc) VALUES ($new_id_produit, '$diag', '$proc', '$ram', '$taille', '$os', '$batterie', '$nb_sim', '$type_sim', '$resav', '$resar', '$nfc');") or die("Erreur d'insertion Téléphonie" . $conn->error);
 
 				break;
 			case "PC":
@@ -135,7 +141,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_
 		$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_annonce," .
 	"'" . addslashes ($img) . "');") or die ("Erreur d'insertion photo" . $conn->error);
 		/*Inserer la publication corresspondant*/
-		$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, '$date');") or die ("Erreur d'insertion photo" . $conn->error);
+		$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, '$date');") or die ("Erreur d'insertion publication" . $conn->error);
 
 		$nb_id_photo->free();
 		$nb_id_annonce->free();
@@ -254,11 +260,9 @@ function upload(){
         			<input type="text" id="processeur" name="processeur_tel" >
 	   			</div>
 	   			<div>
-	   				<label for="os_produit">OS:</label>
-		        	<select name="os_produit" form="tel_form">
-					 	<option value="IOS">IOS</option>
-			 		 	<option value="Android">Android</option>
-					</select> 
+	   				<div>
+		        	<label for="os_produit">OS:</label>
+        			<input type="text" id="os_produit" name="os_produit" >
 	   			</div>
 	   			<div>
 		        	<label for="ram">Ram :</label>
@@ -273,12 +277,9 @@ function upload(){
         			<input type="text" id="nbsim" name="nbsim" >
 	   			</div>
 	   			<div>
-	   				<label for="type_sim">Type de Sim:</label>
-		        	<select name="type_sim" form="tel_form">
-					 	<option value="Sim" selected>SIM</option>
-			 		 	<option value="Micro" >Micro</option>
-					 	<option value="Nano">Nano</option>
-					</select> 
+	   				<div>
+		        	<label for="type_sim">Type Sim</label>
+        			<input type="text" id="type_sim" name="type_sim" >
 	   			</div>
 	   			<div>
 		        	<label for="taille_disque_pc">Taille du disque :</label>
@@ -293,11 +294,9 @@ function upload(){
         			<input type="text" id="ress_app_ar" name="ress_app_ar" >
 	   			</div>
 	   			<div>
-	   				<label for="nfc">NFC:</label>
-		        	<select name="nfc" form="tel_form">
-					 	<option value="Yes">Oui</option>
-			 		 	<option value="No" selected>Non</option>
-					</select> 
+	   				<div>
+		        	<label for="nfc">NFC:</label>
+        			<input type="text" id="nfc" name="nfc" >
 	   			</div>
 ');
 				break;

@@ -31,10 +31,11 @@
 		print "<div> Ville : $ville <br> </div>";
 		print "</div>";
 	}
+	
 	function get_user_info(){
 		$login = $_SESSION['login'];
 		connectDb($conn);
-		$query = "SELECT * FROM annonceur where login = '$login'";
+		$query = "SELECT * FROM annonceur WHERE login = '$login'";
 		$result = $conn->query($query) or die ("SELECT error:" . $conn->error);
 		$tuple = mysqli_fetch_object($result);
 		display_user_info($tuple->annonceur_photo, $tuple->nom, $tuple->prenom, $tuple->mail, $tuple->ville, $tuple->telephone);
@@ -43,37 +44,55 @@
 	}
 
 //Ajouter id dans la balise tr Modifier 
-	function display_user_annonces($price, $title, $date){
+	function display_user_annonces($id,$price, $title, $date, $nbrow , $idproduit){
+		
 		print"<tr>";
+		print"<td> $id,$idproduit  <input type='hidden' name='$idprod' value='$idproduit' /> <input type='hidden' name='$nbrow' value='$id' /></td>";
 		print "<td > $title , $price € , $date </td>";
-		print "<td><from action ='login.php'><button id='remove_button'><img src='../img/remove.png'></from></button></td>";
-		print "<td><button id='remove_button'><img src='../img/settings.png'></button></td>";
+		print "<td>
+				<button type='submit' name ='remove_button' value='$id'>
+						<img src='../img/remove.png'>
+				</button>
+			</td>";
+		print "<td><button type='submit' name='update_button' value='$id'><img src='../img/settings.png'></button></td>";
 		print"</tr>";
 	}
 
 	function get_user_annonces(){
-	
+		
 		$id = $_SESSION['id'];
 		connectDb($conn);
-		$query = "SELECT DISTINCT a.titre_annonce, a.prix, a.time_pub
+		$query = "SELECT DISTINCT a.id_annonce, a.id_produit, a.titre_annonce, a.prix, a.time_pub
 					FROM annonce a , annonceur an , publier p
 					WHERE a.id_annonceur = an.id_annonceur AND p.id_annonceur = a.id_annonceur
 						AND an.id_annonceur = '$id' ";
 		$result = $conn->query($query) or die("SELECT Error: ". $conn->error);
-		print("<table id='Annonce_table' >");
+		print("<form method='POST' action='updateannonces.php'>");
+		print("<table id='Annonce_table'  border=1>");
+		print('<thead>
+		        <tr>
+		            <th scope="id">ID</th>
+		            <th scope="infos">Infos</th>
+		            <th scope="remove">Retirer</th>
+		            <th scope="update">Modifier</th>
+		        </tr>
+   			 </thead>');
 		//Passe dans le if quand l'utilisateur n'a pas d'annonce (bug)
+		$nbrow = 0;
 		if($result){
 			while ($tuple = mysqli_fetch_object($result)){
+			$nbrow++;
  			$dateFormat = date("Y-m-d",strtotime($tuple->time_pub));
- 			display_user_annonces($tuple->prix,$tuple->titre_annonce,$dateFormat);
+ 			display_user_annonces($tuple->id_annonce, $tuple->prix,$tuple->titre_annonce,$dateFormat, $nbrow ,$tuple->id_produit);
  			}
+ 			$_SESSION['nbrow'] = $nbrow;
 		}else{
 			print "<div><tr>";
 			print "Qu'attendez vous pour publier des annonces !";
 			print "</div></tr>";  	
 		}
 		print("</table>");
-
+		print("</form>");
 
 		$result->free();
 		closeDb($conn);
@@ -94,7 +113,7 @@
 		$id = $_SESSION['id'];
 		connectDb($conn);
 		//Ces publications dans chaque catégorie
-		$query = "SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id'";
+		$query = "SELECT  a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce FROM annonceur a , annonce an , publier p , produit pr WHERE a.id_annonceur = p.id_annonceur AND p.id_annonce = an.id_annonce AND pr.id_produit = an.id_produit GROUP BY a.id_annonceur, pr.categorie HAVING a.id_annonceur = '$id'";
 		//Ses publications totales
 		$query2 = "SELECT COUNT(*) as nb
 					FROM publier p , annonceur an
@@ -104,12 +123,8 @@
 		
 
 		$result = $conn->query($query) or die("SELECT Error: ".$conn->error);
-		$result2 = $conn->query($query2) or die("SELECT Error: ".$conn->error);;
+		$result2 = $conn->query($query2) or die("SELECT Error: ".$conn->error);
 
-		
-		
-
-		
 		if($tupleNBAnnonce = mysqli_fetch_object($result2)){
 			print("Vous avez publié:  $tupleNBAnnonce->nb annonce(s).<br>");
 		

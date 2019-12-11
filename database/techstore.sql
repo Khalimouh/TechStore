@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS annonceur;
 
 CREATE TABLE techstore.annonceur (
 	id_annonceur INT NOT NULL,
-	login VARCHAR(20) NOT NULL,
+	login VARCHAR(20) NOT NULL ,
 	password VARCHAR(158) NOT NULL,
 	mail VARCHAR(50) NOT NULL,
 	nom VARCHAR(30) NOT NULL,
