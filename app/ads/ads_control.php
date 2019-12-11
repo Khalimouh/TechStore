@@ -160,19 +160,20 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 			LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 			$t_photos
 			INNER JOIN v_pc ON a.id_produit = v_pc.id_produit
-			WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
+			WHERE a.ville LIKE '%$ville%'
+			AND ( a.titre_annonce LIKE '%$keyword%' OR pr.marque LIKE '%$keyword%' OR pr.modele LIKE '%$keyword%' OR t.processeur LIKE '%$keyword%' OR v_pc.type_disque LIKE '%$keyword%' OR v_pc.c_g LIKE '%$keyword%') 
 			AND v_pc.categorie LIKE '$cat%' 
-			AND v_pc.marque LIKE '%$marque%' OR v_pc.marque LIKE '%$keyword%'
-			AND v_pc.modele LIKE '%$modele%' OR v_pc.modele LIKE '%$keyword%'
+			AND v_pc.marque LIKE '%$marque%' 
+			AND v_pc.modele LIKE '%$modele%'
 			and v_pc.etat LIKE '%$etat%' 
 			AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 			AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 			$t_poids_cond
 			AND a.type_annonce LIKE '$urgence%' 
-			AND v_pc.processeur LIKE '%$cpu%' OR v_pc.processeur LIKE '%$keyword%'
-			AND v_pc.c_g LIKE '%$c_g%' OR v_pc.c_g LIKE '%$keyword%'
+			AND v_pc.processeur LIKE '%$cpu%'
+			AND v_pc.c_g LIKE '%$c_g%'
 			AND v_pc.diagonale <= '$t_diag' AND v_pc.ram <= '$t_ram' 
-			AND v_pc.type_disque LIKE '$type_disk%' OR v_pc.type_disque LIKE '%$keyword%'
+			AND v_pc.type_disque LIKE '$type_disk%' 
 			AND v_pc.taille_disque <= '$t_taille_disk'
 
 			GROUP by a.id_annonce
@@ -194,16 +195,17 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 	$t_photos
 	INNER JOIN v_telephonie t ON a.id_produit = t.id_produit
-	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
-	AND t.categorie LIKE '$cat%' 
-	AND t.marque LIKE '%$marque%' OR t.marque LIKE '%$keyword%'
-	AND t.modele LIKE '%$modele%' OR t.modele LIKE '%$keyword%'
+	WHERE a.ville LIKE '%$ville%'
+	AND ( a.titre_annonce LIKE '%$keyword%' OR pr.marque LIKE '%$keyword%' OR pr.modele LIKE '%$keyword%' OR t.processeur LIKE '%$keyword%') 
+	AND t.categorie LIKE '$cat%'
+	AND t.marque LIKE '%$marque%' 
+	AND t.modele LIKE '%$modele%'
 	and t.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
 	AND a.type_annonce LIKE '$urgence%'
-	AND t.processeur LIKE '%$cpu%' OR t.processeur LIKE '%$keyword%'
+	AND t.processeur LIKE '%$cpu%'
 	AND t.res_app_arr <= '$t_app_photo' AND t.diagonale <= '$t_diag' 
 	AND t.ram <= '$t_ram' AND t.taille_disque <= '$t_taille_disk'
 	GROUP by a.id_annonce
@@ -224,11 +226,12 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
 	$t_photos
 	INNER JOIN produit pr ON a.id_produit = pr.id_produit
-	WHERE a.ville LIKE '%$ville%' AND a.titre_annonce LIKE '%$keyword%' 
+	WHERE a.ville LIKE '%$ville%' 
+	AND ( a.titre_annonce LIKE '%$keyword%' OR pr.marque LIKE '%$keyword%' OR pr.modele LIKE '%$keyword%')
 	AND pr.categorie LIKE '$cat%' 
-	AND pr.marque LIKE '%$marque%' OR pr.marque LIKE '%$keyword%'
-	AND pr.modele LIKE '%$modele%' OR pr.modele LIKE '%$keyword%'
-	and pr.etat LIKE '%$etat%' 
+	AND pr.marque LIKE '%$marque%'
+	AND pr.modele LIKE '%$modele%'
+	AND pr.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
 	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
