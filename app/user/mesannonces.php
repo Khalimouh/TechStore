@@ -34,33 +34,32 @@
 		</ul>
 	</nav>
 	<section id="section_center">
-		<div id="section_title">Profil</div>
-		<h3>Mes informations personelles</h3>
+		<h2>Mes annonces</h2>
 		<section id="section_recommanded_ads">
-		<?php
-			require_once("user_profile.php");
-			get_user_info();	
-		?>
+			<?php
+        		require_once("user_profile.php");
+        		get_user_annonces();
+        	
+        	?>	
 		</section>
-		
+	</section>
 	
-
-</section>
 	<aside id="aside_right">
 		<div id="section_title">Statistiques</div>
 		<?php  
-			require_once("user_profile.php");
-        	get_user_stats();
+		require_once("user_profile.php");
+        		get_user_stats();
 		?>
 	</aside>
+
 </section>
+
 <footer>
 		<footer>
             <p>Copyright Zozor - Tous droits réservés<br />
             <a href="#">Me contacter !</a></p>
         </footer>
 	</footer>
-
 
 </body>
 </html>

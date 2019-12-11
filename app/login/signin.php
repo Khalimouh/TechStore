@@ -12,8 +12,6 @@ if (!defined('PROJECT_LIBS'))
 require_once(PROJECT_LIBS.'/app/dbconnection.php');
 $conn = null;
 
-
-
 function getUserIpAddr(){
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
         $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -79,28 +77,31 @@ $taille_max = 3550000;
 
 //Verifie la conconrdance des mots de passes et des emails
 if(strcmp($password, $confpassword) == 0 && filter_var($mail, FILTER_VALIDATE_EMAIL)){
-//hachage du mot de passe
-$passhache = password_hash($password, PASSWORD_DEFAULT);
-/*print($passhache);*/
-//On se connecte à la BD
-connectDb($conn);
-//récuperation de l'id_user
-$res = $conn->query("SELECT * FROM user");
-$new_id_availible = $res->num_rows+1;
+		//hachage du mot de passe
+		$passhache = password_hash($password, PASSWORD_DEFAULT);
+		/*print($passhache);*/
+		//On se connecte à la BD
+		connectDb($conn);
+		//récuperation de l'id_user
+		$res = $conn->query("SELECT MAX(id_user) as maxIdUser FROM user");
+		$new_id_availible = $res->fetch_object();
+		$maxid = $new_id_availible->maxIdUser +1 ;
+		//print($new_id_availible->maxIdUser);
+		//récuperation de la date
+		$date = date('Y-m-d H:i:s');
 
-//récuperation de la date
-$date = date('Y-m-d H:i:s');
 
+		$conn->query("INSERT INTO user (id_user, time_access, adress_ip, type_user) VALUES ($maxid, '$date', '$user_ip', 'Annonceur');") or die("Erreur insertion user : " . $conn->error);
 
-$conn->query("INSERT INTO user (id_user, time_access, adress_ip, type_user) VALUES ($new_id_availible, '$date', '$user_ip', 'Annonceur');") or die("Erreur insertion user : " . $conn->error);
+		$conn->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
+			nom, prenom, ville, telephone, annonceur_photo) VALUES ($maxid, '$Login','$passhache', '$mail', '$nom', '$prenom', '$ville', '$tel', " .
+		"'" . addslashes ($img_blob) . "');")or die("Erreur insertion annonceur: " . $conn->error);
+		//rediriger vers la page d'acceuil du site 	
+			$res->free();
+			$conn->close();
 
-$conn->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
-	nom, prenom, ville, telephone, annonceur_photo) VALUES ($new_id_availible, '$Login','$passhache', '$mail', '$nom', '$prenom', '$ville', '$tel', " .
-"'" . addslashes ($img_blob) . "');")or die("Erreur insertion annonceur: " . $conn->error);
-//rediriger vers la page d'acceuil du site 	
-
-//header("Location: ");
-	exit;
+			header("Location: ../user/login.php");
+			exit;
 }else{
 	header("Location: signin.html");
 	print("Les mots de passe ne sont pas identiques");
@@ -108,8 +109,5 @@ $conn->query("INSERT INTO annonceur (id_annonceur, login, password, mail,
 }
 
 
-
-$resultat->free();
-$conn->close();
 
 ?>

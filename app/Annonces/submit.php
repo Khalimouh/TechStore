@@ -51,7 +51,7 @@
 	  	<div class="type_annonce">
 			<label for="monselectEtat">Etat:</label>
 		 	<select name = "etat" id="monselectEtat"  form="updateform">
-		 	  <option value="" ><?php echo $etat == "" ? " " : $etat ?></option> 
+		 	  <option value="<?php echo $etat ?>" ><?php echo $etat == "" ? " " : $etat ?></option> 
 			  <option value="Urgent">Urgent</option>
 			  <option value="Non Urgent">Non Urgent</option>
 			</select> 
@@ -64,7 +64,7 @@
 		<div class="Catégories">
 			<label for="Catégorie">Catégorie:</label>
 		 	<select name="cat" id="monselectcategorie"  form="updateform" onchange="document.getElementById('cat_button').click()">
-		 	  <option value="" selected hidden><?php echo $cat == "" ? "" : $cat ?></option> 
+		 	  <option value="<?php echo $cat ?>" selected hidden><?php echo $cat == "" ? "" : $cat ?></option> 
 			  <option value="Appareil Photo">Appareil Photo</option>
 			  <option value="Accesoires">Acessoires</option>
 			  <option value="PC" >PC</option>
@@ -88,7 +88,7 @@
 	    <div>
         	<label for="Etat">Etat produit :</label>
         	<select name="etat_produit" id="monselectetatproduit" form="updateform">
-        	<option value="" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
+        	<option value="<?php echo $etatp ?>" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
 			  <option value="Neuf">Neuf</option>
 			  <option value="Use">Usé</option>
 			</select> 
