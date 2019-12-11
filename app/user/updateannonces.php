@@ -28,8 +28,8 @@
 				WHERE a.id_produit = p.id_produit
 				AND a.id_annonce = '$idAnnonceToDel'");
 		$produit = $result->fetch_object();
-		print($produit->id_produit);
-		print($produit->categorie);
+		//print($produit->id_produit);
+		//print($produit->categorie);
 		/*Suppression de la publication*/
 		$conn->query("DELETE FROM publier WHERE id_annonce = $idAnnonceToDel;") or die("Erreur de suppression produit" . $conn->error);
 		/*Suppression de la photo*/
@@ -63,6 +63,9 @@
 		}
 		/*Suppression du produit*/
 		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;") or die("Erreur de suppression produit" . $conn->error);
+		$result->free();
+		$conn->close();
+		header("Location: profil.php");
 	}
 	if(isset($_POST['update_button'])){
 		echo "Update";
