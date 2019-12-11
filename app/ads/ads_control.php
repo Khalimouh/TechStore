@@ -161,7 +161,7 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 			$t_photos
 			INNER JOIN v_pc ON a.id_produit = v_pc.id_produit
 			WHERE a.ville LIKE '%$ville%'
-			AND ( a.titre_annonce LIKE '%$keyword%' OR pr.marque LIKE '%$keyword%' OR pr.modele LIKE '%$keyword%' OR t.processeur LIKE '%$keyword%' OR v_pc.type_disque LIKE '%$keyword%' OR v_pc.c_g LIKE '%$keyword%') 
+			AND ( a.titre_annonce LIKE '%$keyword%' OR v_pc.marque LIKE '%$keyword%' OR v_pc.modele LIKE '%$keyword%' OR v_pc.processeur LIKE '%$keyword%' OR v_pc.type_disque LIKE '%$keyword%' OR v_pc.c_g LIKE '%$keyword%') 
 			AND v_pc.categorie LIKE '$cat%' 
 			AND v_pc.marque LIKE '%$marque%' 
 			AND v_pc.modele LIKE '%$modele%'
@@ -196,7 +196,7 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	$t_photos
 	INNER JOIN v_telephonie t ON a.id_produit = t.id_produit
 	WHERE a.ville LIKE '%$ville%'
-	AND ( a.titre_annonce LIKE '%$keyword%' OR pr.marque LIKE '%$keyword%' OR pr.modele LIKE '%$keyword%' OR t.processeur LIKE '%$keyword%') 
+	AND ( a.titre_annonce LIKE '%$keyword%' OR t.marque LIKE '%$keyword%' OR t.modele LIKE '%$keyword%' OR t.processeur LIKE '%$keyword%') 
 	AND t.categorie LIKE '$cat%'
 	AND t.marque LIKE '%$marque%' 
 	AND t.modele LIKE '%$modele%'
