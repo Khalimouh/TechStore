@@ -1,4 +1,4 @@
-<?php session_start(); ?> 
+<?php require_once("./app/user/newuser.php"); ?> 
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -73,16 +73,15 @@
 		<?php  
 			getStatsVille();
 		?>
+		<div><h2>Visiteurs : <?php echo getNumberVisitors(); ?></h2></div>
 	</aside>
 	</section>
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Footer -+-+-+-+-+-+-+-+-+- -->
 	<footer>
-		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
+            <p> <?php echo $_SESSION['id']," ",$_SESSION['user']; ?> <br />
+           
         </footer>
-	</footer>
 
 </body>
 </html>

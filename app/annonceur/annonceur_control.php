@@ -16,7 +16,7 @@ require_once(PROJECT_LIBS.'/app/dbconnection.php');
 $conn = null;
 
 /* Getters from the URL */
-if(!isset($_GET["id"]))	
+if(!isset($_GET["id"]) or $_GET["id"] == '')	
 	header("Location: /TechStore/app/404");
 
 

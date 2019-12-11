@@ -1,6 +1,7 @@
 <html>
 <head>
 	<?php 
+		require_once("../user/newuser.php");
 		require_once("../main/ads.php");
 		require_once("./ads_control.php");
 
@@ -125,6 +126,7 @@
 					$q = get_ads_query($keyword,$cat, $marque, $modele, $etat, $poids_min, $poids_max, $prix_min, $prix_max, $ville, $urgence, $date_min, $date_max, $photos);				
 
 			    //echo $q;
+			    echo $q;
 				printResults($q);
 			?>
 		</section>
@@ -150,10 +152,8 @@
 
 
 	<footer>
-		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
-        </footer>
-	</footer>
+            <p> <?php echo $_SESSION['id']," ",$_SESSION['user']; ?> <br />
+           
+    </footer>
 </body>
 </html>

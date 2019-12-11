@@ -86,4 +86,21 @@
 		$result->free();
 		closeDb($GLOBALS['conn']);
 	}
+
+	function getNumberVisitors(){
+
+		connectDb($GLOBALS['conn']);
+		$query = "SELECT COUNT(*) nbr_v FROM user";
+
+		$result = $GLOBALS['conn']->query($query)
+				or die("SELECT Error: ".$GLOBALS['conn']->error);
+		
+		$tuple = mysqli_fetch_object($result);
+		$nbr_v = $tuple->nbr_v;
+		
+		$result->free();
+		closeDb($GLOBALS['conn']);
+
+		return $nbr_v;
+	}
 ?>
