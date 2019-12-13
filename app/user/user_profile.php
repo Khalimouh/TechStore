@@ -47,7 +47,7 @@
 	function display_user_annonces($id,$price, $title, $date, $nbrow , $idproduit){
 		
 		print"<tr>";
-		print"<td> $id,$idproduit  <input type='hidden' name='$idprod' value='$idproduit' /> <input type='hidden' name='$nbrow' value='$id' /></td>";
+		print"<td> $id,$idproduit  <input type='hidden' name='$idproduit' value='$idproduit' /> <input type='hidden' name='$nbrow' value='$id' /></td>";
 		print "<td > $title , $price € , $date </td>";
 		print "<td>
 				<button type='submit' name ='remove_button' value='$id'>

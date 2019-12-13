@@ -111,7 +111,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_
 				$type =  $_POST['disque_pc'];
 				$taille = $_POST['taille_disque_pc'];
 				$bat = $_POST['batterie_pc'];
-				$conn->query("INSERT INTO pc (id_produit, diagonale, processeur ,c_g , ram , type_disque, taille_disque, batterie) VALUES ($new_id_produit, $diagonale, '$processeur', '$cg', $ram, '$type', $taille, '$bat');") or die ("Erreur d'insertion PC" . $conn->error);
+				$conn->query("INSERT INTO pc (id_produit, diagonale, processeur ,c_g , ram , type_disque, taille_disque, batterie) VALUES ($new_id_produit, $diagonale, '$proc', '$cg', $ram, '$type', $taille, '$bat');") or die ("Erreur d'insertion PC" . $conn->error);
 
 				break;
 			case "TV":
