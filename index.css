@@ -193,6 +193,7 @@ nav .nbr_ads{
 	display: flex;
 	flex-direction: column;
     border: 1px solid black;
+    position: relative;
 }
 .ads:hover {
 	opacity: 0.8;
@@ -212,6 +213,7 @@ nav .nbr_ads{
 	display: block;
 	width: auto;
 	max-height: 100%;
+	overflow: hidden;
 }
 .ads .img_ads img{
 	
@@ -243,12 +245,15 @@ nav .nbr_ads{
 	align-self: flex-end;
 	width: auto;
 	height: auto;
-	position: absolute;
-	z-index: 2;
 	color: white;
+	right: 0;
+	top: 0;
+	position: absolute;
 	background: #f33105;
 	border-radius: 8px;
 	opacity: 0.9;
+	z-index: 2;
+
 }
 
 #aside_right{

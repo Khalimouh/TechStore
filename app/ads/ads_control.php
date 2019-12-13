@@ -104,10 +104,12 @@ else {
 /* -+ - +- +- +- +- - + - -+ -+ -+ - +- +- +- +- +- + -+ -+ -+ - +- +- */
 
 function print_ad_cat($id,$title, $cat='', $marque, $model, $ad_ville, $etat, $urg, $price,
-	$id_ann,$an_ville, $diffdate, $an_nom, $nbr_cons){
+	$id_ann,$an_ville, $diffdate, $an_nom, $nbr_cons, $annonceur_photo, $photo){
 	print "<aside class=aside_ad><div class=ad_desc>";
 	/* Annonce */
-	print "<img src=../img/logo.png>";
+	if($photo)
+		print '<img src="data:image/jpeg;base64,'.base64_encode( $photo ).'"/>';
+	else print "<img src=/TechStore/app/img/logo.png>";
 	print "<div class=ad_caracts>";
 	print "<div class=ad_title><a href=/TechStore/app/ad/ad.php?id=$id target=_blank>$title</a></div>";
 	print "$cat<br>$marque $model<br>$ad_ville<br>$etat<br>$urg<br>$nbr_cons";
@@ -117,7 +119,10 @@ function print_ad_cat($id,$title, $cat='', $marque, $model, $ad_ville, $etat, $u
 	print "<div class=annonceur_div>";
 	print "<div class=annonceur_ville>$an_ville</div>";
 	print "<div class=diff_date_pub>$diffdate</div>";
-	print "<a href=/TechStore/app/annonceur/annonceur.php?id=$id_ann target=_blank><img src=/TechStore/app/img/logo.png>";
+	print "<a href=/TechStore/app/annonceur/annonceur.php?id=$id_ann target=_blank>";
+	if($annonceur_photo)
+		print '<img src="data:image/jpeg;base64,'.base64_encode( $annonceur_photo ).'"/>';
+	else print "<img src=/TechStore/app/img/user.png>";
 	print "<div class=annonceur_nom>$an_nom</div>";
 	print "</a></div></aside>";
 }
@@ -211,6 +216,7 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	GROUP by a.id_annonce
 	ORDER BY nbr_cons DESC
 	LIMIT 100";
+	
 	else
 		$query = "SELECT ann.id_annonceur,ann.nom, ann.prenom, ann.ville as an_ville, ann.annonceur_photo,
 	a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville,
@@ -253,7 +259,7 @@ function printResults($query){
 	or die("SELECT Error: ".$conn->error);
 
 	while ($tuple = mysqli_fetch_object($result)){
-		print_ad_cat($tuple->id_annonce,$tuple->titre_annonce, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->ad_ville, $tuple->etat, $tuple->type_annonce, $tuple->prix,$tuple->id_annonceur, $tuple->an_ville, $tuple->time_pub, $tuple->nom." ".$tuple->prenom, $tuple->nbr_cons);			
+		print_ad_cat($tuple->id_annonce,$tuple->titre_annonce, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->ad_ville, $tuple->etat, $tuple->type_annonce, $tuple->prix,$tuple->id_annonceur, $tuple->an_ville, $tuple->time_pub, $tuple->nom." ".$tuple->prenom, $tuple->nbr_cons, $tuple->annonceur_photo, $tuple->photo);			
 	}
 
 	$result->free();

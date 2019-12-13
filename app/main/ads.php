@@ -18,17 +18,20 @@ function get_ads($query){
 
 	while ($tuple = mysqli_fetch_object($result)){
 		$dateFormat = date("Y-m-d",strtotime($tuple->time_pub));
- 		print_ads($tuple->id_annonce,$tuple->prix,$tuple->titre_annonce,$dateFormat,$tuple->nbr_cons);
+ 		print_ads($tuple->id_annonce,$tuple->prix,$tuple->titre_annonce,$dateFormat,$tuple->nbr_cons, $tuple->photo);
  	}
 	$result->free();
 	closeDb($conn);
 }
 
-function print_ads($id, $price, $title, $date, $nbr){
+function print_ads($id, $price, $title, $date, $nbr, $photo){
 	print "<a href=/TechStore/app/ad/ad.php?id=$id target=_blank>";
 	print "<div class= ads>";
 	// photo ads
-	print "<img class=img_ads src=./app/img/logo.png>";
+	if($photo)
+		print '<img class=img_ads src="data:image/jpeg;base64,'.base64_encode( $photo ).'"/>';
+	else print "<img class=img_ads src=/TechStore/app/img/logo.png>";
+	
 	// price ads
 	print "<div class=price_ads>$price €</div>";
 	// title ads
