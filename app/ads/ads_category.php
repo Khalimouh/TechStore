@@ -126,7 +126,7 @@
 					$q = get_ads_query($keyword,$cat, $marque, $modele, $etat, $poids_min, $poids_max, $prix_min, $prix_max, $ville, $urgence, $date_min, $date_max, $photos);				
 
 			    //echo $q;
-			    echo $q;
+			    
 				printResults($q);
 			?>
 		</section>

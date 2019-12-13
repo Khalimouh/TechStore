@@ -28,12 +28,11 @@ closeDb($conn);
 
 function getAd(){
 	global $id, $titre;
-	$query = "SELECT a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville, 				a.type_annonce, p.photo, COUNT(c.id_annonce) nbr_cons, 
+	$query = "SELECT a.id_annonce, a.titre_annonce, a.prix, a.time_pub, a.ville as ad_ville, 				a.type_annonce, COUNT(c.id_annonce) nbr_cons, 
 	an.id_annonceur, an.nom, an.prenom, an.mail, an.telephone, an.telephone, an.ville as an_ville,
 	pr.categorie, pr.marque, pr.modele, pr.poids, pr.etat,pr.id_produit
 	FROM annonce a
 	LEFT JOIN consulter c ON a.id_annonce = c.id_annonce
-	LEFT JOIN photo p ON a.id_annonce = p.id_annonce
 	INNER JOIN produit pr ON a.id_produit = pr.id_produit
 	INNER JOIN v_annonceur an ON a.id_annonceur = an.id_annonceur
 	WHERE a.id_annonce = $id
@@ -57,29 +56,30 @@ function getAd(){
 	}
 
 	$result->free();
+
+	$result = $conn->query("SELECT photo FROM photo WHERE id_annonce = $id")
+			or die ("SELECT photo Error: ".$conn->error);
 	
+	$photos = [];
+	while($t_p = mysqli_fetch_object($result)){
+		$photos[] = $t_p->photo;
+	}
+
+	$result->free();
+
 	$_GET["titre"] = $tuple->titre_annonce;
 	$_GET["marque"] = $tuple ->marque;
 	$_GET["modele"] = $tuple ->modele;
 	$_GET["cat"] = $tuple ->categorie;
 	
 	
-	print_ad($tuple->id_annonce, $tuple->titre_annonce, $tuple->prix, $tuple->time_pub, $tuple->ad_ville, $tuple->type_annonce, $tuple->nbr_cons, $tuple->id_annonceur, $tuple->nom, $tuple->prenom, $tuple->mail, $tuple->telephone, $tuple->an_ville, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->poids, $tuple->etat, $caracts);
+	print_ad($tuple->id_annonce, $tuple->titre_annonce, $tuple->prix, $tuple->time_pub, $tuple->ad_ville, $tuple->type_annonce, $tuple->nbr_cons, $tuple->id_annonceur, $tuple->nom, $tuple->prenom, $tuple->mail, $tuple->telephone, $tuple->an_ville, $tuple->categorie, $tuple->marque, $tuple->modele, $tuple->poids, $tuple->etat, $caracts, $photos);
 		
-
-	
-	
-
-	
-   	
-	
-
-
 	closeDb($conn);
 }
 
 
-function print_ad($id_annonce, $titre_annonce, $prix, $time_pub, $ad_ville, $type_annonce, $nbr_cons, $id_annonceur, $nom, $prenom, $mail, $telephone, $an_ville, $categorie, $marque, $modele, $poids, $etat, $caracts){
+function print_ad($id_annonce, $titre_annonce, $prix, $time_pub, $ad_ville, $type_annonce, $nbr_cons, $id_annonceur, $nom, $prenom, $mail, $telephone, $an_ville, $categorie, $marque, $modele, $poids, $etat, $caracts, $photos){
 	print "<div class=redirect_cat>";
 	print "<a href=/TechStore/app/ads/ads_category.php>";
 	print "<span>Toutes les catégories</span></a> >> ";
@@ -107,7 +107,14 @@ function print_ad($id_annonce, $titre_annonce, $prix, $time_pub, $ad_ville, $typ
 	print "</div>";
 	print "<div class=ad_price>$prix €</div></div><hr>";
 	print "<section id=section_photos>";
-	print "<img src=/TechStore/app/img/logo.png><img src=/TechStore/app/img/logo.png><img src=/TechStore/app/img/logo.png><img src=/TechStore/app/img/logo.png><img src=/TechStore/app/img/logo.png></section><hr>";
+	if(!empty($photos)){
+		foreach ($photos as $photo) {
+			print '<img src="data:image/jpeg;base64,'.base64_encode( $photo ).'"/>';
+		}
+	}
+	else 
+		print "<h2> Aucune photo!</h2>";
+	print "</section><hr>";
 
 	print "<div class=annonceur_div>";
 	print "<h2>A propos de l'annonceur</h2>";
