@@ -172,7 +172,7 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 			AND v_pc.modele LIKE '%$modele%'
 			and v_pc.etat LIKE '%$etat%' 
 			AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
-			AND a.time_pub BETWEEN '$date_min' AND $t_date_max
+			AND DATE(a.time_pub) BETWEEN '$date_min' AND $t_date_max
 			$t_poids_cond
 			AND a.type_annonce LIKE '$urgence%' 
 			AND v_pc.processeur LIKE '%$cpu%'
@@ -207,7 +207,7 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	AND t.modele LIKE '%$modele%'
 	and t.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
-	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
+	AND DATE(a.time_pub) BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
 	AND a.type_annonce LIKE '$urgence%'
 	AND t.processeur LIKE '%$cpu%'
@@ -239,16 +239,16 @@ function get_ads_query($keyword ='', $cat ='', $marque ='', $modele ='', $etat =
 	AND pr.modele LIKE '%$modele%'
 	AND pr.etat LIKE '%$etat%' 
 	AND a.prix BETWEEN '$prix_min' AND '$t_prix_max' 
-	AND a.time_pub BETWEEN '$date_min' AND $t_date_max
+	AND DATE(a.time_pub) BETWEEN '$date_min' AND $t_date_max
 	$t_poids_cond
-	AND a.type_annonce LIKE '$urgence%'
+	AND a.type_annonce LIKE '$urgence%' 
 	GROUP by a.id_annonce
 	ORDER BY nbr_cons DESC
 	LIMIT 100";
 
 
-		//echo $query;
-		//echo '<script type="text/javascript">console.log("'.$query.'");</script>';
+	//echo $query;
+	
 	return $query;
 
 }
