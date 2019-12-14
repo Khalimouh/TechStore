@@ -90,7 +90,7 @@
         	<select name="etat_produit" id="monselectetatproduit" form="updateform">
         	<option value="<?php echo $etatp ?>" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
 			  <option value="Neuf">Neuf</option>
-			  <option value="Use">Usé</option>
+			  <option value="Occasion">Occasion</option>
 			</select> 
 
 	    </div>      
