@@ -46,8 +46,6 @@
 			require_once("user_profile.php");
 			get_user_info();	
 		?>
-
-		
 		</section>
 		
 	
