@@ -2,9 +2,7 @@
 	if (session_status() == PHP_SESSION_NONE) {
 	    session_start();
 	}
-	error_reporting(-1);
-	ini_set('display_errors', 'On');
-
+	
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 	if (!defined('PROJECT_LIBS'))
@@ -60,8 +58,8 @@
 		/*Suppression du produit*/
 		/*Suppression de l'annonce*/
 		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS = 0;");
-		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel;");
-		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;") or die("Erreur de suppression produit" . $conn->error);
+		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;"); 
+		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel or id_produit = $produit->id_produit;");
 		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS=1;");
 		$result->free();
 		$conn->close();

@@ -61,8 +61,7 @@
 </section>
 <footer>
 		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
+            <?php echo "Bienvenue ". $_SESSION['login']. " !" ?>
         </footer>
 	</footer>
 
