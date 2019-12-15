@@ -25,6 +25,7 @@
 		<div id="buttons_header">
 			<button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = '../login/checkLogin.php';"><img src="../img/icon_user.png"></button>
+			<?php require("../main/logout_print.php"); ?>
 		</div>
 	</header>
 
@@ -35,6 +36,7 @@
 	<!-- -+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+- -->
 	<!-- -+-+-+-+-+-+-+-+-+- Section Center-+-+-+-+-+-+-+-+-+- -->
 	<section id="section_center">
+		<div id="section_title">Annonces</div>
 		<div id="section_categories">
 			<ul>
 
@@ -44,32 +46,19 @@
   		?>
 		</ul>
 		</div>
-		<div id="section_title">Annonces</div>
 		<section id="section_popular_ads">
 			<?php
 				get_popular_ads(6,$cat);
 			?>
 		</section>
+		<hr>
 			<section id="section_search_filter">
 			<form method="get" action="<?=$_SERVER['PHP_SELF'];?>"  id="filter_form">
 				<input type="hidden" name="cat" value="<?php echo $cat;?>">
 				<input type="text" name="keyword" placeholder="Mots clés" value="<?php echo $keyword; ?>">
 				<input type="text" name="marque" placeholder="Marque" value="<?php echo $marque; ?>">
 				<input type="text" name="modele" placeholder="Modèle" value="<?php echo $modele; ?>">
-				<div style="display: flex; flex-direction: column;">
-					<input type="text" name="prix_min" placeholder="Prix min" value="<?php echo $prix_min; ?>">
-					<input type="text" name="prix_max" placeholder="Prix max" value="<?php echo $prix_max; ?>">
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<input type="text" name="poids_min" placeholder="Poids min" value="<?php echo $poids_min; ?>">
-					<input type="text" name="poids_max" placeholder="Poids max" value="<?php echo $poids_max; ?>">
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<input  type="text" placeholder="Date de" 
-					onfocus="(this.type='date')"  onblur="(this.type='text')" name="date_min" value="<?php echo $date_min; ?>">
-					<input type="text" placeholder="Date à" 
-					onfocus="(this.type='date')"  onblur="(this.type='text')" name="date_max" value="<?php echo $date_max; ?>">
-				</div>
+				
 				<select name ="etat" form="filter_form">
 					<option value="" selected hidden><?php echo $etat=='' ? 'Etat' : $etat; ?></option>
 					<option value="Neuf">Neuf</option>
@@ -106,13 +95,27 @@
   					<option value="Sans photos">Sans photos</option>
   					<option value="">Peu importe</option>
 				</select>
+				
+					<input type="text" name="prix_min" placeholder="Prix min" value="<?php echo $prix_min; ?>">
+					<input type="text" name="prix_max" placeholder="Prix max" value="<?php echo $prix_max; ?>">
+				
+					<input type="text" name="poids_min" placeholder="Poids min" value="<?php echo $poids_min; ?>">
+					<input type="text" name="poids_max" placeholder="Poids max" value="<?php echo $poids_max; ?>">
+				
+					<input  type="text" placeholder="Date de" 
+					onfocus="(this.type='date')"  onblur="(this.type='text')" name="date_min" value="<?php echo $date_min; ?>">
+					<input type="text" placeholder="Date à" 
+					onfocus="(this.type='date')"  onblur="(this.type='text')" name="date_max" value="<?php echo $date_max; ?>">
+				
 				 
-				<input type="submit" name="filterButton" value="Filtrer"></input>
-				<input type="reset" onclick='document.getElementById("filter_form").reset();'>
-			
 			</form>
 			<?php printFormCatg($cat); ?>
+			<div style="display: flex;justify-content: flex-end;">
+				<input id="button_filter" form="filter_form" type="submit" name="filterButton" value="Filtrer"></input>
+				<input id="button_reset" form="filter_form" type="reset" onclick='document.getElementById("filter_form").reset();'>
+			</div>
 			</section>
+			<hr>
 		<section id="section_ads">
 			<?php
 				if($cat == 'PC'){
@@ -152,7 +155,7 @@
 
 
 	<footer>
-            <p> <?php echo $_SESSION['id']," ",$_SESSION['user']; ?> <br />
+           <div><h2>Visiteurs : <?php echo getNumberVisitors(); ?></h2></div>
            
     </footer>
 </body>

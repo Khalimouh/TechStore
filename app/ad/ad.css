@@ -1,20 +1,21 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: lightgray;
+  background-color: white;
 }
+
 header{ 
 
-	background: gray;
+	background: #f1faee;
 	margin: 5px;
 	padding: 5px 15px 5px 15px;
 	height: 10vh;
 	width: auto;
 	display: flex;
 	justify-content: space-between;
+	border: 0.5px outset white;
 
 }
-
 #logo_header a{
 
 	width: 12vw;
@@ -42,18 +43,20 @@ header{
 #search_bar_header input[type=text] {
 	
   	width: 100%;
-  	font-size: 17px;
+  	font-size: 20px;
   	font-style: italic;
   	padding: 10px;
   	border-radius: 10px 0 0 10px;
   	outline: none;
-  	border: none;
+  	border: 0.2px solid #e63946;
+  	border-right: 0px;
 }
 #search_bar_header button {
 	width: 7%;
   	background: #ddd;
   	font-size: 17px;
-  	border: none;
+  	border: 0.2px solid #e63946;
+  	border-left: 0px;
   	border-radius: 0 10px 10px 0;
   	cursor: pointer;
   	display: flex;
@@ -76,12 +79,18 @@ header{
 #buttons_header button {
 	margin: 5px;
 	width: auto;
-  	border: 2px solid black;
+  	border: 0.2px solid #e63946;
   	border-radius: 5px;
   	text-align: center;
   	text-decoration: none;
   	cursor: pointer; 
 	padding: 5px;
+	font-size: 17px;
+	font-weight: bold;
+}
+#buttons_header button:hover{
+	background-color: #e63946;
+	color: white;
 }
 
 #buttons_header #button_head_compte {
@@ -91,7 +100,6 @@ header{
 }
 
 #section_main{
-	margin: 5px;
 	display: flex;
 	align-items: stretch;
 
@@ -99,34 +107,38 @@ header{
 #section_title {
 	vertical-align: middle;
 	text-align: center;
-	background: gray;
+	background: #e63946;
 	width: 100%;
 	height: 5vh;
+	color:  white;
+	font-size: 20px;
+	font-weight: bold;
 }
-
-
 #section_center{
 	
-	border: 1px solid red;
 	height: auto;
 	width: auto;
 	flex: 3;
-	display: block;
-	padding: 10px;
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+	margin : 0 5px 0 5px;
+	border: 0.5px outset white;
+  	background-color: #f1faee;
+  	padding: 10px;
 }
-
-#section_center a {
-	color: #123482;
-  	text-decoration: none;
-}
-
 #section_center div {
 	padding: 2px;
 }
 
 .redirect_cat {
 	font-size: 25px;
-
+	display: flex;
+	
+}
+.redirect_cat span{
+	color: #e63946;
+	
 }
 
 .ad_title {
@@ -139,8 +151,7 @@ header{
 }
 
 .caracts_cat{
-	border:  1px solid red;
-
+	display: grid;
 	grid-gap: 2px;
 	grid-column-gap: 2px;
 	grid-template-columns: auto auto auto; 
@@ -148,15 +159,17 @@ header{
 .ad_price {
 	font-size: 25px;
 	font-weight: bold;
-	color: red;
+	color: #e63946;
 }
 
-
+hr {
+	border: 0.5px solid lightgray;
+	width: 100%;
+}
 
 #section_photos {
 	width: auto;
 	height: auto;
-	border: 1px solid red;
 	margin: 10px;
 
 	display: grid;
@@ -171,23 +184,31 @@ header{
 	height: 40vh;
 	display: flex;
 }
-
 #section_popular_ads {
 	margin: 5px;
-	display: flex;
-	background-color: white;
+	display: grid;
+	grid-gap: 5px;
+	grid-column-gap: 5px;
+	grid-template-columns: auto auto auto auto;
 }
 
+
+#section_center a {
+	display: block;
+  	color: #000;
+  	text-decoration: none;
+}
 
 .ads {
-	width: 13vw;
-	height: 30vh;
+	width: 15vw;
+	height: 40vh;
 	display: flex;
 	flex-direction: column;
-    border: 1px solid black;
+    position: relative;
+	border: 0.5px outset lightgray;
 }
 .ads:hover {
-	opacity: 0.8;
+	opacity: 0.9;
 }
 .ads .title_ads{
 	text-align: center;
@@ -195,11 +216,13 @@ header{
 	height: auto;
 	color: white;
 	align-self: center;
-	background: red;
+	background: #e52938;
+	
+	font-size: 15px;
 
 }
 .ads .img_ads{
-	border: 1px solid black;
+	background-color: white;
 	z-index: 1;
 	display: block;
 	width: auto;
@@ -213,10 +236,12 @@ header{
 }
 .ads .date_ads{
 	text-align: center;
-	background: yellow;
+	background: lightgray;
 	align-self: center;
 	width: 100%;
 	height: 3vh;
+	border : 0.5px outset #e52938;
+ 	border-width: 0.5px 0 0 0;
 
 }
 .ads .date_ads :first-child{
@@ -236,58 +261,88 @@ header{
 	align-self: flex-end;
 	width: auto;
 	height: auto;
-	position: absolute;
-	z-index: 2;
 	color: white;
-	background: #f33105;
+	right: 0;
+	top: 0;
+	position: absolute;
+	background: #e63946;
 	border-radius: 8px;
-	opacity: 0.9;
+	opacity: 0.95;
+	z-index: 2;
+	font-weight: bold;
+
 }
 
+.annonceur_div{
+	font-size: 17px;
+}
+.annonceur_nom{
+	font-size: 20px;
+	font-weight: bold;
+	color: #e63946;
+}
 
 #aside_right{
-	border: 1px solid black;
 	height: auto;
 	flex: 0.8;
 	display: flex;
 	flex-direction: column;
   	align-items: center; 
+  	background-color: #f1faee;
+  	border: 0.5px inset white;
+
 
 }
 
+#aside_right a{
+	display: block;
+  	color: #000;
+  	border-width: 0 0 0.5px 0;
+  	
+
+}
 .table_stats{
-	border: 1px solid black;
 	width: 95%;
 	height: auto;
 	margin: 2px;
 
 }
+.title_right{
+	font-weight: bold;
+	font-size: 15px;
+	margin: 2px;
+}
 .table_stats table {
-  	border-collapse: collapse;
+	border-collapse: collapse;
+	border: 0.5px outset black;
   	width: 100%;
+  	font-size: 16px;
+  	background-color: white;
 }
 
 .table_stats th, td {
   	text-align: left;
   	padding: 8px;
+  	border-style: none;
+  	
 }
 
 .table_stats tr:nth-child(even){
-	background-color: #f2f2f2
+	background-color: #fff0c6;
 }
 
 .table_stats th {
 	text-align: center;
-  	background-color: #4CAF50;
-  	color: white;
+  	background-color: #e8dcdd;
+	color: #e52938;
 }
 
-
-
 footer{
-	margin: 5px;
-	border: 1px solid black;
-	background: blue;
-	display: block;
+	height: 10%;
+	margin: -15px 5px 5px 5px;
+	background: #f1faee;
+	display: flex;
+    justify-content: center;
 	width: auto;
+
 }
