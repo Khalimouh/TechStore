@@ -1,4 +1,8 @@
-
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
 form {
   background-color: #a83232;
   /* Uniquement centrer le formulaire sur la page */
@@ -19,6 +23,8 @@ label {
   display: inline-block;
   width: 90px;
   text-align: right;
+  color: white;
+  font-weight: bold;
 }
 
 input, textarea {
@@ -56,5 +62,13 @@ button {
   /* Cette marge supplémentaire représente grosso modo le même espace que celui
      entre les étiquettes et les champs texte */
   margin-left: .5em;
+}
+
+#sign_in_label{
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 20px;
+  font-style: italic;
+  color: white;
 }
 

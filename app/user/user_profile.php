@@ -25,10 +25,10 @@
 	function display_user_info($photo, $nom , $prenom, $mail , $ville , $tel){
 		$id = $_SESSION['id'];
 		print "<div class= user>";
-		print "<div> Nom: $nom  <br> Prénom: $prenom <br> </div>";
-		print "<div> Téléphone : $tel <br> </div>";
-		print "<div> E-Mail : $mail <br> </div>";
-		print "<div> Ville : $ville <br> </div>";
+		print "<div> <span>Nom :</span> $nom  <br> <span>Prénom :</span> $prenom <br> </div>";
+		print "<div> <span>Téléphone :</span> $tel <br> </div>";
+		print "<div> <span>E-Mail :</span> $mail <br> </div>";
+		print "<div> <span>Ville :</span> $ville <br> </div>";
 		print "</div>";
 	}
 	

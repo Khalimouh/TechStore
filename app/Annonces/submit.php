@@ -12,7 +12,7 @@
 			<a href="../../index.php"><img src="../img/logo.png"></a>
 		</div>
 		<div id = "search_bar_header" >		
-    		<form action="/action_page.php">
+    		<form action="/TechStore/app/ads/ads_category.php">
       		<input type="text" placeholder="Chercher un produit, une marque..." name="search">
       		<button type="submit"><img src="../img/icon_search.png"></button>
     		</form>
@@ -20,16 +20,16 @@
 		<div id="buttons_header">
 			<button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = '../user/profil.php';"><img src="../img/icon_user.png"></button>
+			<button id="logout" onclick="window.location.href = '../login/logout.php';"><img src="../img/remove.png"></button>
 		</div>
 	</header>
 <section id="section_main">
 	<nav id="navigation_bar">
-		<div id="section_title">Catégories</div>
+		<div id="section_title">Gestion</div>
 		<ul>
-  		<?php
-  			require_once("../main/category.php");
-  			getCategories();
-  		?>
+			<li><a href="../user/profil.php">Profil</a></li>
+			<li><a href="../user/updateUser.php">Modifier Coordonnées</a></li>
+			<li><a href="../user/mesannonces.php">Mes annonces</a></li>
 		</ul>
 	</nav>
 	<section id="section_center">
@@ -86,7 +86,7 @@
 
 	    </div>
 	    <div>
-        	<label for="Etat">Etat produit :</label>
+        	<label for="Etat"> Etat produit :</label>
         	<select name="etat_produit" id="monselectetatproduit" form="updateform">
         	<option value="<?php echo $etatp ?>" selected hidden><?php echo $etatp == "" ? " " : $etatp ?></option> 
 			  <option value="Neuf">Neuf</option>
@@ -116,12 +116,11 @@
 			getStatsCatg();
 		?>
 	</aside>
-</section>
 
+	</section>
+	
 <footer>
-		<footer>
-           Bienvenu(e) !
-        </footer>
+        <div>Bienvenu(e) !</div>         
 	</footer>
 
 </body>

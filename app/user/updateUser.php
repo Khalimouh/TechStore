@@ -14,24 +14,24 @@
             <a href="../../index.php"><img src="../img/logo.png"></a>
         </div>
         <div id = "search_bar_header" >     
-            <form action="/action_page.php">
+            <form action="/TechStore/app/ads/ads_category.php">
             <input type="text" placeholder="Chercher un produit, une marque..." name="search">
             <button type="submit"><img src="../img/icon_search.png"></button>
             </form>
         </div>
         <div id="buttons_header">
-            <button id="logout" onclick="window.location.href = '../login/logout.php';"><img src="../img/remove.png"></button>
             <button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
             <button id="button_head_compte" onclick="window.location.href = 'profil.php';"><img src="../img/icon_user.png"></button>
+            <button id="logout" onclick="window.location.href = '../login/logout.php';"><img src="../img/remove.png"></button>
         </div>
     </header>
 <section id="section_main">
     <nav id="navigation_bar">
-        <div id="section_title">Mes annonces </div>
+        <div id="section_title">Gestion</div>
         <ul>
-            <li><a href="mesannonces.php">Mes annonces</a></li>
-            <li><a href="updateUser.php">Modifier Coordonnées</a></li>
             <li><a href="profil.php">Profil</a></li>
+            <li><a href="updateUser.php">Modifier Coordonnées</a></li>
+            <li><a href="mesannonces.php">Mes annonces</a></li>
         </ul>
     </nav>
 	<section id="section_center">
@@ -92,10 +92,7 @@
 </section>
 
 <footer>
-		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
-        </footer>
+		Bienvenu(e)!
 	</footer>
 
 </body>

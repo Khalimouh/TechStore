@@ -20,6 +20,7 @@
 		<div id="buttons_header">
 			<button id="button_head_annonce" onclick="window.location.href =' /TechStore/app/login/checkLoginAnnonce.php';">Deposer annonce</button>
 			<button id="button_head_compte" onclick="window.location.href = '/TechStore/app/login/checkLogin.php';"><img src="/TechStore/app/img/icon_user.png"></button>
+			<?php require("../main/logout_print.php"); ?>
 		</div>
 	</header>
 
@@ -41,13 +42,13 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Section Right-+-+-+-+-+-+-+-+-+- -->
 	<aside id="aside_right">
 		<div id="section_title">Statistiques</div>
-		<div>Classement par catégorie</div>
+		<div class="title_right">Classement par catégorie</div>
 		<?php  
 			require_once("../main/stats.php");
 			getStatsCatg();
 
 		?>
-		<div>Classement par ville</div>
+		<div class="title_right">Classement par ville</div>
 		<?php  
 			getStatsVille();
 		?>
@@ -57,8 +58,7 @@
 	<!-- -+-+-+-+-+-+-+-+-+- Footer -+-+-+-+-+-+-+-+-+- -->
 	<footer>
 		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
+            
         </footer>
 	</footer>
 

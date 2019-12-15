@@ -120,9 +120,11 @@ function print_ad_cat($id,$title, $cat='', $marque, $model, $ad_ville, $etat, $u
 	print "<div class=annonceur_ville>$an_ville</div>";
 	print "<div class=diff_date_pub>$diffdate</div>";
 	print "<a href=/TechStore/app/annonceur/annonceur.php?id=$id_ann target=_blank>";
+	print "<div class= ann_photo>";
 	if($annonceur_photo)
 		print '<img src="data:image/jpeg;base64,'.base64_encode( $annonceur_photo ).'"/>';
 	else print "<img src=/TechStore/app/img/user.png>";
+	print "</div>";
 	print "<div class=annonceur_nom>$an_nom</div>";
 	print "</a></div></aside>";
 }

@@ -26,6 +26,7 @@
 			<div id="buttons_header">
 				<button id="button_head_annonce" onclick="window.location.href =' ../login/checkLoginAnnonce.php';">Deposer annonce</button>
 				<button id="button_head_compte" onclick="window.location.href = '../login/checkLogin.php';"><img src="../img/icon_user.png"></button>
+				<?php require("../main/logout_print.php"); ?>
 			</div>
 		</header>
 
@@ -68,7 +69,7 @@
 
 
 		<footer>
-            <p> <?php echo $_SESSION['id']," ",$_SESSION['user']; ?> <br />
+           <div><h2>Visiteurs : <?php echo getNumberVisitors(); ?></h2></div>
            
         </footer>
 		</body>
