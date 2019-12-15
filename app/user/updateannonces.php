@@ -29,6 +29,8 @@
 		$produit = $result->fetch_object();
 		//print($produit->id_produit);
 		//print($produit->categorie);
+		/*Suppresion des consultations*/
+		$conn->query("DELETE FROM consulter WHERE id_annonce = $idAnnonceToDel;") or die("Erreur de suppression produit" . $conn->error);
 		/*Suppression de la publication*/
 		$conn->query("DELETE FROM publier WHERE id_annonce = $idAnnonceToDel;") or die("Erreur de suppression produit" . $conn->error);
 		/*Suppression de la photo*/
@@ -57,12 +59,10 @@
 				break;
 		}
 		/*Suppression du produit*/
-		/*Suppression de l'annonce*/
-		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS = 0;");
-		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;"); 
-		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel or id_produit = $produit->id_produit;");
-		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS=1;");
+		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel");
 		$result->free();
+		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;") or die("Erreur suppression produit". $conn->error); 
+		/*Suppression de l'annonce*/
 		$conn->close();
 		header("Location: profil.php");
 	}
