@@ -36,7 +36,7 @@ function upload(){
 	$taille_max = 9000000;
 
 	if ($_FILES['file'] > 0){
-  		print("You have selected a file to upload");
+  		//print("You have selected a file to upload");
   	}
 	$ret = is_uploaded_file($_FILES['file']['tmp_name']);
 	if (!$ret) {

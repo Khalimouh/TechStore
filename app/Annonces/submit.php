@@ -120,8 +120,7 @@
 
 <footer>
 		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
+           Bienvenu(e) !
         </footer>
 	</footer>
 

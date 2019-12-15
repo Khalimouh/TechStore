@@ -61,7 +61,7 @@
 </section>
 <footer>
 		<footer>
-            <?php echo "Bienvenue ". $_SESSION['login']. " !" ?>
+            <?php echo "Bienvenu e ". $_SESSION['login']. " !" ?>
         </footer>
 	</footer>
 
