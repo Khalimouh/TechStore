@@ -141,8 +141,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['button_valider']) && $_
 		$conn->query("INSERT INTO photo(id_photo, id_annonce, photo) VALUES ($new_id_photo, $new_id_annonce," .
 	"'" . addslashes ($img) . "');") or die ("Erreur d'insertion photo" . $conn->error);
 		/*Inserer la publication corresspondant*/
-		/*$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, '$date');") or die ("Erreur d'insertion publication" . $conn->error);
-		*/
+		$conn->query("INSERT INTO publier (id_annonceur, id_annonce, date_publication) VALUES ($idann, $new_id_annonce, '$date');") or die ("Erreur d'insertion publication" . $conn->error);
+		
 		$nb_id_photo->free();
 		$nb_id_annonce->free();
 		$nb_id_produit->free();
