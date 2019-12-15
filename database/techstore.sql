@@ -68,6 +68,7 @@ CREATE TABLE techstore.annonce (
 	time_pub DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	id_annonceur INT NOT NULL,
 	id_produit INT NOT NULL,
+	etat_annonce VARCHAR(30) NOT NULL DEFAULT 'En attente',
 	PRIMARY KEY(id_annonce)
 );
 

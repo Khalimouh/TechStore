@@ -204,6 +204,7 @@ header{
 	display: block;
 	width: auto;
 	max-height: 100%;
+	overflow: hidden;
 }
 .ads .img_ads img{
 	
