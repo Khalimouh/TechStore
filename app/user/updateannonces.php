@@ -2,14 +2,15 @@
 	if (session_status() == PHP_SESSION_NONE) {
 	    session_start();
 	}
-	
+	error_reporting(-1);
+	ini_set('display_errors', 'On');
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 	if (!defined('PROJECT_LIBS'))
     	define('PROJECT_LIBS', PROJECT_ROOT . '/TechStore');
     //Get script dbconnection
 	require_once(PROJECT_LIBS.'/app/dbconnection.php');
-
+	
 	$conn = null;
 	$idann = $_SESSION['id'];
 
@@ -70,13 +71,22 @@
 		echo "Update";
 		print($_POST['update_button']);
 		*/
-		
+		connectDb($conn);
+		$idAnnonceToMod = $_POST['update_button'];
+		$result = $conn->query("SELECT p.categorie
+				FROM annonce a, produit p
+				WHERE a.id_produit = p.id_produit
+				AND a.id_annonce = $idAnnonceToMod;");
+		$categorie = $result->fetch_object();
+		$_SESSION['idannonce'] = $idAnnonceToMod ;
+		$_SESSION['cat'] = $categorie->categorie;
+		$result->free();
+		$conn->close();
+
+		header("Location: formannonces.php");
 	}
 
-
-	function showUpdateForm($cat){
-
-	}
-
+	
 
 ?>
+
