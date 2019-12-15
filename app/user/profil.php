@@ -5,6 +5,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="../../index.css">
+	<link rel="stylesheet" type="text/css" href="profile.css">
 	<title>TechStore</title>
 </head>
 <body>
@@ -37,6 +38,10 @@
 		<div id="section_title">Profil</div>
 		<h3>Mes informations personelles</h3>
 		<section id="section_recommanded_ads">
+		<?php 
+			require_once("getImage.php");
+			GetImage();
+		?>
 		<?php
 			require_once("user_profile.php");
 			get_user_info();	
@@ -56,8 +61,7 @@
 </section>
 <footer>
 		<footer>
-            <p>Copyright Zozor - Tous droits réservés<br />
-            <a href="#">Me contacter !</a></p>
+            <?php echo "Bienvenue ". $_SESSION['login']. " !" ?>
         </footer>
 	</footer>
 

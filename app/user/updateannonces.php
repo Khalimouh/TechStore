@@ -2,9 +2,7 @@
 	if (session_status() == PHP_SESSION_NONE) {
 	    session_start();
 	}
-	error_reporting(-1);
-	ini_set('display_errors', 'On');
-
+	
 	if (!defined('PROJECT_ROOT'))
 	    define('PROJECT_ROOT',$_SERVER['DOCUMENT_ROOT']);
 	if (!defined('PROJECT_LIBS'))
@@ -26,7 +24,7 @@
 		$result = $conn->query("SELECT p.id_produit, p.categorie
 				FROM annonce a, produit p
 				WHERE a.id_produit = p.id_produit
-				AND a.id_annonce = '$idAnnonceToDel'");
+				AND a.id_annonce = $idAnnonceToDel;");
 		$produit = $result->fetch_object();
 		//print($produit->id_produit);
 		//print($produit->categorie);
@@ -34,8 +32,6 @@
 		$conn->query("DELETE FROM publier WHERE id_annonce = $idAnnonceToDel;") or die("Erreur de suppression produit" . $conn->error);
 		/*Suppression de la photo*/
 		$conn->query("DELETE FROM photo WHERE id_annonce = $idAnnonceToDel;");
-		/*Suppression de l'annonce*/
-		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel");
 		/*Suppression de la catégorie*/
 		switch ($produit->categorie) {
 			case "Téléphonie":
@@ -51,25 +47,35 @@
 				break;
 			case "Accesoires":
 				$conn->query("DELETE FROM accesoires WHERE id_produit = $produit->id_produit;");
-
 				break;
 			case "Appareil Photo":
 				$conn->query("DELETE FROM app_photo  WHERE id_produit = $produit->id_produit;");
-
 				break;
 			default:
 
 				break;
 		}
 		/*Suppression du produit*/
-		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;") or die("Erreur de suppression produit" . $conn->error);
+		/*Suppression de l'annonce*/
+		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS = 0;");
+		$conn->query("DELETE FROM produit WHERE id_produit = $produit->id_produit;"); 
+		$conn->query("DELETE FROM annonce WHERE id_annonce = $idAnnonceToDel or id_produit = $produit->id_produit;");
+		$conn->query("SET GLOBAL FOREIGN_KEY_CHECKS=1;");
 		$result->free();
 		$conn->close();
 		header("Location: profil.php");
 	}
 	if(isset($_POST['update_button'])){
+		/*
 		echo "Update";
 		print($_POST['update_button']);
+		*/
+		
+	}
+
+
+	function showUpdateForm($cat){
+
 	}
 
 

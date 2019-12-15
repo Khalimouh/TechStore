@@ -160,7 +160,7 @@ function upload(){
 	$taille_max = 9000000;
 
 	if ($_FILES['file'] > 0){
-  		print("You have selected a file to upload");
+  		//print("You have selected a file to upload");
   	}
 	$ret = is_uploaded_file($_FILES['file']['tmp_name']);
 	if (!$ret) {
@@ -188,27 +188,27 @@ function upload(){
 				print('
 		       	<div>
 		        	<label for="resolution">Resolution :</label>
-        			<input type="text" id="resolution" name="resolution_app">
+        			<input  type="text" id="resolution" name="resolution_app">
 	   			</div>
 	   			<div>
 		        	<label for="format_cap">Format de capture :</label>
-        			<input type="text" id="format_cap" name="format_cap" >
+        			<input  type="text" id="format_cap" name="format_cap" >
 	   			</div>
 	   			<div>
 		        	<label for="definition">Definition :</label>
-        			<input type="text" id="definition" name="definition_app" >
+        			<input  type="text" id="definition" name="definition_app" >
 	   			</div>
 	   			<div>
 		        	<label for="memoire">Mémoire :</label>
-        			<input type="text" id="memoire" name="memoire_app" >
+        			<input  type="text" id="memoire" name="memoire_app" >
 	   			</div>
 	   			<div>
 		        	<label for="type_ecran_app">Type Ecran :</label>
-        			<input type="text" id="type_ecran_app" name="type_ecran_app" >
+        			<input  type="text" id="type_ecran_app" name="type_ecran_app" >
 	   			</div>
 	   			<div>
 		        	<label for="tech">Technologie:</label>
-        			<input type="text" id="tech" name="tech_app" >
+        			<input  type="text" id="tech" name="tech_app" >
 	   			</div>
 	   			
 ');
@@ -220,27 +220,27 @@ function upload(){
 		    
 		       	<div>
 		        	<label for="Diagonale">Diagonale :</label>
-        			<input type="text" id="Diagonale" name="diagonale_pc">
+        			<input  type="text" id="Diagonale" name="diagonale_pc">
 	   			</div>
 	   			<div>
 		        	<label for="processeur">Processeur :</label>
-        			<input type="text" id="processeur" name="processeur_pc" >
+        			<input  type="text" id="processeur" name="processeur_pc" >
 	   			</div>
 	   			<div>
 		        	<label for="cg">Graphique :</label>
-        			<input type="text" id="cg" name="cg_pc" >
+        			<input  type="text" id="cg" name="cg_pc" >
 	   			</div>
 	   			<div>
 		        	<label for="ram">Ram :</label>
-        			<input type="text" id="ram" name="ram_pc" >
+        			<input  type="text" id="ram" name="ram_pc" >
 	   			</div>
 	   			<div>
 		        	<label for="disque_pc">Type de disque :</label>
-        			<input type="text" id="disque_pc" name="disque_pc" >
+        			<input  type="text" id="disque_pc" name="disque_pc" >
 	   			</div>
 	   			<div>
 		        	<label for="taille_disque_pc">Taille du disque :</label>
-        			<input type="text" id="taille_disque_pc" name="taille_disque_pc" >
+        			<input  type="text" id="taille_disque_pc" name="taille_disque_pc" >
 	   			</div>
 	   			<div>
 		        	<label for="batterie_pc">Batterie:</label>
