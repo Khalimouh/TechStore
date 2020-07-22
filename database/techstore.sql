@@ -465,24 +465,27 @@ INSERT INTO `consulter` (`id_user`, `id_annonce`, `date_consultation`) VALUES
 ('4', '1', CURRENT_TIME()),('4', '2', CURRENT_TIME()),('5', '1', CURRENT_TIME()),
 ('5', '3', CURRENT_TIME()),('6', '4', CURRENT_TIME()),('7', '1', CURRENT_TIME()),
 ('7', '3', CURRENT_TIME()),('9', '2', CURRENT_TIME()),('8', '1', CURRENT_TIME());
-/* SELECT */
-/* Nombre d'annonces pour chaque ville */
-SELECT ville, COUNT(*) FROM annonce
-GROUP BY ville
 
+/* Nombre d'annonces pour chaque ville */
+/*
+SELECT ville, COUNT(*) FROM annonce
+GROUP BY ville;
+*/
 /* Nombre d'annonces par catégorie */
-SELECT categorie, COUNT(*) nbr
+/*SELECT categorie, COUNT(*) nbr
 FROM produit p, annonce a
 where p.id_produit = a.id_produit
-GROUP BY categorie
-
+GROUP BY categorie;
+*/
 
 /* Nombre de consultation de chaque annonce*/
+/*
 SELECT id_annonce, COUNT(*) nbr_consultation
 from consulter
 GROUP by id_annonce;
-
+*/
 /* Nombre de consulation d'un utilisateur donné pour chaque catégorie */
+/*
 SELECT u.id_user, categorie , COUNT(*) nbr_consultation
 FROM  consulter c , user u, annonce a , produit p 
 WHERE c.id_user = u.id_user
@@ -490,38 +493,42 @@ and c.id_annonce = a.id_annonce
 and a.id_produit = p.id_produit
 and u.id_user = 1
 GROUP by categorie;
-
+*/
 /* Nombre de consultation de chaque utilisateur pour chaque catégorie */
+/*
 SELECT u.id_user, categorie , COUNT(*) nbr_consultation
 FROM  consulter c , user u, annonce a , produit p 
 WHERE c.id_user = u.id_user
 and c.id_annonce = a.id_annonce
 and a.id_produit = p.id_produit
 GROUP by u.id_user,categorie;
-
+*/
 /* Toutes les annonces d'une catégorie donné */
+/*
 SELECT id_annonce 
 FROM annonce a , produit p 
 WHERE a.id_produit = p.id_produit
 and categorie = 'categorie_donnée';
-
+*/
 /* Les annonceurs qui n'ont aucune annonce */
+/*
 SELECT DISTINCT a.id_annonceur 
 FROM annonceur a
 WHERE a.id_annonceur NOT IN (SELECT a2.id_annonceur 
                            FROM publier p , annonceur a2
                           WHERE p.id_annonceur = a2.id_annonceur)
-
+*/
 /* Classement des annonceurs par nbr d'annonces pour chaque catégorie */
+/*
 SELECT a.id_annonceur, pr.categorie ,COUNT(p.id_annonceur) nbr_annonce 
 FROM annonceur a , annonce an , publier p , produit pr
 WHERE a.id_annonceur = p.id_annonceur
 AND p.id_annonce = an.id_annonce
 AND pr.id_produit = an.id_produit
 GROUP BY a.id_annonceur, pr.categorie;
-
+*/
 /* L'annonceur qui possede au moins une annonce dans chaque catégorie */
-
+/*
 SELECT DISTINCT v.id_annonceur
 FROM v_ann_cat v
 WHERE NOT EXISTS (SELECT DISTINCT categorie
@@ -530,7 +537,7 @@ WHERE NOT EXISTS (SELECT DISTINCT categorie
                                      WHERE (v.id_annonceur = v2.id_annonceur)
                                      AND (v2.categorie = p.categorie)));
 
-
+*/
 
 
 

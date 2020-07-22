@@ -3,7 +3,7 @@
 	
 	// Connection BDD
 	function connectDb(&$conn){		
-		$conn = new mysqli('localhost', 'user' , 'user','techstore');
+		$conn = new mysqli('localhost', 'root' , '','techstore');
 		if ($conn->connect_errno) {
 			die ("Erreur de connexion : errno: " . $conn->errno . " error: ". $conn->error);
 		}
